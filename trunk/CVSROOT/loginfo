@@ -25,7 +25,7 @@
 # or
 #DEFAULT (echo ""; id; echo %{sVv}; date; cat) >> $CVSROOT/CVSROOT/commitlog
 
-CVSROOT /usr/local/bin/syncmail %{sVv} ivop@mail.berlios.de
+CVSROOT /usr/local/bin/syncmail -u %{sVv} ivop@mail.berlios.de
 
-DEFAULT /usr/local/bin/syncmail %{sVv} fpm-cvslog@lists.berlios.de
+DEFAULT /usr/local/bin/syncmail -u %{sVv} fpm-cvslog@lists.berlios.de
 
