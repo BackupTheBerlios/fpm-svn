@@ -7,3 +7,5 @@ benchmarklut
 configure.log
 config.mak
 config.sh
+benchmark.dat
+benchmarklut.dat
