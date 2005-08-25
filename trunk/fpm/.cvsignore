@@ -1,2 +1,9 @@
-deps
-barcharts
+deps/
+barcharts/
+test/
+genlut
+benchmark
+benchmarklut
+configure.log
+config.mak
+config.sh
