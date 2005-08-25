@@ -1,6 +1,6 @@
-deps/
-barcharts/
-test/
+deps
+barcharts
+test
 genlut
 benchmark
 benchmarklut
