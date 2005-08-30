@@ -9,7 +9,7 @@
   <xsl:param name="html.stylesheet" select="'default.css'"/>
   <xsl:param name="html.stylesheet.type" select="'text/css'"/>
 
-  <xsl:param name="html.cleanup" select="'0'"/>
+  <xsl:param name="html.cleanup" select="'1'"/>
   <xsl:param name="make.valid.html" select="'1'"/>
   <xsl:param name="make.single.year.ranges" select="'1'"/>
   <xsl:param name="make.year.ranges" select="'1'"/>
