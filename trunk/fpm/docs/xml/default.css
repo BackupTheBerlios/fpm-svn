@@ -1,0 +1,43 @@
+body {
+	color: #000000;
+	background: #ffffff;
+	font-size: 12pt;
+    margin-left: 64px;
+    width: 700px;
+}
+
+a {
+    color: #000080;
+}
+
+div.table table, div.informaltable table {
+	background: #333366;
+	border-collapse: separate;
+	border: solid 1px #333366;
+	border-spacing: 1px;
+}
+
+div.table th, div.informaltable th {
+	color: white;
+	background: #4488cc;
+	border: 0px;
+	padding: 2px;
+}
+
+div.table td, div.informaltable td {
+	background: #fffff8;
+	border: 0px;
+	padding: 2px;
+}
+
+
+pre.screen {
+	padding: 4px;
+	background: #e0e0e0;
+}
+
+pre.programlisting {
+	padding: 4px;
+	background: #e0e0e0;
+}
+
