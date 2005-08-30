@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<chapter id="getting-started">
+    <title> Getting started </title>
+
+    <para>
+        This is getting started.
+    </para>
+
+    <sect1 id="system-requirements">
+        <title> System requirements </title>
+        <para>
+            About system requirements
+        </para>
+    </sect1>
+
+    <sect1 id="compilation-and-installation">
+        <title> Compilation and installation </title>
+        <para>
+            About compilation and installation
+
+            <example>
+                <title> This is an example </title>
+                <programlisting>
+                    a = fp16p16sqrt(b);
+                    prinf("0.8f\n", fp16p16tof(a));
+                </programlisting>
+            </example>
+
+        </para>
+    </sect1>
+</chapter>
+

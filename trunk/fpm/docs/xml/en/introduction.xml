@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<chapter id="introduction">
+    <title> Introduction </title>
+
+    <para>
+        This is the introduction
+    </para>
+
+    <sect1 id="about-this-library">
+        <title> About this library </title>
+        <para>
+            This library is about...
+        </para>
+    </sect1>
+
+</chapter>
+
