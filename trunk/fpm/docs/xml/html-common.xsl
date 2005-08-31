@@ -52,4 +52,8 @@
       </xsl:text>
   </xsl:template>
 
+  <xsl:template match="application">
+      <b><xsl:apply-templates/></b>
+  </xsl:template>
+
 </xsl:stylesheet>
