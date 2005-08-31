@@ -2,10 +2,34 @@
           <table bgcolor="#f0f0f0" width="700" border="0" cellspacing="0" cellpadding="16" height="1000" > <tr> <td valign="top" align="left">
       <div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="introduction.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="compilation-and-installation.html">Next</a></td></tr></table><hr></div>
           
-      <div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="getting-started"></a>Chapter 2.  Getting started </h2></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>2.1. <a href="getting-started.html#system-requirements"> System requirements </a></dt><dt>2.2. <a href="compilation-and-installation.html"> Compilation and installation </a></dt></dl></div><p>
-        This is getting started.
-    </p><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="system-requirements"></a>2.1.  System requirements </h2></div></div><p>
-            About system requirements
+      <div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="getting-started"></a>Chapter 2.  Getting started </h2></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>2.1. <a href="getting-started.html#system-requirements"> System requirements </a></dt><dt>2.2. <a href="compilation-and-installation.html"> Compilation and installation </a></dt><dt>2.3. <a href="tweaking-the-build-process.html"> Tweaking the build process </a></dt></dl></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="system-requirements"></a>2.1.  System requirements </h2></div></div><p>
+            Basically, all you need is a decent C-compiler. If your compiler
+            doesn't accept the -MM command line option for generation of
+            <b>make</b>
+            dependencies, you need to have
+            <b>makedepend</b> installed.
+            Optionally, if you have
+            <b>indent</b> on your system, it is used
+            to process the generated LUT header file.
+        </p><p>
+            Running benchmarks does not require any other tools, but if you
+            automatically want to generate barcharts of the results, you need
+            <b>gnuplot</b>,
+            <b>awk</b> and
+            <b>fig2dev</b> with PNG support (which
+            requires libpng).
+        </p><p>
+            For building your own HTML documentation from the XML files
+            that are in CVS, you need docbook,
+            <b>xmllint</b>,
+            <b>xsltproc</b> and
+            the libraries they depend on, like libxml and libxslt.
+        </p><p>
+            All configure scripts and Makefiles assume that basic programs
+            like
+            <b>sh</b>,
+            <b>sed</b> and
+            <b>cut</b> are available.
         </p></div></div>
           
       <div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="introduction.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="compilation-and-installation.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div>
