@@ -1,0 +1,29 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>3.4.  sqrt, ln, exp and pow </title><link rel="stylesheet" href="default.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.48"><link rel="home" href="index.html" title=" Fixed Point Math Macro Library "><link rel="up" href="usage.html" title="Chapter 3.  Usage "><link rel="previous" href="doing-calculations.html" title="3.3.  Doing calculations "><link rel="next" href="advanced.html" title="Chapter 4.  Advanced "></head><body text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+          <table bgcolor="#f0f0f0" width="700" border="0" cellspacing="0" cellpadding="16" height="1000" > <tr> <td valign="top" align="left">
+      <div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="doing-calculations.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="advanced.html">Next</a></td></tr></table><hr></div>
+          
+      <div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="sqrt-ln-exp-and-pow"></a>3.4.  sqrt, ln, exp and pow </h2></div></div><p>
+            For all fixed point types, the macro library implements
+            sqrt, ln, exp and pow.
+
+            <div class="table"><p><b>Table 3.4.  Math macro's for ufp16p16_t </b></p><table summary=" Math macro's for ufp16p16_t " border="1"><colgroup><col><col></colgroup><thead><tr><th> </th><th> description </th></tr></thead><tbody><tr><td> sqrtufp16p16(x) </td><td> calculates the square root of x
+                                    for x &gt;= 0 </td></tr><tr><td> lnufp16p16(x) </td><td> calculates the natural logarithm of x
+                                    for x &gt;= 0 </td></tr><tr><td> expufp16p16(x) </td><td> calculates e to the power of x
+                                    for x &gt;= 1 </td></tr><tr><td> powufp16p16(x, y) </td><td> calculates x to the power of y
+                                    for y &gt;= 1 </td></tr></tbody></table></div>
+        </p><p>
+            For all seven other types, similar macro's exist.
+            Also, be aware that the exp and pow macro's easily overflow your
+            variables!
+
+            <pre class="programlisting">
+        fp24p8_t a;
+
+        a = ftofp24p8(2.37);
+
+        a = sqrtfp24p8(a); </pre>
+        </p></div>
+          
+      <div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="doing-calculations.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="advanced.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div>
+          </td> </tr> </table>
+      </body></html>

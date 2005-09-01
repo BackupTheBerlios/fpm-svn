@@ -1,6 +1,6 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>2.3.  Tweaking the build process </title><link rel="stylesheet" href="default.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.48"><link rel="home" href="index.html" title=" Fixed Point Math Macro Library "><link rel="up" href="getting-started.html" title="Chapter 2.  Getting started "><link rel="previous" href="compilation-and-installation.html" title="2.2.  Compilation and installation "><link rel="next" href="license.html" title="Appendix A.  License "></head><body text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>2.3.  Tweaking the build process </title><link rel="stylesheet" href="default.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.48"><link rel="home" href="index.html" title=" Fixed Point Math Macro Library "><link rel="up" href="getting-started.html" title="Chapter 2.  Getting started "><link rel="previous" href="compilation-and-installation.html" title="2.2.  Compilation and installation "><link rel="next" href="usage.html" title="Chapter 3.  Usage "></head><body text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
           <table bgcolor="#f0f0f0" width="700" border="0" cellspacing="0" cellpadding="16" height="1000" > <tr> <td valign="top" align="left">
-      <div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="compilation-and-installation.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="license.html">Next</a></td></tr></table><hr></div>
+      <div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="compilation-and-installation.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="usage.html">Next</a></td></tr></table><hr></div>
           
       <div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="tweaking-the-build-process"></a>2.3.  Tweaking the build process </h2></div></div><p>
             By default,
@@ -11,18 +11,15 @@
             <b>configure</b>.
 
             <pre class="screen">
-                CC=/usr/local/intel/bin/icc ./configure
-            </pre>
+        CC=/usr/local/intel/bin/icc ./configure </pre>
             <pre class="screen">
-                ./configure --cc=tcc
-            </pre>
+        ./configure --cc=tcc </pre>
         </p><p>
             You can override the default CFLAGS by setting the environment
             variable of the same name.
 
             <pre class="screen">
-                CFLAGS=-time ./configure
-            </pre>
+        CFLAGS=-time ./configure </pre>
 
             If CFLAGS is set by default in your environment and you don't want
             that, you can specify an empty CFLAGS= on your command line.
@@ -32,11 +29,9 @@
             fails to link against libm, you can use:
 
             <pre class="screen">
-                ./configure --with-extraincdir=/opt/some/dir/include
-            </pre>
+        ./configure --with-extraincdir=/opt/some/dir/include </pre>
             <pre class="screen">
-                ./configure --with-extralibdir=/opt/some/dir/lib
-            </pre>
+        ./configure --with-extralibdir=/opt/some/dir/lib </pre>
         </p><p>
             If certain applications needed for the build process can't be
             found in your default PATH, but you are sure they are installed
@@ -44,8 +39,7 @@
             <b>configure</b>:
 
             <pre class="screen">
-                ./configure --with-makedepend=/not/in/my/path/bin/makedepend
-            </pre>
+        ./configure --with-makedepend=/not/in/my/path/bin/makedepend </pre>
 
             Similar options are available for all applications that might
             be needed for the basic build process or for running benchmarks
@@ -57,13 +51,11 @@
             you can enable debug symbols and/or all compiler warnings:
 
             <pre class="screen">
-                ./configure --enable-debug
-            </pre>
+        ./configure --enable-debug </pre>
             <pre class="screen">
-                ./configure --enable-warnings
-            </pre>
+        ./configure --enable-warnings </pre>
         </p></div>
           
-      <div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="compilation-and-installation.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="getting-started.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="license.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div>
+      <div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="compilation-and-installation.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="getting-started.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="usage.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div>
           </td> </tr> </table>
       </body></html>

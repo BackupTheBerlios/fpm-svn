@@ -1,0 +1,46 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>3.3.  Doing calculations </title><link rel="stylesheet" href="default.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.48"><link rel="home" href="index.html" title=" Fixed Point Math Macro Library "><link rel="up" href="usage.html" title="Chapter 3.  Usage "><link rel="previous" href="type-conversion.html" title="3.2.  Initialization and type conversion "><link rel="next" href="sqrt-ln-exp-and-pow.html" title="3.4.  sqrt, ln, exp and pow "></head><body text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+          <table bgcolor="#f0f0f0" width="700" border="0" cellspacing="0" cellpadding="16" height="1000" > <tr> <td valign="top" align="left">
+      <div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="type-conversion.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="sqrt-ln-exp-and-pow.html">Next</a></td></tr></table><hr></div>
+          
+      <div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="doing-calculations"></a>3.3.  Doing calculations </h2></div></div><p>
+            For addition and substraction, all fixed point variables can be
+            treated as if they were normal variables.
+
+            <pre class="programlisting">
+        fp16p16_t x, y, z;
+
+        [...]
+
+        z = x + y;
+        z = x - y;</pre>
+        </p><p>
+            Multiplication and division are a bit more complicated. Using
+            the basic '*' and '/' operators will not work with fixed point
+            variables. Since C doesn't support overloading of operators, there
+            are multiple macro's that do the job. One for each type.
+            Macro's for multiplication start with 'mul' and those for
+            division start with div. All macro's take two arguments.
+        </p><p>
+            mul...(x, y) = x * y
+        </p><p>
+            div...(x, y) = x / y
+        </p><p>
+            Both arguments have to be of the same type and can be other
+            variables, constants or the same variable.
+
+            <pre class="programlisting">
+        fp8p8_t   x, y, z;
+        ufp8p24_t a;
+
+        [...]
+
+        z = mulfp8p8(x, y);
+        x = mulfp8p8(x, itofp8p8(15));
+        y = divfp8p8(x, z);
+    
+        a = mulufp8p24(a, a);</pre>
+        </p></div>
+          
+      <div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="type-conversion.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="sqrt-ln-exp-and-pow.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div>
+          </td> </tr> </table>
+      </body></html>

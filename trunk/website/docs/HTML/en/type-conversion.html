@@ -1,0 +1,61 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>3.2.  Initialization and type conversion </title><link rel="stylesheet" href="default.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.48"><link rel="home" href="index.html" title=" Fixed Point Math Macro Library "><link rel="up" href="usage.html" title="Chapter 3.  Usage "><link rel="previous" href="usage.html" title="Chapter 3.  Usage "><link rel="next" href="doing-calculations.html" title="3.3.  Doing calculations "></head><body text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+          <table bgcolor="#f0f0f0" width="700" border="0" cellspacing="0" cellpadding="16" height="1000" > <tr> <td valign="top" align="left">
+      <div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="usage.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="doing-calculations.html">Next</a></td></tr></table><hr></div>
+          
+      <div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="type-conversion"></a>3.2.  Initialization and type conversion </h2></div></div><p>
+            To initialize your variables, you need to convert a value from
+            another type and assign it to your fixed point variable. For
+            each fixed point type, there are several macro's that convert
+            to and from other types.
+
+            <div class="table"><p><b>Table 3.2.  Type conversion to fp8p8_t </b></p><table summary=" Type conversion to fp8p8_t " border="1"><colgroup><col><col></colgroup><thead><tr><th> from </th><th> fp8p8_t </th></tr></thead><tbody><tr><td> int </td><td> itofp8p8(x) </td></tr><tr><td> float </td><td> ftofp8p8(x) </td></tr><tr><td> double </td><td> dtofp8p8(x) </td></tr></tbody></table></div>
+        </p><p>
+            Similar macro's exist for all other fixed point types.
+
+            <pre class="programlisting">
+        int        a;
+        ufp16p16_t b;
+
+        a = 97;
+        b = itoufp16p16(a);
+
+        [...]
+
+        b = itoufp16p16(123); </pre>
+        </p><p>
+            There are also macro's that convert your fixed point
+            variables back to standard types.
+
+            <div class="table"><p><b>Table 3.3.  Type conversion from fp8p8_t </b></p><table summary=" Type conversion from fp8p8_t " border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th> from </th><th> int </th><th> float </th><th> double </th></tr></thead><tbody><tr><td> fp8p8_t </td><td> fp8p8toi(x) </td><td> fp8p8tof(x) </td><td> fp8p8tod(x) </td></tr></tbody></table></div>
+        </p><p>
+            Again, similar macro's exist for all other fixed point types.
+
+            <pre class="programlisting">
+        fp16p16_t a;
+        float     f;
+
+        [...]
+
+        f = fp16p16tof(a); </pre>
+        </p><p>
+            Finally, there are macro's to convert between fixed point types.
+            Their names are structured analog to the above macro's. Note that
+            there are no explicit macro's to convert between signed and
+            unsigned types. If you want to do that, you have to know exactly
+            what you are doing will work correctly.
+
+            <pre class="programlisting">
+        fp24p8_t   a;
+        fp8p8_t    b;
+        ufp16p16_t c
+
+        [...]
+
+        a = fp8p8tofp24p8(b);
+
+        c = ufp8p8toufp16p16(b);    /* incorrect if b is negative */ </pre>
+        </p></div>
+          
+      <div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="usage.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="usage.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="doing-calculations.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div>
+          </td> </tr> </table>
+      </body></html>
