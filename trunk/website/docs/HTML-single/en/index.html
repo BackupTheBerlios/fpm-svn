@@ -9,14 +9,14 @@
         Invariant Sections, with no Front-Cover texts, and with no Back-Cover
         Texts. A copy of the license can be found at
         the end of this document.
-        </p></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>1. <a href="#introduction"> Introduction </a></dt><dd><dl><dt>1.1. <a href="#about-this-library"> About this library </a></dt></dl></dd><dt>2. <a href="#getting-started"> Getting started </a></dt><dd><dl><dt>2.1. <a href="#system-requirements"> System requirements </a></dt><dt>2.2. <a href="#compilation-and-installation"> Compilation and installation </a></dt><dt>2.3. <a href="#tweaking-the-build-process"> Tweaking the build process </a></dt></dl></dd><dt>A. <a href="#license"> License </a></dt></dl></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="introduction"></a>Chapter 1.  Introduction </h2></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>1.1. <a href="#about-this-library"> About this library </a></dt></dl></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="about-this-library"></a>1.1.  About this library </h2></div></div><p>
+        </p></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>1. <a href="#introduction"> Introduction </a></dt><dd><dl><dt>1.1. <a href="#about-this-library"> About this library </a></dt></dl></dd><dt>2. <a href="#getting-started"> Getting started </a></dt><dd><dl><dt>2.1. <a href="#system-requirements"> System requirements </a></dt><dt>2.2. <a href="#compilation-and-installation"> Compilation and installation </a></dt><dt>2.3. <a href="#tweaking-the-build-process"> Tweaking the build process </a></dt></dl></dd><dt>3. <a href="#usage"> Usage </a></dt><dd><dl><dt>3.1. <a href="#basic-types"> Basic types </a></dt><dt>3.2. <a href="#type-conversion"> Initialization and type conversion </a></dt><dt>3.3. <a href="#doing-calculations"> Doing calculations </a></dt><dt>3.4. <a href="#sqrt-ln-exp-and-pow"> sqrt, ln, exp and pow </a></dt></dl></dd><dt>4. <a href="#advanced"> Advanced </a></dt><dd><dl><dt>4.1. <a href="#look-up-tables"> Look Up Tables </a></dt><dt>4.2. <a href="#precision"> Precision </a></dt><dt>4.3. <a href="#benchmarks"> Benchmarks </a></dt></dl></dd><dt>A. <a href="#license"> License </a></dt></dl></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="introduction"></a>Chapter 1.  Introduction </h2></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>1.1. <a href="#about-this-library"> About this library </a></dt></dl></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="about-this-library"></a>1.1.  About this library </h2></div></div><p>
             This is a macro library written in the C programming language,
             and implements fixed point arithmetic. Although current
             state-of-the-art FPU's are getting faster and faster, it might
             still be beneficial to implement your algorithms with fixed point
             arithmetic to gain even higher speeds, although at the cost of
-            precission. Fixed point arithmetic is less precise than floating
-            point arithmetic, but lots of times, the extra precission is
+            precision. Fixed point arithmetic is less precise than floating
+            point arithmetic, but lots of times, the extra precision is
             not needed.
         </p><p>
             I chose to implement this library as a set of macro's instead of
@@ -67,10 +67,9 @@
             Most of the time, the following will work fine:
 
             <pre class="screen">
-                ./configure
-                make
-                make install
-            </pre>
+        ./configure
+        make
+        make install </pre>
 
             Configure will figure out what tools are available on your system
             and how to use them.
@@ -83,8 +82,7 @@
             the build and installation process, you should run:
 
             <pre class="screen">
-                ./configure --help
-            </pre>
+        ./configure --help </pre>
 
             The next section will describe the
             <b>configure</b>
@@ -98,18 +96,15 @@
             <b>configure</b>.
 
             <pre class="screen">
-                CC=/usr/local/intel/bin/icc ./configure
-            </pre>
+        CC=/usr/local/intel/bin/icc ./configure </pre>
             <pre class="screen">
-                ./configure --cc=tcc
-            </pre>
+        ./configure --cc=tcc </pre>
         </p><p>
             You can override the default CFLAGS by setting the environment
             variable of the same name.
 
             <pre class="screen">
-                CFLAGS=-time ./configure
-            </pre>
+        CFLAGS=-time ./configure </pre>
 
             If CFLAGS is set by default in your environment and you don't want
             that, you can specify an empty CFLAGS= on your command line.
@@ -119,11 +114,9 @@
             fails to link against libm, you can use:
 
             <pre class="screen">
-                ./configure --with-extraincdir=/opt/some/dir/include
-            </pre>
+        ./configure --with-extraincdir=/opt/some/dir/include </pre>
             <pre class="screen">
-                ./configure --with-extralibdir=/opt/some/dir/lib
-            </pre>
+        ./configure --with-extralibdir=/opt/some/dir/lib </pre>
         </p><p>
             If certain applications needed for the build process can't be
             found in your default PATH, but you are sure they are installed
@@ -131,8 +124,7 @@
             <b>configure</b>:
 
             <pre class="screen">
-                ./configure --with-makedepend=/not/in/my/path/bin/makedepend
-            </pre>
+        ./configure --with-makedepend=/not/in/my/path/bin/makedepend </pre>
 
             Similar options are available for all applications that might
             be needed for the basic build process or for running benchmarks
@@ -144,11 +136,144 @@
             you can enable debug symbols and/or all compiler warnings:
 
             <pre class="screen">
-                ./configure --enable-debug
-            </pre>
+        ./configure --enable-debug </pre>
             <pre class="screen">
-                ./configure --enable-warnings
-            </pre>
+        ./configure --enable-warnings </pre>
+        </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="usage"></a>Chapter 3.  Usage </h2></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>3.1. <a href="#basic-types"> Basic types </a></dt><dt>3.2. <a href="#type-conversion"> Initialization and type conversion </a></dt><dt>3.3. <a href="#doing-calculations"> Doing calculations </a></dt><dt>3.4. <a href="#sqrt-ln-exp-and-pow"> sqrt, ln, exp and pow </a></dt></dl></div><p>
+        First, your application needs to include the Fixed Point Math Macro
+        Library header file:
+
+        <pre class="programlisting">
+        #include &lt;fixedpointmath.h&gt;</pre>
+
+        After that, you will be able to use its types and functions. There's
+        no need to link to any special libraries.
+    </p><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="basic-types"></a>3.1.  Basic types </h2></div></div><p>
+            There are four basic fixed point types. They differ in the amount
+            of memory they occupy and the amount of precision they offer.
+            All four come in both signed and unsigned variants, which sums
+            up to a total of eight types.
+
+            <div class="table"><p><b>Table 3.1.  Basic types </b></p><table summary=" Basic types " border="1"><colgroup><col><col><col><col><col><col></colgroup><thead><tr><th> type </th><th> total </th><th> fraction </th><th> min </th><th> max </th><th> precision </th></tr></thead><tbody><tr><td> fp8p8_t </td><td> 16 </td><td> 8 </td><td> -128.999... </td><td> 127.999... </td><td> 0.00390625 </td></tr><tr><td> fp24p8_t </td><td> 32 </td><td> 8 </td><td> -8388608.999... </td><td> 8388607.999... </td><td> 0.00390625 </td></tr><tr><td> fp16p16_t </td><td> 32 </td><td> 16 </td><td> -32768.999... </td><td> 32767.999... </td><td> 0.00001526 </td></tr><tr><td> fp8p24_t </td><td> 32 </td><td> 24 </td><td> -128.999... </td><td> 127.999... </td><td> 0.00000006 </td></tr><tr><td> ufp8p8_t </td><td> 16 </td><td> 8 </td><td> 0.0 </td><td> 255.999... </td><td> 0.00390625 </td></tr><tr><td> ufp24p8_t </td><td> 32 </td><td> 8 </td><td> 0.0 </td><td> 16777215.999... </td><td> 0.00390625 </td></tr><tr><td> ufp16p16_t </td><td> 32 </td><td> 16 </td><td> 0.0 </td><td> 65535.999... </td><td> 0.00001526 </td></tr><tr><td> ufp8p24_t </td><td> 32 </td><td> 24 </td><td> 0.0 </td><td> 255.999... </td><td> 0.00000006 </td></tr></tbody></table></div>
+        </p><p>
+            Declaring variables of certain types is as simple as with any
+            type.
+
+            <pre class="programlisting">
+                ufp16p16_t x, y;
+                fp16p16_t matrix[16][16]; </pre>
+        </p></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="type-conversion"></a>3.2.  Initialization and type conversion </h2></div></div><p>
+            To initialize your variables, you need to convert a value from
+            another type and assign it to your fixed point variable. For
+            each fixed point type, there are several macro's that convert
+            to and from other types.
+
+            <div class="table"><p><b>Table 3.2.  Type conversion to fp8p8_t </b></p><table summary=" Type conversion to fp8p8_t " border="1"><colgroup><col><col></colgroup><thead><tr><th> from </th><th> fp8p8_t </th></tr></thead><tbody><tr><td> int </td><td> itofp8p8(x) </td></tr><tr><td> float </td><td> ftofp8p8(x) </td></tr><tr><td> double </td><td> dtofp8p8(x) </td></tr></tbody></table></div>
+        </p><p>
+            Similar macro's exist for all other fixed point types.
+
+            <pre class="programlisting">
+        int        a;
+        ufp16p16_t b;
+
+        a = 97;
+        b = itoufp16p16(a);
+
+        [...]
+
+        b = itoufp16p16(123); </pre>
+        </p><p>
+            There are also macro's that convert your fixed point
+            variables back to standard types.
+
+            <div class="table"><p><b>Table 3.3.  Type conversion from fp8p8_t </b></p><table summary=" Type conversion from fp8p8_t " border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th> from </th><th> int </th><th> float </th><th> double </th></tr></thead><tbody><tr><td> fp8p8_t </td><td> fp8p8toi(x) </td><td> fp8p8tof(x) </td><td> fp8p8tod(x) </td></tr></tbody></table></div>
+        </p><p>
+            Again, similar macro's exist for all other fixed point types.
+
+            <pre class="programlisting">
+        fp16p16_t a;
+        float     f;
+
+        [...]
+
+        f = fp16p16tof(a); </pre>
+        </p><p>
+            Finally, there are macro's to convert between fixed point types.
+            Their names are structured analog to the above macro's. Note that
+            there are no explicit macro's to convert between signed and
+            unsigned types. If you want to do that, you have to know exactly
+            what you are doing will work correctly.
+
+            <pre class="programlisting">
+        fp24p8_t   a;
+        fp8p8_t    b;
+        ufp16p16_t c
+
+        [...]
+
+        a = fp8p8tofp24p8(b);
+
+        c = ufp8p8toufp16p16(b);    /* incorrect if b is negative */ </pre>
+        </p></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="doing-calculations"></a>3.3.  Doing calculations </h2></div></div><p>
+            For addition and substraction, all fixed point variables can be
+            treated as if they were normal variables.
+
+            <pre class="programlisting">
+        fp16p16_t x, y, z;
+
+        [...]
+
+        z = x + y;
+        z = x - y;</pre>
+        </p><p>
+            Multiplication and division are a bit more complicated. Using
+            the basic '*' and '/' operators will not work with fixed point
+            variables. Since C doesn't support overloading of operators, there
+            are multiple macro's that do the job. One for each type.
+            Macro's for multiplication start with 'mul' and those for
+            division start with div. All macro's take two arguments.
+        </p><p>
+            mul...(x, y) = x * y
+        </p><p>
+            div...(x, y) = x / y
+        </p><p>
+            Both arguments have to be of the same type and can be other
+            variables, constants or the same variable.
+
+            <pre class="programlisting">
+        fp8p8_t   x, y, z;
+        ufp8p24_t a;
+
+        [...]
+
+        z = mulfp8p8(x, y);
+        x = mulfp8p8(x, itofp8p8(15));
+        y = divfp8p8(x, z);
+    
+        a = mulufp8p24(a, a);</pre>
+        </p></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="sqrt-ln-exp-and-pow"></a>3.4.  sqrt, ln, exp and pow </h2></div></div><p>
+            For all fixed point types, the macro library implements
+            sqrt, ln, exp and pow.
+
+            <div class="table"><p><b>Table 3.4.  Math macro's for ufp16p16_t </b></p><table summary=" Math macro's for ufp16p16_t " border="1"><colgroup><col><col></colgroup><thead><tr><th> </th><th> description </th></tr></thead><tbody><tr><td> sqrtufp16p16(x) </td><td> calculates the square root of x
+                                    for x &gt;= 0 </td></tr><tr><td> lnufp16p16(x) </td><td> calculates the natural logarithm of x
+                                    for x &gt;= 0 </td></tr><tr><td> expufp16p16(x) </td><td> calculates e to the power of x
+                                    for x &gt;= 1 </td></tr><tr><td> powufp16p16(x, y) </td><td> calculates x to the power of y
+                                    for y &gt;= 1 </td></tr></tbody></table></div>
+        </p><p>
+            For all seven other types, similar macro's exist.
+            Also, be aware that the exp and pow macro's easily overflow your
+            variables!
+
+            <pre class="programlisting">
+        fp24p8_t a;
+
+        a = ftofp24p8(2.37);
+
+        a = sqrtfp24p8(a); </pre>
+        </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="advanced"></a>Chapter 4.  Advanced </h2></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>4.1. <a href="#look-up-tables"> Look Up Tables </a></dt><dt>4.2. <a href="#precision"> Precision </a></dt><dt>4.3. <a href="#benchmarks"> Benchmarks </a></dt></dl></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="look-up-tables"></a>4.1.  Look Up Tables </h2></div></div><p>
+        </p></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="precision"></a>4.2.  Precision </h2></div></div><p>
+        </p></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="benchmarks"></a>4.3.  Benchmarks </h2></div></div><p>
         </p></div></div><div class="appendix"><div class="titlepage"><div><h2 class="title"><a name="license"></a>Appendix A.  License </h2></div></div><pre class="screen">
 		GNU Free Documentation License
 		  Version 1.2, November 2002
