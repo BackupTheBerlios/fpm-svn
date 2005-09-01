@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- $Revision$ -->
+
+<chapter id="usage">
+    <title> Usage </title>
+
+    <para>
+        First, your application needs to include the Fixed Point Math Macro
+        Library header file:
+
+        <programlisting>
+        #include &lt;fixedpointmath.h&gt;</programlisting>
+
+        After that, you will be able to use its types and functions. There's
+        no need to link to any special libraries.
+    </para>
+
+    <sect1 id="basic-types">
+        <title> Basic types </title>
+        <para>
+            There are four basic fixed point types. They differ in the amount
+            of memory they occupy and the amount of precision they offer.
+            All four come in both signed and unsigned variants, which sums
+            up to a total of eight types.
+
+            <table> <title> Basic types </title>
+                <tgroup cols="6">
+                    <thead>
+                        <row> 
+                            <entry> type </entry>
+                            <entry> total </entry>
+                            <entry> fraction </entry>
+                            <entry> min </entry>
+                            <entry> max </entry>
+                            <entry> precision </entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry> fp8p8_t </entry>
+                            <entry> 16 </entry>
+                            <entry> 8 </entry>
+                            <entry> -128.999... </entry>
+                            <entry> 127.999... </entry>
+                            <entry> 0.00390625 </entry>
+                        </row>
+                        <row>
+                            <entry> fp24p8_t </entry>
+                            <entry> 32 </entry>
+                            <entry> 8 </entry>
+                            <entry> -8388608.999... </entry>
+                            <entry> 8388607.999... </entry>
+                            <entry> 0.00390625 </entry>
+                        </row>
+                        <row>
+                            <entry> fp16p16_t </entry>
+                            <entry> 32 </entry>
+                            <entry> 16 </entry>
+                            <entry> -32768.999... </entry>
+                            <entry> 32767.999... </entry>
+                            <entry> 0.00001526 </entry>
+                        </row>
+                        <row>
+                            <entry> fp8p24_t </entry>
+                            <entry> 32 </entry>
+                            <entry> 24 </entry>
+                            <entry> -128.999... </entry>
+                            <entry> 127.999... </entry>
+                            <entry> 0.00000006 </entry>
+                        </row>
+                        <row>
+                            <entry> ufp8p8_t </entry>
+                            <entry> 16 </entry>
+                            <entry> 8 </entry>
+                            <entry> 0.0 </entry>
+                            <entry> 255.999... </entry>
+                            <entry> 0.00390625 </entry>
+                        </row>
+                        <row>
+                            <entry> ufp24p8_t </entry>
+                            <entry> 32 </entry>
+                            <entry> 8 </entry>
+                            <entry> 0.0 </entry>
+                            <entry> 16777215.999... </entry>
+                            <entry> 0.00390625 </entry>
+                        </row>
+                        <row>
+                            <entry> ufp16p16_t </entry>
+                            <entry> 32 </entry>
+                            <entry> 16 </entry>
+                            <entry> 0.0 </entry>
+                            <entry> 65535.999... </entry>
+                            <entry> 0.00001526 </entry>
+                        </row>
+                        <row>
+                            <entry> ufp8p24_t </entry>
+                            <entry> 32 </entry>
+                            <entry> 24 </entry>
+                            <entry> 0.0 </entry>
+                            <entry> 255.999... </entry>
+                            <entry> 0.00000006 </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+
+        <para>
+            Declaring variables of certain types is as simple as with any
+            type.
+
+            <programlisting>
+                ufp16p16_t x, y;
+                fp16p16_t matrix[16][16]; </programlisting>
+        </para>
+    </sect1>
+
+    <sect1 id="type-conversion">
+        <title> Initialization and type conversion </title>
+
+        <para>
+            To initialize your variables, you need to convert a value from
+            another type and assign it to your fixed point variable. For
+            each fixed point type, there are several macro's that convert
+            to and from other types.
+
+            <table> <title> Type conversion to fp8p8_t </title>
+                <tgroup cols="2">
+                    <thead>
+                        <row> 
+                            <entry> from </entry>
+                            <entry> fp8p8_t </entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry> int </entry>
+                            <entry> itofp8p8(x) </entry>
+                        </row>
+                        <row>
+                            <entry> float </entry>
+                            <entry> ftofp8p8(x) </entry>
+                        </row>
+                        <row>
+                            <entry> double </entry>
+                            <entry> dtofp8p8(x) </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+
+        <para>
+            Similar macro's exist for all other fixed point types.
+
+            <programlisting>
+        int        a;
+        ufp16p16_t b;
+
+        a = 97;
+        b = itoufp16p16(a);
+
+        [...]
+
+        b = itoufp16p16(123); </programlisting>
+        </para>
+
+        <para>
+            There are also macro's that convert your fixed point
+            variables back to standard types.
+
+            <table> <title> Type conversion from fp8p8_t </title>
+                <tgroup cols="4">
+                    <thead>
+                        <row> 
+                            <entry> from </entry>
+                            <entry> int </entry>
+                            <entry> float </entry>
+                            <entry> double </entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry> fp8p8_t </entry>
+                            <entry> fp8p8toi(x) </entry>
+                            <entry> fp8p8tof(x) </entry>
+                            <entry> fp8p8tod(x) </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+        <para>
+            Again, similar macro's exist for all other fixed point types.
+
+            <programlisting>
+        fp16p16_t a;
+        float     f;
+
+        [...]
+
+        f = fp16p16tof(a); </programlisting>
+        </para>
+        <para>
+            Finally, there are macro's to convert between fixed point types.
+            Their names are structured analog to the above macro's. Note that
+            there are no explicit macro's to convert between signed and
+            unsigned types. If you want to do that, you have to know exactly
+            what you are doing will work correctly.
+
+            <programlisting>
+        fp24p8_t   a;
+        fp8p8_t    b;
+        ufp16p16_t c
+
+        [...]
+
+        a = fp8p8tofp24p8(b);
+
+        c = ufp8p8toufp16p16(b);    /* incorrect if b is negative */ </programlisting>
+        </para>
+    </sect1>
+
+    <sect1 id="doing-calculations">
+        <title> Doing calculations </title>
+
+        <para>
+            For addition and substraction, all fixed point variables can be
+            treated as if they were normal variables.
+
+            <programlisting>
+        fp16p16_t x, y, z;
+
+        [...]
+
+        z = x + y;
+        z = x - y;</programlisting>
+        </para>
+
+        <para>
+            Multiplication and division are a bit more complicated. Using
+            the basic '*' and '/' operators will not work with fixed point
+            variables. Since C doesn't support overloading of operators, there
+            are multiple macro's that do the job. One for each type.
+            Macro's for multiplication start with 'mul' and those for
+            division start with div. All macro's take two arguments.
+        </para>
+        <para>
+            mul...(x, y) = x * y
+        </para>
+        <para>
+            div...(x, y) = x / y
+        </para>
+        <para>
+            Both arguments have to be of the same type and can be other
+            variables, constants or the same variable.
+
+            <programlisting>
+        fp8p8_t   x, y, z;
+        ufp8p24_t a;
+
+        [...]
+
+        z = mulfp8p8(x, y);
+        x = mulfp8p8(x, itofp8p8(15));
+        y = divfp8p8(x, z);
+    
+        a = mulufp8p24(a, a);</programlisting>
+        </para>
+    </sect1>
+
+    <sect1 id="sqrt-ln-exp-and-pow">
+        <title> sqrt, ln, exp and pow </title>
+
+        <para>
+            For all fixed point types, the macro library implements
+            sqrt, ln, exp and pow.
+
+            <table> <title> Math macro's for ufp16p16_t </title>
+                <tgroup cols="2">
+                    <thead>
+                        <row> 
+                            <entry> </entry>
+                            <entry> description </entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry> sqrtufp16p16(x) </entry>
+                            <entry> calculates the square root of x
+                                    for x &gt;= 0 </entry>
+                        </row>
+                        <row>
+                            <entry> lnufp16p16(x) </entry>
+                            <entry> calculates the natural logarithm of x
+                                    for x &gt;= 0 </entry>
+                        </row>
+                        <row>
+                            <entry> expufp16p16(x) </entry>
+                            <entry> calculates e to the power of x
+                                    for x &gt;= 1 </entry>
+                        </row>
+                        <row>
+                            <entry> powufp16p16(x, y) </entry>
+                            <entry> calculates x to the power of y
+                                    for y &gt;= 1 </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
+        <para>
+            For all seven other types, similar macro's exist.
+            Also, be aware that the exp and pow macro's easily overflow your
+            variables!
+
+            <programlisting>
+        fp24p8_t a;
+
+        a = ftofp24p8(2.37);
+
+        a = sqrtfp24p8(a); </programlisting>
+        </para>
+    </sect1>
+</chapter>
+

@@ -47,10 +47,9 @@
             Most of the time, the following will work fine:
 
             <screen>
-                ./configure
-                make
-                make install
-            </screen>
+        ./configure
+        make
+        make install </screen>
 
             Configure will figure out what tools are available on your system
             and how to use them.
@@ -64,8 +63,7 @@
             the build and installation process, you should run:
 
             <screen>
-                ./configure --help
-            </screen>
+        ./configure --help </screen>
 
             The next section will describe the
             <application>configure</application>
@@ -85,19 +83,16 @@
             <application>configure</application>.
 
             <screen>
-                CC=/usr/local/intel/bin/icc ./configure
-            </screen>
+        CC=/usr/local/intel/bin/icc ./configure </screen>
             <screen>
-                ./configure --cc=tcc
-            </screen>
+        ./configure --cc=tcc </screen>
         </para>
         <para>
             You can override the default CFLAGS by setting the environment
             variable of the same name.
 
             <screen>
-                CFLAGS=-time ./configure
-            </screen>
+        CFLAGS=-time ./configure </screen>
 
             If CFLAGS is set by default in your environment and you don't want
             that, you can specify an empty CFLAGS= on your command line.
@@ -108,11 +103,9 @@
             fails to link against libm, you can use:
 
             <screen>
-                ./configure --with-extraincdir=/opt/some/dir/include
-            </screen>
+        ./configure --with-extraincdir=/opt/some/dir/include </screen>
             <screen>
-                ./configure --with-extralibdir=/opt/some/dir/lib
-            </screen>
+        ./configure --with-extralibdir=/opt/some/dir/lib </screen>
         </para>
         <para>
             If certain applications needed for the build process can't be
@@ -121,8 +114,7 @@
             <application>configure</application>:
 
             <screen>
-                ./configure --with-makedepend=/not/in/my/path/bin/makedepend
-            </screen>
+        ./configure --with-makedepend=/not/in/my/path/bin/makedepend </screen>
 
             Similar options are available for all applications that might
             be needed for the basic build process or for running benchmarks
@@ -135,11 +127,9 @@
             you can enable debug symbols and/or all compiler warnings:
 
             <screen>
-                ./configure --enable-debug
-            </screen>
+        ./configure --enable-debug </screen>
             <screen>
-                ./configure --enable-warnings
-            </screen>
+        ./configure --enable-warnings </screen>
         </para>
     </sect1>
 

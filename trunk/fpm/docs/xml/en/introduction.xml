@@ -13,8 +13,8 @@
             state-of-the-art FPU's are getting faster and faster, it might
             still be beneficial to implement your algorithms with fixed point
             arithmetic to gain even higher speeds, although at the cost of
-            precission. Fixed point arithmetic is less precise than floating
-            point arithmetic, but lots of times, the extra precission is
+            precision. Fixed point arithmetic is less precise than floating
+            point arithmetic, but lots of times, the extra precision is
             not needed.
         </para>
         <para>

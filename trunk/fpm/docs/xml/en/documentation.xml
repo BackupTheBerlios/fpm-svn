@@ -39,6 +39,8 @@
 
 &introduction.xml;
 &gettingstarted.xml;
+&usage.xml;
+&advanced.xml;
 
 &license.xml;
 
