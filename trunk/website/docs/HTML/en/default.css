@@ -24,11 +24,18 @@ div.table th, div.informaltable th {
 	padding: 2px;
 }
 
-div.table td, div.informaltable td {
+div.table td {
 	background: #ffffff;
 	border: 0px;
 	padding: 8px;
     text-align: right;
+}
+
+div.informaltable td {
+	background: #ffffff;
+	border: 0px;
+	padding: 8px;
+    text-align: left;
 }
 
 
