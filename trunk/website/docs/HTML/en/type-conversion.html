@@ -11,6 +11,8 @@
             <div class="table"><p><b>Table 3.2.  Type conversion to fp8p8_t </b></p><table summary=" Type conversion to fp8p8_t " border="1"><colgroup><col><col></colgroup><thead><tr><th> from </th><th> fp8p8_t </th></tr></thead><tbody><tr><td> int </td><td> itofp8p8(x) </td></tr><tr><td> float </td><td> ftofp8p8(x) </td></tr><tr><td> double </td><td> dtofp8p8(x) </td></tr></tbody></table></div>
         </p><p>
             Similar macro's exist for all other fixed point types.
+        </p><p>
+            Example:
 
             <pre class="programlisting">
         int        a;
@@ -29,6 +31,8 @@
             <div class="table"><p><b>Table 3.3.  Type conversion from fp8p8_t </b></p><table summary=" Type conversion from fp8p8_t " border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th> from </th><th> int </th><th> float </th><th> double </th></tr></thead><tbody><tr><td> fp8p8_t </td><td> fp8p8toi(x) </td><td> fp8p8tof(x) </td><td> fp8p8tod(x) </td></tr></tbody></table></div>
         </p><p>
             Again, similar macro's exist for all other fixed point types.
+        </p><p>
+            Example:
 
             <pre class="programlisting">
         fp16p16_t a;
@@ -42,7 +46,9 @@
             Their names are structured analog to the above macro's. Note that
             there are no explicit macro's to convert between signed and
             unsigned types. If you want to do that, you have to know exactly
-            what you are doing will work correctly.
+            that what you are doing will work correctly.
+        </p><p>
+            Example:
 
             <pre class="programlisting">
         fp24p8_t   a;

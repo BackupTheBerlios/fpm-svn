@@ -9,7 +9,7 @@
         <title> System requirements </title>
         <para>
             Basically, all you need is a decent C-compiler. If your compiler
-            doesn't accept the -MM command line option for generation of
+            doesn't accept the -MM command line option for generating
             <application>make</application>
             dependencies, you need to have
             <application>makedepend</application> installed.
