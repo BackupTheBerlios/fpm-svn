@@ -25,7 +25,7 @@
             are used to accomplish that.
             For example, the square root function needs more
             precision for small values of x, but once the "curve" is mostly
-            done, it's almost a straight line and lesser samples are needed
+            done, it's almost a straight line and less samples are needed
             to quite accurately approximate the function.
             Depending on the fixed point type chosen and the function at hand,
             two to four tables are needed, each consisting of somewhere around
@@ -55,7 +55,7 @@
 
         [...]
 
-        a = scrtfp16p16(b);     /* will be "looked up" and possibly
+        a = sqrtfp16p16(b);     /* will be "looked up" and possibly
                                  * interpolated */ </pre>
         </p></div></div>
           
