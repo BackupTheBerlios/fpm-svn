@@ -1,11 +1,15 @@
 deps
 barcharts
+graphs
 test
 genlut
 benchmark
 benchmarklut
+precision
+precisionlut
 configure.log
 config.mak
 config.sh
 benchmark.dat
 benchmarklut.dat
+precision.dat
