@@ -26,15 +26,15 @@
             are wasted by saving and restoring CPU registers.
         </p><p>
             Possible fields of use are:
-            <div class="itemizedlist"><ul type="disc"><li><p>
+            <div class="itemizedlist"><ul type="disc" compact><li>
                         Games
-                </p></li><li><p>
+                </li><li>
                         Embedded systems
-                </p></li><li><p>
+                </li><li>
                         Audio and video filtering
-                </p></li><li><p>
+                </li><li>
                         Optimized codecs
-                </p></li></ul></div>
+                </li></ul></div>
         </p></div></div><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="getting-started"></a>Chapter 2.  Getting started </h2></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt>2.1. <a href="#system-requirements"> System requirements </a></dt><dt>2.2. <a href="#compilation-and-installation"> Compilation and installation </a></dt><dt>2.3. <a href="#tweaking-the-build-process"> Tweaking the build process </a></dt></dl></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="system-requirements"></a>2.1.  System requirements </h2></div></div><p>
             Basically, all you need is a decent C-compiler. If your compiler
             doesn't accept the -MM command line option for generating
@@ -219,7 +219,8 @@
 
         a = fp8p8tofp24p8(b);
 
-        c = ufp8p8toufp16p16(b);    /* incorrect if b is negative */ </pre>
+        /* incorrect if b is negative */
+        c = ufp8p8toufp16p16(b); </pre>
         </p></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="doing-calculations"></a>3.3.  Doing calculations </h2></div></div><p>
             For addition and substraction, all fixed point variables can be
             treated as if they were normal variables.
@@ -259,7 +260,7 @@
         z = mulfp8p8(x, y);
         x = mulfp8p8(x, itofp8p8(15));
         y = divfp8p8(x, z);
-    
+
         a = mulufp8p24(a, a);</pre>
         </p></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="sqrt-ln-exp-and-pow"></a>3.4.  sqrt, ln, exp and pow </h2></div></div><p>
             For all fixed point types, the macro library implements
@@ -318,7 +319,9 @@
             compiler. Currently (as of the alpha release) the following
             defines are supported:
 
-            <div class="informaltable"><table border="1"><colgroup><col><col></colgroup><tbody><tr><td> __FPM_ENABLE_ALL_LUT__ </td><td> Enable look-up tables for all calculations </td></tr><tr><td> __FPM_ENABLE_SQRT_LUT__ </td><td> Enable look-up tables for all square root calculations </td></tr></tbody></table></div>
+            <div class="informaltable"><table border="1"><colgroup><col><col></colgroup><tbody><tr><td> __FPM_ENABLE_ALL_LUT__ </td><td> Enable look-up tables for all
+                                    calculations </td></tr><tr><td> __FPM_ENABLE_SQRT_LUT__ </td><td> Enable look-up tables for all square root
+                                    calculations </td></tr></tbody></table></div>
         </p><p>
             Eventually, all mathematical functions will have their
             look-up table equivalent. I even consider splitting it up for
