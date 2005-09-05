@@ -26,19 +26,19 @@
         </para>
         <para>
             Possible fields of use are:
-            <itemizedlist>
-                <listitem> <para>
+            <itemizedlist spacing="compact">
+                <listitem> <simpara>
                         Games
-                </para> </listitem>
-                <listitem> <para>
+                </simpara> </listitem>
+                <listitem> <simpara>
                         Embedded systems
-                </para> </listitem>
-                <listitem> <para>
+                </simpara> </listitem>
+                <listitem> <simpara>
                         Audio and video filtering
-                </para> </listitem>
-                <listitem> <para>
+                </simpara> </listitem>
+                <listitem> <simpara>
                         Optimized codecs
-                </para> </listitem>
+                </simpara> </listitem>
             </itemizedlist>
         </para>
     </sect1>

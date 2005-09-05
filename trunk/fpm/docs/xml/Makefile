@@ -1,5 +1,7 @@
 # Makefile for generating the HTML documentation
 
+# $Id$
+
 # List of subdirectories to be processed.
 SUBDIRS = en
 

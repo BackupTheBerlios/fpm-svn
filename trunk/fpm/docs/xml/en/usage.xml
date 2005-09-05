@@ -27,7 +27,7 @@
             <table> <title> Basic types </title>
                 <tgroup cols="6">
                     <thead>
-                        <row> 
+                        <row>
                             <entry> type </entry>
                             <entry> total </entry>
                             <entry> fraction </entry>
@@ -128,7 +128,7 @@
             <table> <title> Type conversion to fp8p8_t </title>
                 <tgroup cols="2">
                     <thead>
-                        <row> 
+                        <row>
                             <entry> from </entry>
                             <entry> fp8p8_t </entry>
                         </row>
@@ -176,7 +176,7 @@
             <table> <title> Type conversion from fp8p8_t </title>
                 <tgroup cols="4">
                     <thead>
-                        <row> 
+                        <row>
                             <entry> from </entry>
                             <entry> int </entry>
                             <entry> float </entry>
@@ -227,7 +227,8 @@
 
         a = fp8p8tofp24p8(b);
 
-        c = ufp8p8toufp16p16(b);    /* incorrect if b is negative */ </programlisting>
+        /* incorrect if b is negative */
+        c = ufp8p8toufp16p16(b); </programlisting>
         </para>
     </sect1>
 
@@ -280,7 +281,7 @@
         z = mulfp8p8(x, y);
         x = mulfp8p8(x, itofp8p8(15));
         y = divfp8p8(x, z);
-    
+
         a = mulufp8p24(a, a);</programlisting>
         </para>
     </sect1>
@@ -295,7 +296,7 @@
             <table> <title> Math macro's for ufp16p16_t </title>
                 <tgroup cols="2">
                     <thead>
-                        <row> 
+                        <row>
                             <entry> </entry>
                             <entry> description </entry>
                         </row>

@@ -1,6 +1,8 @@
 #
 # Makefile.inc for Makefiles in subdirectories.
 #
+# $Id$
+#
 
 # Use customized html-chunk.xsl and/or html-single.xsl file if they exist...
 # Also add html-common.xsl to depends if it exists.

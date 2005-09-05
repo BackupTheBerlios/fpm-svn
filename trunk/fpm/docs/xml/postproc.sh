@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# $Id$
+
 # Simple script to replace keywords by begining and ending of table instead of
 # overriding "chunk-element-content" in the stylesheet, which results in an
 # endless loop (<xsl:apply-imports/>).  If somebody knows how to fix that,

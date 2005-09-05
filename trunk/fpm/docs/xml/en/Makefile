@@ -1,3 +1,5 @@
+# $Id$
+
 # Set if you are using your own HTML stylesheet...
 #HTML_STYLESHEET = mystyle.css
 

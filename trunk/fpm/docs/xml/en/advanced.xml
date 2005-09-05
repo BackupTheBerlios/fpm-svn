@@ -54,11 +54,13 @@
                     <tbody>
                         <row>
                             <entry> __FPM_ENABLE_ALL_LUT__ </entry>
-                            <entry> Enable look-up tables for all calculations </entry>
+                            <entry> Enable look-up tables for all
+                                    calculations </entry>
                         </row>
                         <row>
                             <entry> __FPM_ENABLE_SQRT_LUT__ </entry>
-                            <entry> Enable look-up tables for all square root calculations </entry>
+                            <entry> Enable look-up tables for all square root
+                                    calculations </entry>
                         </row>
                     </tbody>
                 </tgroup>
@@ -87,7 +89,7 @@
         a = sqrtfp16p16(b);     /* will be "looked up" and possibly
                                  * interpolated */ </programlisting>
         </para>
-            
+
     </sect1>
 
     <sect1 id="precision">

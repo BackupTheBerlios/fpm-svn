@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# $Id$
+
 # Script to check for catalogs, stylesheets, XSL processors and all
 # the other stuff necessary to convert the XML documentation.
 
@@ -43,7 +45,7 @@ for _try_chunk_xsl in \
   /usr/local/share/sgml/docbook/stylesheet/xsl/nwalsh/html/chunk.xsl \
   /usr/local/share/sgml/docbook/yelp/docbook/html/chunk.xsl \
   /usr/share/docbook-xsl/html/chunk.xsl \
-  /usr/share/sgml/docbook/xsl-stylesheets*/html/chunk.xsl 
+  /usr/share/sgml/docbook/xsl-stylesheets*/html/chunk.xsl
 do
   if test -f "$_try_chunk_xsl"
   then
@@ -68,7 +70,7 @@ for _try_docbook_xsl in \
   /usr/local/share/sgml/docbook/stylesheet/xsl/nwalsh/html/docbook.xsl \
   /usr/local/share/sgml/docbook/yelp/docbook/html/docbook.xsl \
   /usr/share/docbook-xsl/html/docbook.xsl \
-  /usr/share/sgml/docbook/xsl-stylesheets*/html/docbook.xsl 
+  /usr/share/sgml/docbook/xsl-stylesheets*/html/docbook.xsl
 do
   if test -f "$_try_docbook_xsl"
   then
@@ -144,7 +146,7 @@ for lang in `grep 'SUBDIRS =' Makefile|cut -d= -f2`; do
 <?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
     "$_dtd"
-[ 
+[
 EOF
 
   for file in `find $lang en -name \*.xml -exec basename \{\} \; | sort -u`; do
