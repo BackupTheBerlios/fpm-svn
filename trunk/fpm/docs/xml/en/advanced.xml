@@ -62,6 +62,16 @@
                             <entry> Enable look-up tables for all square root
                                     calculations </entry>
                         </row>
+                        <row>
+                            <entry> __FPM_ENABLE_EXP_LUT__ </entry>
+                            <entry> Enable look-up tables for all exponential
+                                    calculations </entry>
+                        </row>
+                        <row>
+                            <entry> __FPM_ENABLE_LN_LUT__ </entry>
+                            <entry> Enable look-up tables for all natural
+                                    logarithm calculations </entry>
+                        </row>
                     </tbody>
                 </tgroup>
             </informaltable>

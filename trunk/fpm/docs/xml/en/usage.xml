@@ -310,12 +310,12 @@
                         <row>
                             <entry> lnufp16p16(x) </entry>
                             <entry> calculates the natural logarithm of x
-                                    for x &gt;= 0 </entry>
+                                    for x &gt;= 1 </entry>
                         </row>
                         <row>
                             <entry> expufp16p16(x) </entry>
                             <entry> calculates e to the power of x
-                                    for x &gt;= 1 </entry>
+                                    for x &gt;= 0 </entry>
                         </row>
                         <row>
                             <entry> powufp16p16(x, y) </entry>
