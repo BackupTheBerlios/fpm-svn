@@ -268,8 +268,8 @@
 
             <div class="table"><p><b>Table 3.4.  Math macro's for ufp16p16_t </b></p><table summary=" Math macro's for ufp16p16_t " border="1"><colgroup><col><col></colgroup><thead><tr><th> </th><th> description </th></tr></thead><tbody><tr><td> sqrtufp16p16(x) </td><td> calculates the square root of x
                                     for x &gt;= 0 </td></tr><tr><td> lnufp16p16(x) </td><td> calculates the natural logarithm of x
-                                    for x &gt;= 0 </td></tr><tr><td> expufp16p16(x) </td><td> calculates e to the power of x
-                                    for x &gt;= 1 </td></tr><tr><td> powufp16p16(x, y) </td><td> calculates x to the power of y
+                                    for x &gt;= 1 </td></tr><tr><td> expufp16p16(x) </td><td> calculates e to the power of x
+                                    for x &gt;= 0 </td></tr><tr><td> powufp16p16(x, y) </td><td> calculates x to the power of y
                                     for y &gt;= 1 </td></tr></tbody></table></div>
         </p><p>
             For all seven other types, similar macro's exist.
@@ -321,7 +321,9 @@
 
             <div class="informaltable"><table border="1"><colgroup><col><col></colgroup><tbody><tr><td> __FPM_ENABLE_ALL_LUT__ </td><td> Enable look-up tables for all
                                     calculations </td></tr><tr><td> __FPM_ENABLE_SQRT_LUT__ </td><td> Enable look-up tables for all square root
-                                    calculations </td></tr></tbody></table></div>
+                                    calculations </td></tr><tr><td> __FPM_ENABLE_EXP_LUT__ </td><td> Enable look-up tables for all exponential
+                                    calculations </td></tr><tr><td> __FPM_ENABLE_LN_LUT__ </td><td> Enable look-up tables for all natural
+                                    logarithm calculations </td></tr></tbody></table></div>
         </p><p>
             Eventually, all mathematical functions will have their
             look-up table equivalent. I even consider splitting it up for
