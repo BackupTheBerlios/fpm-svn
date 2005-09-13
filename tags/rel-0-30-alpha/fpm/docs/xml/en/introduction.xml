@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- $Revision$ -->
+
+<chapter id="introduction">
+    <title> Introduction </title>
+
+    <sect1 id="about-this-library">
+        <title> About this library </title>
+        <para>
+            This is a macro library written in the C programming language,
+            and implements fixed point arithmetic. Although current
+            state-of-the-art FPU's are getting faster and faster, it might
+            still be beneficial to implement your algorithms with fixed point
+            arithmetic to gain even higher speeds, although at the cost of
+            precision. Fixed point arithmetic is less precise than floating
+            point arithmetic, but lots of times, the extra precision is
+            not needed.
+        </para>
+        <para>
+            I chose to implement this library as a set of macro's instead of
+            functions, to avoid having the extra overhead of function calls.
+            This might add a little to the codesize of the program that
+            utilizes this library, but assures you that no precious clockcycles
+            are wasted by saving and restoring CPU registers.
+        </para>
+        <para>
+            Possible fields of use are:
+            <itemizedlist spacing="compact">
+                <listitem> <simpara>
+                        Games
+                </simpara> </listitem>
+                <listitem> <simpara>
+                        Embedded systems
+                </simpara> </listitem>
+                <listitem> <simpara>
+                        Audio and video filtering
+                </simpara> </listitem>
+                <listitem> <simpara>
+                        Optimized codecs
+                </simpara> </listitem>
+            </itemizedlist>
+        </para>
+    </sect1>
+
+</chapter>
+

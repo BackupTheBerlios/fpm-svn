@@ -1,0 +1,398 @@
+#! /bin/sh
+
+#
+# Alternate configure
+# Loosely based on MPlayer's configure
+#
+# (C)opyright 2005 by Ivo van Poorten
+# Licensed under version 2 of the GPL
+#
+# $Id$
+#
+
+rm -f config.mak
+
+TMPC="configure-test-file.c"
+TMPO="configure-test-file.o"
+TMPLOG="configure.log"
+
+rm -f $TMPLOG
+
+_debug=
+_cc=gcc
+_ccfordeps="$_cc -MM"
+_ldd=ldd
+_prefix=/usr/local
+_cflags="-O4"
+_warnings=
+_ldflags=-lm
+_inc_extra=
+_ld_extra=
+_make=make
+_indent=indent
+_makedepend=makedepend
+_gnuplot=gnuplot
+_awk=
+_fig2dev=fig2dev
+_fig2dev_png=
+
+
+# check environment
+
+if test "$CC" != "" ; then
+    _cc=$CC
+    _ccfordeps="$_cc -MM"
+fi
+if test "$CFLAGS" != "" ; then
+    echo "Warning: Overriding CFLAGS with environment variable ($CFLAGS)"
+    echo "If that's not what you want, run CFLAGS= ./configure"
+    _cflags=$CFLAGS
+    echo
+fi
+
+# Functions
+
+case `echo -n` in
+    -n)     _echo_n=        _echo_c='\c'    ;; # SysV echo
+    *)      _echo_n='-n '   _echo_c=        ;; # BSD echo
+esac
+
+echocheck() {
+    echo "============ Checking for $@ ============" >> "$TMPLOG"
+    echo ${_echo_n} "Checking for $@ ... ${_echo_c}"
+}
+
+echores() {
+    echo "Result is: $@" >> "$TMPLOG"
+    echo "##########################################" >> "$TMPLOG"
+    echo "" >> "$TMPLOG"
+    echo "$@"
+}
+
+cc_check() {
+    echo "" >> "$TMPLOG"
+    cat "$TMPC" >> "$TMPLOG"
+    echo "" >> "$TMPLOG"
+    echo "$_cc $CFLAGS $_inc_extra $_ld_extra $TMPC -o $TMPO $@" >> "$TMPLOG"
+    rm -f "$TMPO"
+    ( $_cc $CFLAGS $_inc_extra $_ld_extra "$TMPC" -o "$TMPO" "$@" ) >> "$TMPLOG" 2>&1
+    TMP="$?"
+    echo >> "$TMPLOG"
+    echo "ldd $TMPO" >> "$TMPLOG"
+    ( $_ldd "$TMPO" ) >> "$TMPLOG" 2>&1
+    echo >> "$TMPLOG"
+    return "$TMP"
+}
+
+die () {
+    echo
+    echo "Error: $@" >&2
+    echo >&2
+    rm -f "$TMPO" "$TMPC"
+    echo "Check \"$TMPLOG\" if you do not understand why it failed."
+    echo
+    exit 1
+}
+
+# Parse commandline
+
+for parm in "$@"; do
+    if test "$parm" = "--help" || test "$parm" = "-help" || test "$parm" = "-h" ; then
+        cat << EOF
+
+Usage $0 [options] ...
+
+Configuration:
+  -h, --help                display this help and exit
+
+Installation directories:
+  --prefix=DIR              use this prefix for installation [/usr/local]
+
+Miscellaneous options:
+  --cc=COMPILER             use this C compiler to build [gcc]
+  --with-extraincdir=DIR    extra headers
+  --with-extralibdir=DIR    extra library files
+
+Advanced options:
+  --enable-debug            enable debug symbols [disabled]
+  --enable-warnings         enable all compiler warnings [disabled]
+
+  --with-make=              use a custom make program
+  --with-indent=            use a custom indent program
+  --with-makedepend=        use a custom makedepend program (if needed)
+  --with-gnuplot=           use a custom gnuplot program (if needed)
+  --with-awk=               use a custom awk program (if needed)
+  --with-fig2dev=           use a custom fig2dev program (if needed)
+
+EOF
+        exit 0
+    fi
+done
+
+for ac_option do
+    case "$ac_option" in
+    --prefix=*)
+        _prefix=`echo $ac_option | cut -d '=' -f 2`
+        ;;
+    --cc=*)
+        _cc=`echo $ac_option | cut -d '=' -f 2`
+        ;;
+    --with-extraincdir=*)
+        _inc_extra=-I`echo $ac_option | cut -d '=' -f 2 | sed 's,:, -I,g'`
+        ;;
+    --with-extralibdir=*)
+        _ld_extra=-L`echo $ac_option | cut -d '=' -f 2 | sed 's,:, -L,g'`
+        ;;
+    --disable-debug)
+        _debug=""
+        ;;
+    --enable-debug)
+        _debug="-g"
+        _cflags=""
+        ;;
+    --disable-warnings)
+        _warnings=""
+        ;;
+    --enable-warnings)
+        _warnings="-Wall"
+        ;;
+    --with-make=*)
+        _make=`echo $ac_option | cut -d '=' -f 2`
+        ;;
+    --with-indent=*)
+        _indent=`echo $ac_option | cut -d '=' -f 2`
+        ;;
+    --with-makedepend=*)
+        _makedepend=`echo $ac_option | cut -d '=' -f 2`
+        ;;
+    --with-gnuplot=*)
+        _gnuplot=`echo $ac_option | cut -d '=' -f 2`
+        ;;
+    --with-awk=*)
+        _awk=`echo $ac_option | cut -d '=' -f 2`
+        ;;
+    --with-fig2dev=*)
+        _fig2dev=`echo $ac_option | cut -d '=' -f 2`
+        ;;
+    *)
+        echo "unknown option: $ac_option"
+        exit 1
+        ;;
+    esac
+done
+
+
+# Do tests...
+
+echocheck "c compiler"
+cc_run=`( $_cc ) 2>&1`
+if test "$?" -gt 1; then
+    echores "no"
+    die "can't find compiler"
+fi
+echores "$_cc"
+
+
+
+echocheck "extra headers"
+if test "$_inc_extra" ; then
+    echores "$_inc_extra"
+else
+    echores "no"
+fi
+
+
+
+echocheck "extra libraries"
+if test "$_ld_extra" ; then
+    echores "$_ld_extra"
+else
+    echores "no"
+fi
+
+
+
+echocheck "indent"
+(echo "$_indent" | $_indent) >> "$TMPLOG" 2>&1
+_tmp=`(echo "indent" | $_indent) 2>&1`
+if test "$_tmp" = "indent" ; then
+    echores "yes, $_indent"
+else
+    echores "no, using cat instead"
+    _indent=cat
+fi
+
+
+
+echocheck "$_cc support of -MM option"
+cat > $TMPC << EOF
+int main(void) { return 0; }
+EOF
+$_cc -MM $TMPC >> $TMPLOG 2>&1
+if test "$?" -gt 0; then
+    echores "no"
+    _ccfordeps=""
+else
+    echores "yes"
+    _ccfordeps="$_cc -MM"
+fi
+
+
+
+if test "$_ccfordeps" = ""; then
+    echocheck "makedepend"
+    cat > $TMPC << EOF
+int main(void) { return 0; }
+EOF
+    $_makedepend -f- $TMPC >> $TMPLOG 2>&1
+    if test "$?" -gt 0; then
+        echores "no"
+        die "If you compiler doensn't understand -MM, makedepend is needed."
+    else
+        echores "yes, $_makedepend"
+        _ccfordeps="$_makedepend -f-"
+    fi
+fi
+
+
+
+echocheck "gnuplot"
+(echo "set terminal fig; plot x;" | $_gnuplot) 2>> "$TMPLOG" 1>/dev/null
+if test "$?" -gt 0 ; then
+    echores "no"
+    _gnuplot=""
+    _nobarcharts="yes"
+else
+    echores "yes, $_gnuplot"
+fi
+
+
+
+echocheck "awk"
+for _awkt in $_awk mawk gawk nawk awk noawkpresent; do
+    ( $_awkt 'BEGIN{testme();}function testme(){print "";}' ) >> "$TMPLOG" 2>&1
+    if test "$?" -eq 0 ; then
+        echores "yes, $_awkt"
+        break
+    fi
+done
+_awk=$_awkt
+if test "$_awk" = "noawkpresent"; then
+    echores "no"
+    _awk=""
+    _nobarcharts="yes"
+fi
+
+
+
+echocheck "fig2dev"
+($_fig2dev -h) 2>> "$TMPLOG" 1>/dev/null
+if test "$?" -gt 0 ; then
+    echores "no"
+    _fig2dev=""
+    _nobarcharts="yes"
+else
+    echores "yes, $_fig2dev"
+fi
+
+
+
+if test "$_fig2dev" != "" ; then
+    echocheck "$_fig2dev support of PNG output"
+    _fig2dev_png=`($_fig2dev -h | grep png) 2>>"$TMPLOG"`
+    if test "$_fig2dev_png" = "" ; then
+        echores "no"
+        _fig2dev_png=no
+    else
+        echores "yes"
+        _fig2dev_png=yes
+    fi
+fi
+
+
+
+# Write report
+
+echo
+if test "$_debug" = ""; then
+    echo "Debug symbols disabled."
+else
+    echo "Debug symbols enabled."
+fi
+if test "$_warnings" = ""; then
+    echo "All compiler warnings disabled."
+else
+    echo "All compiler warnings enabled."
+fi
+
+if test "$_nobarcharts" = "yes"; then
+    echo ${_echo_n} "No benchmark barcharts support because the ${_echo_c}"
+    echo "following programs were not found:"
+    echo ${_echo_n} "    ${_echo_c}"
+    if test "$_gnuplot" = ""; then
+        echo ${_echo_n} "gnuplot ${_echo_c}"
+    fi
+    if test "$_awk" = ""; then
+        echo ${_echo_n} "awk ${_echo_c}"
+    fi
+    if test "$_fig2dev" = ""; then
+        echo ${_echo_n} "fig2dev ${_echo_c}"
+    fi
+    echo
+fi
+
+
+
+# Cleaning up source tree
+
+echo
+echo ${_echo_n} "Cleaning up source tree ... ${_echo_c}"
+> config.mak
+$_make clean >> $TMPLOG 2>&1
+echores "done"
+
+
+# Assemble _cflags and _ldflags
+
+_cflags="$_cflags"
+_ldflags="$_ldflags $_ld_extra"
+
+# Generate config.mak
+
+echo
+echo ${_echo_n} "Generating config.mak ... ${_echo_c}"
+cat > config.mak << EOF
+CC=$_cc
+CFLAGS=$_cflags
+INCLUDES=-I./include $_inc_extra
+CCFORDEPS=$_ccfordeps
+LD=$_cc
+LDFLAGS=$_ldflags
+INDENT=$_indent
+DEBUG=$_debug
+WARNINGS=$_warnings
+MAKE=$_make
+PREFIX=$_prefix
+EOF
+
+echo "done."
+
+# Generate config.sh for shellscripts (like genbarcharts.sh)
+
+echo ${_echo_n} "Generating config.sh ... ${_echo_c}"
+cat > config.sh << EOF
+_gnuplot=$_gnuplot
+_awk=$_awk
+_fig2dev=$_fig2dev
+_fig2dev_png=$_fig2dev_png
+EOF
+
+echo "done."
+echo
+echo "Now type 'make' to build."
+echo
+
+# Clean up
+
+rm -f "$TMPC" "$TMPO"
+

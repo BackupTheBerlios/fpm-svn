@@ -1,0 +1,4 @@
+$Id$
+
+The documentation build-system is mostly borrowed from the MPlayer project
+(see: http://www.mplayerhq.hu/) and is all licensed under version 2 of the GPL.

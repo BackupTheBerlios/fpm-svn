@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- $Revision$ -->
+
+<chapter id="getting-started">
+    <title> Getting started </title>
+
+    <sect1 id="system-requirements">
+        <title> System requirements </title>
+        <para>
+            Basically, all you need is a decent C-compiler. If your compiler
+            doesn't accept the -MM command line option for generating
+            <application>make</application>
+            dependencies, you need to have
+            <application>makedepend</application> installed.
+            Optionally, if you have
+            <application>indent</application> on your system, it is used
+            to process the generated LUT header file.
+        </para>
+        <para>
+            Running benchmarks does not require any other tools, but if you
+            automatically want to generate barcharts of the results, you need
+            <application>gnuplot</application>,
+            <application>awk</application> and
+            <application>fig2dev</application> with PNG support (which
+            requires libpng).
+        </para>
+        <para>
+            For building your own HTML documentation from the XML files
+            that are in CVS, you need docbook,
+            <application>xmllint</application>,
+            <application>xsltproc</application> and
+            the libraries they depend on, like libxml and libxslt.
+        </para>
+        <para>
+            All configure scripts and Makefiles assume that basic programs
+            like
+            <application>sh</application>,
+            <application>sed</application> and
+            <application>cut</application> are available.
+        </para>
+    </sect1>
+
+    <sect1 id="compilation-and-installation">
+        <title> Compilation and installation </title>
+        <para>
+            Most of the time, the following will work fine:
+
+            <screen>
+        ./configure
+        make
+        make install </screen>
+
+            Configure will figure out what tools are available on your system
+            and how to use them.
+            Running make will build the final macro library header files and
+            make install will install them in the default installation
+            directory, which usualy is /usr/local/include. After that, you
+            can start developping your program and use this library.
+        </para>
+        <para>
+            If this doesn't work, or you want a more fine grained control of
+            the build and installation process, you should run:
+
+            <screen>
+        ./configure --help </screen>
+
+            The next section will describe the
+            <application>configure</application>
+            options in more detail.
+        </para>
+    </sect1>
+
+    <sect1 id="tweaking-the-build-process">
+        <title> Tweaking the build process </title>
+
+        <para>
+            By default,
+            <application>gcc</application>
+            is the C-compiler that's used. You can override that by either
+            setting the CC environment variable or by using the --cc command
+            line option of
+            <application>configure</application>.
+
+            <screen>
+        CC=/usr/local/intel/bin/icc ./configure </screen>
+            <screen>
+        ./configure --cc=tcc </screen>
+        </para>
+        <para>
+            You can override the default CFLAGS by setting the environment
+            variable of the same name.
+
+            <screen>
+        CFLAGS=-time ./configure </screen>
+
+            If CFLAGS is set by default in your environment and you don't want
+            that, you can specify an empty CFLAGS= on your command line.
+        </para>
+        <para>
+            You can also specify extra directories to look for include files
+            and libraries. If your compiler can't find math.h by default, or
+            fails to link against libm, you can use:
+
+            <screen>
+        ./configure --with-extraincdir=/opt/some/dir/include </screen>
+            <screen>
+        ./configure --with-extralibdir=/opt/some/dir/lib </screen>
+        </para>
+        <para>
+            If certain applications needed for the build process can't be
+            found in your default PATH, but you are sure they are installed
+            on your system, you can pass the absolute pathnames to
+            <application>configure</application>:
+
+            <screen>
+        ./configure --with-makedepend=/not/in/my/path/bin/makedepend </screen>
+
+            Similar options are available for all applications that might
+            be needed for the basic build process or for running benchmarks
+            and generating barcharts. Check ./configure --help for a list
+            of all available options.
+        </para>
+        <para>
+            If you plan to work on the library itself, maybe enhance its
+            functionality or improve the algorithms that are currently in use,
+            you can enable debug symbols and/or all compiler warnings:
+
+            <screen>
+        ./configure --enable-debug </screen>
+            <screen>
+        ./configure --enable-warnings </screen>
+        </para>
+    </sect1>
+
+</chapter>
+

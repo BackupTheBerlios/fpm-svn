@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- $Revision$ -->
+
+<bookinfo>
+    <title> Fixed Point Math Macro Library </title>
+    <authorgroup>
+        <author>
+            <firstname> Ivo </firstname>
+            <surname> van Poorten </surname>
+            <affiliation>
+                <address>
+                    <email> ivop@mail.berlios.de </email>
+                </address>
+            </affiliation>
+        </author>
+    </authorgroup>
+
+    <date> August 26, 2005 </date>
+
+    <legalnotice>
+        <title> License </title>
+        <para>
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1
+        published by the Free Software Foundation; with no
+        Invariant Sections, with no Front-Cover texts, and with no Back-Cover
+        Texts. A copy of the license can be found at
+        the end of this document.
+        </para>
+    </legalnotice>
+
+    <copyright>
+        <year> 2005 </year>
+        <holder> Ivo van Poorten </holder>
+    </copyright>
+
+</bookinfo>
+
+&introduction.xml;
+&gettingstarted.xml;
+&usage.xml;
+&advanced.xml;
+
+&license.xml;
+

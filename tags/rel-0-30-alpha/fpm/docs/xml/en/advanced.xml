@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- $Revision$ -->
+
+<chapter id="advanced">
+    <title> Advanced </title>
+
+    <sect1 id="look-up-tables">
+        <title> Look Up Tables </title>
+
+        <para>
+            By default, all mathematical functions are calculated and/or
+            approximated algorithmicly. In some cases the algorithms use
+            a few (static) temporary variables, but generally speaking,
+            they don't use large amounts of memory and in most cases they
+            are faster than their floating point equivalents.
+        </para>
+
+        <para>
+            In some cases though, they are not. For example, Athlon CPU's
+            "cheat" a little by using a 14-bit look-up table for square
+            root calculation and are therefore actually faster! This is
+            clearly not what we want.
+        </para>
+
+        <para>
+            This Fixed Point Math Macro Library also supports look-up table
+            variants of all mathematical functions. But considering its
+            fields of use, it has to be cache friendly. Large tables would
+            ruin the L1 cache. So instead of one large table, I chose to use
+            several small tables and linear interpolation for the values
+            that don't directly map to the look-up table.
+            Depending on the mathematical function that's
+            approximated and the precision that's needed, different tables
+            are used to accomplish that.
+            For example, the square root function needs more
+            precision for small values of x, but once the "curve" is mostly
+            done, it's almost a straight line and less samples are needed
+            to quite accurately approximate the function.
+            Depending on the fixed point type chosen and the function at hand,
+            two to four tables are needed, each consisting of somewhere around
+            128 values. This assures only a few kilobytes of memory and
+            hence won't trash the cache in most cases.
+        </para>
+
+        <para>
+            Look-up tables can be activated by using #define before including
+            fixedpointmath.h or by using the -D command line option of your
+            compiler. Currently (as of the alpha release) the following
+            defines are supported:
+
+            <informaltable>
+                <tgroup cols="2">
+                    <tbody>
+                        <row>
+                            <entry> __FPM_ENABLE_ALL_LUT__ </entry>
+                            <entry> Enable look-up tables for all
+                                    calculations </entry>
+                        </row>
+                        <row>
+                            <entry> __FPM_ENABLE_SQRT_LUT__ </entry>
+                            <entry> Enable look-up tables for all square root
+                                    calculations </entry>
+                        </row>
+                        <row>
+                            <entry> __FPM_ENABLE_EXP_LUT__ </entry>
+                            <entry> Enable look-up tables for all exponential
+                                    calculations </entry>
+                        </row>
+                        <row>
+                            <entry> __FPM_ENABLE_LN_LUT__ </entry>
+                            <entry> Enable look-up tables for all natural
+                                    logarithm calculations </entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </informaltable>
+        </para>
+
+        <para>
+            Eventually, all mathematical functions will have their
+            look-up table equivalent. I even consider splitting it up for
+            every basic fixed point type, which could save memory.
+            Embedded systems with only limitted amount of RAM or ROM, could
+            benefit from that.
+        </para>
+
+        <para>
+            Example:
+
+            <programlisting>
+        #define __FPM_ENABLE_SQRT_LUT__
+        #include &lt;fixedpointmath.h&gt;
+
+        fp16p16_t a, b;
+
+        [...]
+
+        a = sqrtfp16p16(b);     /* will be "looked up" and possibly
+                                 * interpolated */ </programlisting>
+        </para>
+
+    </sect1>
+
+    <sect1 id="precision">
+        <title> Precision </title>
+
+        <para>
+            This section will eventually have a whole bunch of graphs that
+            show the precision and/or lack thereof of all fixed point
+            math macro's compared to 32/64-bit floating point.
+        </para>
+    </sect1>
+
+    <sect1 id="benchmarks">
+        <title> Benchmarks </title>
+
+        <para>
+            This section (and possibly sub-sections) will have barcharts
+            of how the fixed point math routines compare to floating point
+            variants on different CPU/FPU's and with different compilers
+            and optimization settings.
+        </para>
+
+        <para>
+            Note: I already noticed that Intel's ICC, in all its wisdom,
+            completely optimizes the benchmark program to oblivion, leaving
+            only 11 clockcycles (on a Sempron 2400 CPU) for almost all
+            timing loops. Something has to be done about that :)
+        </para>
+
+        <para>
+            This section will also describe how to run benchmarks yourself.
+        </para>
+    </sect1>
+
+</chapter>
+

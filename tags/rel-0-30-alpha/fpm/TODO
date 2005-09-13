@@ -1,0 +1,17 @@
+TODO
+====
+
+$Id$
+
+- Regression tests.
+- Removal of conditional statement in sqrt macros (in converge); find a way
+  to change them into 0 or 1 and use multiplication. This should be a huge
+  speed up for the algorithmic versions.
+- Add more functions like (arc)sin, (arc)cos, (arc)tan, et cetera.
+- Inivestigate possibilities to increase speed with SIMD instructions. (might
+  be difficult because a lot of algorithms use 64 bits at times. SSE2 maybe? )
+- Write sample code. Preferably something that does something useful :)
+- Document __FPM_VERSION_RELEASE__  valid values are: alpha, beta, stable and
+  cvs.
+- Add selective LUT support, like only include luts for a specific f.p type
+
