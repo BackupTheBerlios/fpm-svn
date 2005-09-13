@@ -1,0 +1,47 @@
+ChangeLog
+=========
+
+$Id$
+
+v0.30   [First alpha release]
+
+    - Better Makefile(s)
+    - Fixed exp macro's conditional expressions to always evaluate as true
+    - Added make install/uninstall
+    - Generation of index.html for graphs
+    - Barcharts index.html "tool"
+    - Updated documentation
+
+v0.29   Added lut support for ln, exp and pow (indirectly)
+v0.28   Added precision(lut) and script to generate graphs of the output
+v0.27   First draft of documentation
+v0.26   Setup documentation build system
+v0.25   Moved types to code.h, finished sqrt LUT support (maybe 8fp24 needs
+        one more table, or at least higher resolution for lut256)
+v0.24   All todo's for 0.23 done.
+v0.23   Decent non-autotools configure script added; todo: test for gnuplot,
+        awk and fig2dev and have genbarchart act on that if one of them isn't
+        found. also add --with-indent= etc. options
+v0.22   Benchmark output changed to values and comments only, wrote barchart
+        script to generate PNG files of benchmark output, adjusted makefile
+        to do that
+v0.21   Preliminary sqrt LUT support and split of code and API in two .h
+        files.
+v0.20   Added pow()
+v0.19   After doing some timing tests, the "oh-so-clever" sqrt algorithm
+        turned out to be 10-15 times slower than floating point <g>
+        So, I completely rewrote the sqrt algorithm. It's still 3-11
+        times slower than the FPU, but is it possible to beat hardware
+        fsqrt that has a 14-bit lookup table? (athlon)
+v0.18   Fixed type problem in ftoufpxpx causing false integer overflow
+        compiler warnings.
+v0.17   Added a wrapper around ln() so constants can be passed. If a
+        variable is passed, it's no longer changed itself!
+v0.16   Replaced divs by muls in ln()
+v0.15   Added ln()
+v0.14   Removed silly 16p8 and 8p16 types
+v0.13   Added exp()
+v0.12   Changed sqrt() from nested macros to use a temp var (gcc trouble)
+v0.11   Added sqrt()
+v0.10   Basic types, mul() and div()
+
