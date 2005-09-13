@@ -4,8 +4,10 @@ graphs
 genlut
 benchmark
 benchmarklut
+benchmarklut.c
 precision
 precisionlut
+precisionlut.c
 configure.log
 config.mak
 config.sh
