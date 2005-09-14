@@ -325,11 +325,14 @@
                                     calculations </td></tr><tr><td> __FPM_ENABLE_LN_LUT__ </td><td> Enable look-up tables for all natural
                                     logarithm calculations </td></tr></tbody></table></div>
         </p><p>
-            Eventually, all mathematical functions will have their
+            All mathematical functions should have their
             look-up table equivalent. I even consider splitting it up for
             every basic fixed point type, which could save memory.
             Embedded systems with only limitted amount of RAM or ROM, could
-            benefit from that.
+            benefit from that. Note that pow is a special case as it takes
+            two arguments. Currently, it is implemented algorithmicly
+            by using ln and exp. If one of those (or both) are LUT enabled,
+            pow will be (partly) LUT enabled.
         </p><p>
             Example:
 
@@ -344,9 +347,31 @@
         a = sqrtfp16p16(b);     /* will be "looked up" and possibly
                                  * interpolated */ </pre>
         </p></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="precision"></a>4.2.  Precision </h2></div></div><p>
-            This section will eventually have a whole bunch of graphs that
-            show the precision and/or lack thereof of all fixed point
-            math macro's compared to 32/64-bit floating point.
+            This section describes how you can visualize the precision
+            of all fixed point macro's. The result will look like this:
+        </p><p>
+            <a href="http://fpm.berlios.de/website/graphs/" target="_top">
+                Graphs (version 0.31-cvs)</a>
+        </p><p>
+            The easiest way is to unpack the tarball, run configure with your
+            desired command line options and run:
+
+            <pre class="screen">
+        make graphs </pre>
+        </p><p>
+            This will compile 'precision' and 'precisionlut' and run
+            gengraphs.sh to generate the graphs. You need to have gnuplot
+            and fig2dev installed.
+        </p><p>
+            It's also possible to run 'precision' and 'precisionlut' by hand.
+            They take an unsigned fixed point type and a function name as
+            arguments. A huge table will be printed to stdout. Each line
+            consists of the value of x, the value of function(x) calculated
+            by libm and the value of function(x) calculated by a fixed point
+            macro.
+
+            <pre class="screen">
+        ./precision ufp16p16 sqrt </pre>
         </p></div><div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="benchmarks"></a>4.3.  Benchmarks </h2></div></div><p>
             This section (and possibly sub-sections) will have barcharts
             of how the fixed point math routines compare to floating point
@@ -355,7 +380,7 @@
         </p><p>
             Note: I already noticed that Intel's ICC, in all its wisdom,
             completely optimizes the benchmark program to oblivion, leaving
-            only 11 clockcycles (on a Sempron 2400 CPU) for almost all
+            only 11 clockcycles (on a Sempron 2400+ CPU) for almost all
             timing loops. Something has to be done about that :)
         </p><p>
             This section will also describe how to run benchmarks yourself.

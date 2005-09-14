@@ -43,11 +43,14 @@
                                     calculations </td></tr><tr><td> __FPM_ENABLE_LN_LUT__ </td><td> Enable look-up tables for all natural
                                     logarithm calculations </td></tr></tbody></table></div>
         </p><p>
-            Eventually, all mathematical functions will have their
+            All mathematical functions should have their
             look-up table equivalent. I even consider splitting it up for
             every basic fixed point type, which could save memory.
             Embedded systems with only limitted amount of RAM or ROM, could
-            benefit from that.
+            benefit from that. Note that pow is a special case as it takes
+            two arguments. Currently, it is implemented algorithmicly
+            by using ln and exp. If one of those (or both) are LUT enabled,
+            pow will be (partly) LUT enabled.
         </p><p>
             Example:
 

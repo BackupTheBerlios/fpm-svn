@@ -3,9 +3,31 @@
       <div class="navheader"><table width="100%" summary="Navigation header"><tr><td width="20%" align="left"><a accesskey="p" href="advanced.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="benchmarks.html">Next</a></td></tr></table><hr></div>
           
       <div class="sect1"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="precision"></a>4.2.  Precision </h2></div></div><p>
-            This section will eventually have a whole bunch of graphs that
-            show the precision and/or lack thereof of all fixed point
-            math macro's compared to 32/64-bit floating point.
+            This section describes how you can visualize the precision
+            of all fixed point macro's. The result will look like this:
+        </p><p>
+            <a href="http://fpm.berlios.de/website/graphs/" target="_top">
+                Graphs (version 0.31-cvs)</a>
+        </p><p>
+            The easiest way is to unpack the tarball, run configure with your
+            desired command line options and run:
+
+            <pre class="screen">
+        make graphs </pre>
+        </p><p>
+            This will compile 'precision' and 'precisionlut' and run
+            gengraphs.sh to generate the graphs. You need to have gnuplot
+            and fig2dev installed.
+        </p><p>
+            It's also possible to run 'precision' and 'precisionlut' by hand.
+            They take an unsigned fixed point type and a function name as
+            arguments. A huge table will be printed to stdout. Each line
+            consists of the value of x, the value of function(x) calculated
+            by libm and the value of function(x) calculated by a fixed point
+            macro.
+
+            <pre class="screen">
+        ./precision ufp16p16 sqrt </pre>
         </p></div>
           
       <div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="advanced.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="advanced.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="benchmarks.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div>
