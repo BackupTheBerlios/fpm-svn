@@ -17,9 +17,9 @@
 
 /* ------------------------------------------------------------------------- */
 
-#define __FPM_VERSION__         0.30
+#define __FPM_VERSION__         0.31
 #define __FPM_VERSION_MAJOR__   0
-#define __FPM_VERSION_MINOR__   30
+#define __FPM_VERSION_MINOR__   31
 #define __FPM_VERSION_RELEASE__ cvs
 
 /* ------------------------------------------------------------------------- */
