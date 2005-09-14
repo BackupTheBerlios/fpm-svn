@@ -609,14 +609,19 @@ static uint64_t _fp64_x2,  _fp64_x3,  _fp64_x4,  _fp64_x5,  _fp64_x6,
 
 /* x^y */
 
-#define _powufp8p8(x,y)   ((_ufp8p8tmp2   = _mulufp8p8 (y, lnufp8p8(x)  )) ? \
+#define __powufp8p8(x,y)   ((_ufp8p8tmp2   = _mulufp8p8 (y, lnufp8p8(x)  )) ?\
                                            expufp8p8  (_ufp8p8tmp2) : 1<<8)
-#define _powufp24p8(x,y)  ((_ufp24p8tmp2  = _mulufp24p8(y, lnufp24p8(x)  )) ? \
-                                           expufp24p8 (_ufp24p8tmp2) : 1<<24)
-#define _powufp16p16(x,y) ((_ufp16p16tmp2 = _mulufp16p16(y, lnufp16p16(x)  ))?\
+#define __powufp24p8(x,y)  ((_ufp24p8tmp2  = _mulufp24p8(y, lnufp24p8(x)  )) ?\
+                                           expufp24p8 (_ufp24p8tmp2) : 1<<8)
+#define __powufp16p16(x,y) ((_ufp16p16tmp2 = _mulufp16p16(y, lnufp16p16(x) ))?\
                                            expufp16p16 (_ufp16p16tmp2) : 1<<16)
-#define _powufp8p24(x,y)  ((_ufp8p24tmp2  = _mulufp8p24 (y, lnufp8p24(x)  )) ?\
-                                           expufp8p24  (_ufp8p24tmp2) : 1<<8)
+#define __powufp8p24(x,y)  ((_ufp8p24tmp2  = _mulufp8p24 (y, lnufp8p24(x)  ))?\
+                                           expufp8p24  (_ufp8p24tmp2) : 1<<24)
+
+#define _powufp8p8(x,y)   ( x>(1<<8)  ? __powufp8p8(x,y)   : 1<<8 )
+#define _powufp24p8(x,y)  ( x>(1<<8)  ? __powufp24p8(x,y)  : 1<<8 )
+#define _powufp16p16(x,y) ( x>(1<<16) ? __powufp16p16(x,y) : 1<<16 )
+#define _powufp8p24(x,y)  ( x>(1<<24) ? __powufp8p24(x,y)  : 1<<24 )
 
 #define _powfp8p8(x,y)   _powufp8p8(x,y)
 #define _powfp24p8(x,y)  _powufp24p8(x,y)
