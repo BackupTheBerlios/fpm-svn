@@ -59,4 +59,7 @@
       <b><xsl:apply-templates/></b>
   </xsl:template>
 
+  <!-- Override target=_top -->
+  <xsl:param name="ulink.target" select="''"/>
+
 </xsl:stylesheet>
