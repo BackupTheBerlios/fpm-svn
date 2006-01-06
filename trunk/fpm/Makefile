@@ -88,7 +88,7 @@ config.mak:			configure
 
 -include deps/$(PRECOBJS:.o=.d)
 
--include deps/$(PRECLUTOBJS:.0=.d)
+-include deps/$(PRECLUTOBJS:.o=.d)
 
 %.o:	%.c
 	$(CC) -c $(CFLAGS) $(INCLUDES) $*.c -o $*.o $(DEBUG) $(WARNINGS)
