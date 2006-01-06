@@ -35,6 +35,8 @@ _gnuplot=gnuplot
 _awk=
 _fig2dev=fig2dev
 _fig2dev_png=
+_inttypes=
+_stdint=
 
 
 # check environment
@@ -212,6 +214,35 @@ fi
 
 
 
+echocheck "inttypes.h"
+cat > $TMPC << EOF
+#include <inttypes.h>
+int main(void) { return 0; }
+EOF
+cc_check && _inttypes=yes
+if test "$_inttypes" = yes ; then
+    echores "yes"
+    _inttypes="-DHAVE_INTTYPES_H"
+else
+    echores "no"
+    _inttypes=""
+    echocheck "stdint.h"
+    cat > $TMPC << EOF
+#include <stdint.h>
+int main(void) { return 0; }
+EOF
+    cc_check && _stdint=yes
+    if test "$_stdint" = yes ; then
+        echores "yes"
+        _stdint="-DHAVE_STDINT_H"
+    else
+        echores "no"
+        _stdint=""
+    fi
+fi
+
+
+
 echocheck "indent"
 (echo "$_indent" | $_indent) >> "$TMPLOG" 2>&1
 _tmp=`(echo "indent" | $_indent) 2>&1`
@@ -363,7 +394,7 @@ echo
 echo ${_echo_n} "Generating config.mak ... ${_echo_c}"
 cat > config.mak << EOF
 CC=$_cc
-CFLAGS=$_cflags
+CFLAGS=$_cflags $_inttypes $_stdint
 INCLUDES=-I./include $_inc_extra
 CCFORDEPS=$_ccfordeps
 LD=$_cc
