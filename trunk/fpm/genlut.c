@@ -20,7 +20,7 @@
 
 #define outputccode(A, B, C, D, e) \
     printf("\n/* "A" */\n\n"); \
-    printf("static "B" "C"[%i] = {\n", e); \
+    printf("static const "B" "C"[%i] = {\n", e); \
     for (i=0; i<e-1; i++) { \
         printf("%uU, ", D[i]); \
     } \
