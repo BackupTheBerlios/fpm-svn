@@ -16,7 +16,7 @@
 # Test if all tools were available
 
 testavail() {
-    if [ "$1" == "" ]; then
+    if "$1" = "" ; then
         echo "Can't create barcharts. $2 is not available on your system."
         exit 0
     fi
@@ -26,14 +26,14 @@ testavail "$_gnuplot" "gnuplot"
 testavail "$_awk" "awk"
 testavail "$_fig2dev" "fig2dev"
 
-if [ "$_fig2dev_png" == "no" ]; then
+if test "$_fig2dev_png" = "no" ; then
     echo "Can't generate barcharts. Your $_fig2dev doesn't have PNG support."
     exit 0
 fi
 
 # check command line
 
-if [ "$#" != "3" ]; then
+if test "$#" != "3" ; then
     echo "usage: $0 <datafile> <outputdirectory> <prefix-to-filenames>"
     exit -1
 fi
