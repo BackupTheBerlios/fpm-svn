@@ -80,15 +80,25 @@ config.mak:			configure
 	@echo
 	@exit 1
 
--include deps/$(GENLUTOBJS:.o=.d)
+ifneq ($(GENLUTOBJS),)
+-include $(patsubst %,deps/%,$(GENLUTOBJS:.o=.d))
+endif
 
--include deps/$(BENCHOBJS:.o=.d)
+ifneq ($(BENCHOBJS),)
+-include $(patsubst %,deps/%,$(BENCHOBJS:.o=.d))
+endif
 
--include deps/$(BENCHLUTOBJS):.o=.d)
+ifneq ($(BENCHLUTOBJS),)
+-include $(patsubst %,deps/%,$(BENCHLUTOBJS:.o=.d))
+endif
 
--include deps/$(PRECOBJS:.o=.d)
+ifneq ($(PRECOBJS),)
+-include $(patsubst %,deps/%,$(PRECOBJS:.o=.d))
+endif
 
--include deps/$(PRECLUTOBJS:.o=.d)
+ifneq ($(PRECLUTOBJS),)
+-include $(patsubst %,deps/%,$(PRECLUTOBJS:.o=.d))
+endif
 
 %.o:	%.c
 	$(CC) -c $(CFLAGS) $(INCLUDES) $*.c -o $*.o $(DEBUG) $(WARNINGS)
