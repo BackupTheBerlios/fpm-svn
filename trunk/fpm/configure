@@ -420,7 +420,7 @@ EOF
 
 echo "done."
 echo
-echo "Now type 'make' to build."
+echo "Now type '$_make' to build."
 echo
 
 # Clean up
