@@ -186,11 +186,11 @@ done
 
 # Do tests...
 
-echocheck "c compiler"
+echocheck "C compiler"
 cc_run=`( $_cc ) 2>&1`
 if test "$?" -gt 1; then
     echores "no"
-    die "can't find compiler"
+    die "Can't find compiler"
 fi
 echores "$_cc"
 
