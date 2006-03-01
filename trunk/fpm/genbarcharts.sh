@@ -16,7 +16,7 @@
 # Test if all tools were available
 
 testavail() {
-    if "$1" = "" ; then
+    if test "$1" = "" ; then
         echo "Can't create barcharts. $2 is not available on your system."
         exit 0
     fi
