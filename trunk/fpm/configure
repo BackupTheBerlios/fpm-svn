@@ -28,7 +28,7 @@ _warnings=
 _ldflags=-lm
 _inc_extra=
 _ld_extra=
-_make=make
+_make=
 _indent=indent
 _makedepend=makedepend
 _gnuplot=gnuplot
@@ -193,6 +193,29 @@ if test "$?" -gt 1; then
     die "can't find compiler"
 fi
 echores "$_cc"
+
+
+
+echocheck "GNU Make"
+if test "$_make" = "" ; then
+    for _maket in make gmake nogmakepresent; do
+        _tmp=`$_maket --version 2>>"$TMPLOG" | (read one two; echo $one)`
+        if test "$?" -eq 0 ; then
+            if test "$_tmp" = "GNU" ; then
+                echores "yes, using $_maket"
+                break;
+            fi
+        fi
+    done
+    _make=$_maket
+    if test "$_make" = "nogmakepresent" ; then
+        echores "no"
+        die "You need GNU Make to build. If you are sure your version of make
+is compatible, you may want to specify --with-make= on the command line"
+    fi
+else
+    echores "using $_make (command line override)"
+fi
 
 
 
