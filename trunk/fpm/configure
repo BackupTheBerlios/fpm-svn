@@ -199,7 +199,7 @@ echores "$_cc"
 echocheck "GNU Make"
 if test "$_make" = "" ; then
     for _maket in make gmake nogmakepresent; do
-        _tmp=`$_maket --version 2>>"$TMPLOG" | (read one two; echo $one)`
+        _tmp=`$_maket --version 2>>"$TMPLOG" | head -n 1 | cut -d ' ' -f 1`
         if test "$?" -eq 0 ; then
             if test "$_tmp" = "GNU" ; then
                 echores "yes, using $_maket"
