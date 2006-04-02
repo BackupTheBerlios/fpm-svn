@@ -3,6 +3,9 @@ ChangeLog
 
 $Id$
 
+    - huge speed improvement of algorithmic versions of sqrt(). 40-100 times(!)
+      faster, depending on type, by elimination of conditional code
+    - fixed dependencies, miscellaneous freebsd fixes
     - added detection of inttypes.h and stdint.h (define ourselves if missing)
     - made luts const
     - fixed pow macros for x==1

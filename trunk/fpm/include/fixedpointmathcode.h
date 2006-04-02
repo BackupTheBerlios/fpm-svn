@@ -187,111 +187,127 @@ typedef uint32_t ufp8p24_t;
 
 /* ------------------------------------------------------------------------- */
 
-/* >>> Square root <<< */
-
-/* I've tried numerous algorithms here (Newton, Knuth, Halleck, etc...) but
- * for any type larger than 8p8 they became way too slow (factor 15++ slower
- * than the FPU), so I have to resort to a simple binary search
- * convergence algorithm for now. At least it's only 3-11 times slower,
- * depending on the type chosen :/  It does tend to be less precise though
- * as x increases. Have to check how these algorithms perform on older
- * CPU's without a modern FPU.
+/* unsigned a less|greater than b for 16-bit and 32-bit types
+ * result: 0 or 1
  */
+
+#define _ualtb16(a,b)  ((((uint32_t)a-(uint32_t)b)>>31)&1)
+#define _ualtb32(a,b)  ((((uint64_t)a-(uint64_t)b)>>63)&1)
+#define _uagtb16(a,b)  _ualtb16(b,a)
+#define _uagtb32(a,b)  _ualtb32(b,a)
+
+/* >>> Square root <<< */
 
 /* temporary variables */
 
-static ufp8p8_t   _ufp8p8tmp,   _ufp8p8tmp2;
-static ufp24p8_t  _ufp24p8tmp,  _ufp24p8tmp2;
-static ufp16p16_t _ufp16p16tmp, _ufp16p16tmp2;
-static ufp8p24_t  _ufp8p24tmp,  _ufp8p24tmp2;
+static ufp8p8_t   _ufp8p8tmp,   _ufp8p8tmp2,    _ufp8p8tmp3;
+static ufp24p8_t  _ufp24p8tmp,  _ufp24p8tmp2,   _ufp24p8tmp3;
+static ufp16p16_t _ufp16p16tmp, _ufp16p16tmp2,  _ufp16p16tmp3;
+static ufp8p24_t  _ufp8p24tmp,  _ufp8p24tmp2,   _ufp8p24tmp3;
 
 #define _mid(a,b)           (a+((b-a)>>1))
 
-#define _convergeufp8p8(a,b,x)    ( (_mulufp8p8(_mid(a,b),_mid(a,b))<x)   ? \
-                                       (a=_mid(a,b)):(b=_mid(a,b)) )
-#define _convergeufp24p8(a,b,x)   ( (_mulufp24p8(_mid(a,b),_mid(a,b))<x)  ? \
-                                       (a=_mid(a,b)):(b=_mid(a,b)) )
-#define _convergeufp16p16(a,b,x)  ( (_mulufp16p16(_mid(a,b),_mid(a,b))<x) ? \
-                                       (a=_mid(a,b)):(b=_mid(a,b)) )
-#define _convergeufp8p24(a,b,x)   ( (_mulufp8p24(_mid(a,b),_mid(a,b))<x)  ? \
-                                       (a=_mid(a,b)):(b=_mid(a,b)) )
+#define _convergeufp8p8(a,b,m,x)    ( \
+            ( (m=(_ualtb16(_mulufp8p8(_mid(a,b),_mid(a,b)),x)))||1) &&    \
+            ( (a=m*_mid(a,b)+(1-m)*a)||1 ) && ( (b=(1-m)*_mid(a,b)+m*b)||1 ) \
+                                    )
+#define _convergeufp24p8(a,b,m,x)   ( \
+            ( (m=(_ualtb32(_mulufp24p8(_mid(a,b),_mid(a,b)),x)))||1) &&   \
+            ( (a=m*_mid(a,b)+(1-m)*a)||1 ) && ( (b=(1-m)*_mid(a,b)+m*b)||1 ) \
+                                    )
+#define _convergeufp16p16(a,b,m,x)   ( \
+            ( (m=(_ualtb32(_mulufp16p16(_mid(a,b),_mid(a,b)),x)))||1) &&   \
+            ( (a=m*_mid(a,b)+(1-m)*a)||1 ) && ( (b=(1-m)*_mid(a,b)+m*b)||1 ) \
+                                    )
+#define _convergeufp8p24(a,b,m,x)   ( \
+            ( (m=(_ualtb32(_mulufp8p24(_mid(a,b),_mid(a,b)),x)))||1) &&   \
+            ( (a=m*_mid(a,b)+(1-m)*a)||1 ) && ( (b=(1-m)*_mid(a,b)+m*b)||1 ) \
+                                    )
 
-#define __sqrtufp8p8(a,b,x)   ( (x>(4<<8)) ? (a=1<<8) && (b=(x>>1)) \
-                                           : ((a=0)||1) && (b=x<<1) \
-                              ) \
-                              && _convergeufp8p8(a,b,x) \
-                              && _convergeufp8p8(a,b,x) \
-                              && _convergeufp8p8(a,b,x) \
-                              && _convergeufp8p8(a,b,x) \
-                              && _convergeufp8p8(a,b,x) \
-                              && _convergeufp8p8(a,b,x) \
-                              && _convergeufp8p8(a,b,x) \
-                              && _convergeufp8p8(a,b,x) \
+#define __sqrtufp8p8(a,b,m,x)   ( ((m=_uagtb16(x,(4<<8)))||1) && \
+                                  ((a=m*(1<<8))||1) &&               \
+                                  ((b=m*(x>>1)+(1-m)*(x<<1))||1)     ) \
+                              && _convergeufp8p8(a,b,m,x) \
+                              && _convergeufp8p8(a,b,m,x) \
+                              && _convergeufp8p8(a,b,m,x) \
+                              && _convergeufp8p8(a,b,m,x) \
+                              && _convergeufp8p8(a,b,m,x) \
+                              && _convergeufp8p8(a,b,m,x) \
+                              && _convergeufp8p8(a,b,m,x) \
+                              && _convergeufp8p8(a,b,m,x) \
+                              && _convergeufp8p8(a,b,m,x) \
+                              && _convergeufp8p8(a,b,m,x) \
+                              && _convergeufp8p8(a,b,m,x) \
+                              && _convergeufp8p8(a,b,m,x) \
                               ? _mid(a,b) : 0
 
-#define __sqrtufp24p8(a,b,x)  ( (x>(4<<8)) ? (a=1<<8) && (b=(x>>1)) \
-                                           : ((a=0)||1) && (b=x<<1) \
-                              ) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
-                              && _convergeufp24p8(a,b,x) \
+#define __sqrtufp24p8(a,b,m,x)  ( ((m=_uagtb32(x,(4<<8)))||1) && \
+                                  ((a=m*(1<<8))||1) &&               \
+                                  ((b=m*(x>>1)+(1-m)*(x<<1))||1)     ) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                && _convergeufp24p8(a,b,m,x) \
+                                ? _mid(a,b) : 0
+
+#define __sqrtufp16p16(a,b,m,x)  ( ((m=_uagtb32(x,(4<<16)))||1) && \
+                                   ((a=m*(1<<16))||1) &&               \
+                                   ((b=m*(x>>1)+(1-m)*(x<<1))||1)     ) \
+                              && _convergeufp16p16(a,b,m,x) \
+                              && _convergeufp16p16(a,b,m,x) \
+                              && _convergeufp16p16(a,b,m,x) \
+                              && _convergeufp16p16(a,b,m,x) \
+                              && _convergeufp16p16(a,b,m,x) \
+                              && _convergeufp16p16(a,b,m,x) \
+                              && _convergeufp16p16(a,b,m,x) \
+                              && _convergeufp16p16(a,b,m,x) \
+                              && _convergeufp16p16(a,b,m,x) \
+                              && _convergeufp16p16(a,b,m,x) \
+                              && _convergeufp16p16(a,b,m,x) \
+                              && _convergeufp16p16(a,b,m,x) \
                               ? _mid(a,b) : 0
 
-#define __sqrtufp16p16(a,b,x) ( (x>(4<<16)) ? (a=1<<16) && (b=(x>>1)) \
-                                           : ((a=0)||1) && (b=x<<1) \
-                              ) \
-                              && _convergeufp16p16(a,b,x) \
-                              && _convergeufp16p16(a,b,x) \
-                              && _convergeufp16p16(a,b,x) \
-                              && _convergeufp16p16(a,b,x) \
-                              && _convergeufp16p16(a,b,x) \
-                              && _convergeufp16p16(a,b,x) \
-                              && _convergeufp16p16(a,b,x) \
-                              && _convergeufp16p16(a,b,x) \
-                              && _convergeufp16p16(a,b,x) \
-                              && _convergeufp16p16(a,b,x) \
-                              && _convergeufp16p16(a,b,x) \
-                              && _convergeufp16p16(a,b,x) \
+#define __sqrtufp8p24(a,b,m,x)  ( ((m=_uagtb32(x,(4<<24)))||1) && \
+                                   ((a=m*(1<<24))||1) &&               \
+                                   ((b=m*(x>>1)+(1-m)*(x<<1))||1)     ) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
+                              && _convergeufp8p24(a,b,m,x) \
                               ? _mid(a,b) : 0
 
-#define __sqrtufp8p24(a,b,x) ( (x>(4<<24)) ? (a=1<<24) && (b=(x>>1)) \
-                                           : ((a=0)||1) && (b=x<<1) \
-                              ) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              && _convergeufp8p24(a,b,x) \
-                              ? _mid(a,b) : 0
-
-#define _sqrtufp8p8(x)      __sqrtufp8p8  (_ufp8p8tmp,   _ufp8p8tmp2,   x)
-#define _sqrtufp24p8(x)     __sqrtufp24p8 (_ufp24p8tmp,  _ufp24p8tmp2,  x)
-#define _sqrtufp16p16(x)    __sqrtufp16p16(_ufp16p16tmp, _ufp16p16tmp2, x)
-#define _sqrtufp8p24(x)     __sqrtufp8p24 (_ufp8p24tmp,  _ufp8p24tmp2,  x)
+#define _sqrtufp8p8(x)      __sqrtufp8p8  (_ufp8p8tmp,   _ufp8p8tmp2,   \
+                                           _ufp8p8tmp3,   x)
+#define _sqrtufp24p8(x)     __sqrtufp24p8 (_ufp24p8tmp,  _ufp24p8tmp2,  \
+                                           _ufp24p8tmp3,  x)
+#define _sqrtufp16p16(x)    __sqrtufp16p16(_ufp16p16tmp, _ufp16p16tmp2, \
+                                           _ufp16p16tmp3, x)
+#define _sqrtufp8p24(x)     __sqrtufp8p24 (_ufp8p24tmp,  _ufp8p24tmp2,  \
+                                           _ufp8p24tmp3,  x)
 
 #define _sqrtfp8p8(x)       (x>0 ? _sqrtufp8p8(x)   : 0)
 #define _sqrtfp24p8(x)      (x>0 ? _sqrtufp24p8(x)  : 0)
