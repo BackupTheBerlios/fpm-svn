@@ -296,6 +296,19 @@ EOF
     else
         echores "no"
         _stdint=""
+        echocheck "types.h"
+        cat > $TMPC << EOF
+#include <types.h>
+int main(void) { return 0; }
+EOF
+        cc_check && _types=yes
+        if test "$_types" = yes ; then
+            echores "yes"
+            _types="-DHAVE_TYPES_H"
+        else
+            echores "no"
+            _types=""
+        fi
     fi
 fi
 
@@ -452,7 +465,7 @@ echo
 echo ${_echo_n} "Generating config.mak ... ${_echo_c}"
 cat > config.mak << EOF
 CC=$_cc
-CFLAGS=$_cflags $_inttypes $_stdint $_round $_rdtsc
+CFLAGS=$_cflags $_inttypes $_stdint $_round $_rdtsc $_types
 INCLUDES=-I./include $_inc_extra
 CCFORDEPS=$_ccfordeps
 LD=$_cc

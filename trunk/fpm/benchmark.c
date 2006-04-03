@@ -17,6 +17,11 @@
 
 #include "fixedpointmath.h"
 
+#ifndef HAVE_RDTSC
+#include <sys/time.h>
+#include <time.h>
+#endif
+
 /* ------------------------------------------------------------------------- */
 
 /* 10000 and 100000 or something, but lower values while testing scripts,
@@ -37,7 +42,12 @@ static inline long long rdtsc()
     asm volatile ("rdtsc\n" : "=A"(timestamp));
     return timestamp;
 #else
-    return 0L;      /* FIXME: some gettimeofday() stuff or something */
+    struct timeval tv;
+    struct timezone tz;
+
+    gettimeofday(&tv, &tz);
+    
+    return tv.tv_sec*1000000L + tv.tv_usec;
 #endif
 }
 
