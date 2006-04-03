@@ -3,6 +3,7 @@ ChangeLog
 
 $Id$
 
+    - fix for systems that don't have round()
     - huge speed improvement of algorithmic versions of sqrt(). 40-100 times(!)
       faster, depending on type, by elimination of conditional code
     - fixed dependencies, miscellaneous freebsd fixes

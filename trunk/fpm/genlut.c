@@ -30,6 +30,9 @@ typedef unsigned char      uint8_t;
 typedef          char       int8_t;
 #endif
 #endif
+#ifndef HAVE_ROUND
+#define round(x) rint(x)
+#endif
 
 /* ------------------------------------------------------------------------- */
 
