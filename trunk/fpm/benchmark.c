@@ -85,7 +85,7 @@ static inline long long rdtsc()
 
 #define calcperc(PRC, AVG, AVGR) \
     do { \
-        PRC = (AVG*100)/AVGR; \
+        PRC = (AVG*100)/(AVGR?AVGR:1); \
     } while(0)
 
 #define calcallperc \
