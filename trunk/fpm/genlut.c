@@ -21,7 +21,7 @@
 #include <stdint.h>
 #else
 #ifdef HAVE_TYPES_H
-#include <types.h>
+#include <sys/types.h>
 #else
 typedef unsigned long long uint64_t;
 typedef          long long  int64_t;

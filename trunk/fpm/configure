@@ -37,6 +37,8 @@ _fig2dev=fig2dev
 _fig2dev_png=
 _inttypes=
 _stdint=
+_round=
+_types=
 
 
 # check environment
@@ -298,7 +300,7 @@ EOF
         _stdint=""
         echocheck "types.h"
         cat > $TMPC << EOF
-#include <types.h>
+#include <sys/types.h>
 int main(void) { return 0; }
 EOF
         cc_check && _types=yes
