@@ -186,12 +186,31 @@ done
 
 # Do tests...
 
+
+
+echocheck "architecture"
+cputype=`uname -p 2>&1`
+if test "$cputype" = "unknown" ; then
+    cputype=`uname -m 2>&1`
+fi
+echores "$cputype"
+
+
+
 echocheck "C compiler"
 cc_run=`( $_cc ) 2>&1`
 if test "$?" -gt 1; then
     echores "no"
     die "Can't find compiler"
 fi
+case "$cputype" in
+    i386|i486)
+        _rdtsc=
+        ;;
+    *)
+        _rdtsc=-DHAVE_RDTSC
+        ;;
+esac
 echores "$_cc"
 
 
@@ -433,7 +452,7 @@ echo
 echo ${_echo_n} "Generating config.mak ... ${_echo_c}"
 cat > config.mak << EOF
 CC=$_cc
-CFLAGS=$_cflags $_inttypes $_stdint $_round
+CFLAGS=$_cflags $_inttypes $_stdint $_round $_rdtsc
 INCLUDES=-I./include $_inc_extra
 CCFORDEPS=$_ccfordeps
 LD=$_cc

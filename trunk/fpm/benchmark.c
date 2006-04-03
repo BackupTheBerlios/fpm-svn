@@ -32,9 +32,13 @@
 
 static inline long long rdtsc()
 {
+#ifdef HAVE_RDTSC
     long long timestamp;
     asm volatile ("rdtsc\n" : "=A"(timestamp));
     return timestamp;
+#else
+    return 0L;      /* FIXME: some gettimeofday() stuff or something */
+#endif
 }
 
 /* ------------------------------------------------------------------------- */
