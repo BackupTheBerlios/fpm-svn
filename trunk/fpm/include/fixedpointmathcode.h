@@ -7,7 +7,7 @@
  *
  * This file contains the actual implementations of the functions.
  *
- * (C)opyright 2005 by Ivo van Poorten
+ * (C)opyright 2005,2006 by Ivo van Poorten
  * Licensed under version 2 of the GPL
  *
  * $Id$

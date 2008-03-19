@@ -3,7 +3,7 @@
 /*
  * Fixed Point Math Macro Library
  *
- * (C)opyright 2005 by Ivo van Poorten
+ * (C)opyright 2005,2006 by Ivo van Poorten
  * Licensed under version 2 of the GPL
  *
  * $Id$
@@ -20,7 +20,7 @@
 #define __FPM_VERSION__         0.31
 #define __FPM_VERSION_MAJOR__   0
 #define __FPM_VERSION_MINOR__   31
-#define __FPM_VERSION_RELEASE__ cvs
+#define __FPM_VERSION_RELEASE__ beta
 
 /* ------------------------------------------------------------------------- */
 
