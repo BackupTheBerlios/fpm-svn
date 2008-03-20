@@ -214,10 +214,10 @@ FPMFUNC fp8p8_t    fastmulfp8p8   ( fp8p8_t   x,  fp8p8_t   y);
 FPMFUNC fp24p8_t   fastmulfp24p8  ( fp24p8_t  x,  fp24p8_t  y);
 FPMFUNC fp16p16_t  fastmulfp16p16 ( fp16p16_t x,  fp16p16_t y);
 FPMFUNC fp8p24_t   fastmulfp8p24  ( fp8p24_t  x,  fp8p24_t  y);
-FPMFUNC fp8p8_t    fastmulufp8p8  (ufp8p8_t   x, ufp8p8_t   y);
-FPMFUNC fp24p8_t   fastmulufp24p8 (ufp24p8_t  x, ufp24p8_t  y);
-FPMFUNC fp16p16_t  fastmulufp16p16(ufp16p16_t x, ufp16p16_t y);
-FPMFUNC fp8p24_t   fastmulufp8p24 (ufp8p24_t  x, ufp8p24_t  y);
+FPMFUNC ufp8p8_t   fastmulufp8p8  (ufp8p8_t   x, ufp8p8_t   y);
+FPMFUNC ufp24p8_t  fastmulufp24p8 (ufp24p8_t  x, ufp24p8_t  y);
+FPMFUNC ufp16p16_t fastmulufp16p16(ufp16p16_t x, ufp16p16_t y);
+FPMFUNC ufp8p24_t  fastmulufp8p24 (ufp8p24_t  x, ufp8p24_t  y);
 
 /* division (x/y) */
 
