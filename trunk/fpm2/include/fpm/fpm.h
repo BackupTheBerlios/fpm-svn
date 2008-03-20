@@ -208,6 +208,17 @@ FPMFUNC ufp24p8_t  mulufp24p8 (ufp24p8_t  x, ufp24p8_t  y) { return (uint64_t) x
 FPMFUNC ufp16p16_t mulufp16p16(ufp16p16_t x, ufp16p16_t y) { return (uint64_t) x * y >> 16; }
 FPMFUNC ufp8p24_t  mulufp8p24 (ufp8p24_t  x, ufp8p24_t  y) { return (uint64_t) x * y >> 24; }
 
+/* fast multiplication, less precision */
+
+FPMFUNC fp8p8_t    fastmulfp8p8   ( fp8p8_t   x,  fp8p8_t   y) { return (x >> 4 ) * (y >> 4 ); }
+FPMFUNC fp24p8_t   fastmulfp24p8  ( fp24p8_t  x,  fp24p8_t  y) { return (x >> 4 ) * (y >> 4 ); }
+FPMFUNC fp16p16_t  fastmulfp16p16 ( fp16p16_t x,  fp16p16_t y) { return (x >> 8 ) * (y >> 8 ); }
+FPMFUNC fp8p24_t   fastmulfp8p24  ( fp8p24_t  x,  fp8p24_t  y) { return (x >> 12) * (y >> 12); }
+FPMFUNC fp8p8_t    fastmulufp8p8  (ufp8p8_t   x, ufp8p8_t   y) { return (x >> 4 ) * (y >> 4 ); }
+FPMFUNC fp24p8_t   fastmulufp24p8 (ufp24p8_t  x, ufp24p8_t  y) { return (x >> 4 ) * (y >> 4 ); }
+FPMFUNC fp16p16_t  fastmulufp16p16(ufp16p16_t x, ufp16p16_t y) { return (x >> 8 ) * (y >> 8 ); }
+FPMFUNC fp8p24_t   fastmulufp8p24 (ufp8p24_t  x, ufp8p24_t  y) { return (x >> 12) * (y >> 12); }
+
 /* division (x/y) */
 
 FPMFUNC fp8p8_t    divfp8p8   ( fp8p8_t   x,  fp8p8_t   y) { return (( int32_t) x << 8 ) / y; }
