@@ -91,107 +91,107 @@ typedef uint32_t ufp8p24_t;
 
 /* int to fixed point */
 
-FPMFUNC  fp8p8_t   itofp8p8   (int x) { return x << 8;  }
-FPMFUNC  fp24p8_t  itofp24p8  (int x) { return x << 8;  }
-FPMFUNC  fp16p16_t itofp16p16 (int x) { return x << 16; }
-FPMFUNC  fp8p24_t  itofp8p24  (int x) { return x << 24; }
-FPMFUNC ufp8p8_t   itoufp8p8  (int x) { return x << 8;  }
-FPMFUNC ufp24p8_t  itoufp24p8 (int x) { return x << 8;  }
-FPMFUNC ufp16p16_t itoufp16p16(int x) { return x << 16; }
-FPMFUNC ufp8p24_t  itoufp8p24 (int x) { return x << 24; }
+FPMFUNC  fp8p8_t   itofp8p8   (int x);
+FPMFUNC  fp24p8_t  itofp24p8  (int x);
+FPMFUNC  fp16p16_t itofp16p16 (int x);
+FPMFUNC  fp8p24_t  itofp8p24  (int x);
+FPMFUNC ufp8p8_t   itoufp8p8  (int x);
+FPMFUNC ufp24p8_t  itoufp24p8 (int x);
+FPMFUNC ufp16p16_t itoufp16p16(int x);
+FPMFUNC ufp8p24_t  itoufp8p24 (int x);
 
 /* float to fixed point */
 
-FPMFUNC  fp8p8_t   ftofp8p8   (float x) { return x * 256;      }
-FPMFUNC  fp24p8_t  ftofp24p8  (float x) { return x * 256;      }
-FPMFUNC  fp16p16_t ftofp16p16 (float x) { return x * 65536;    }
-FPMFUNC  fp8p24_t  ftofp8p24  (float x) { return x * 16777216; }
-FPMFUNC ufp8p8_t   ftoufp8p8  (float x) { return x * 256;      }
-FPMFUNC ufp24p8_t  ftoufp24p8 (float x) { return x * 256;      }
-FPMFUNC ufp16p16_t ftoufp16p16(float x) { return x * 65536;    }
-FPMFUNC ufp8p24_t  ftoufp8p24 (float x) { return x * 16777216; }
+FPMFUNC  fp8p8_t   ftofp8p8   (float x);
+FPMFUNC  fp24p8_t  ftofp24p8  (float x);
+FPMFUNC  fp16p16_t ftofp16p16 (float x);
+FPMFUNC  fp8p24_t  ftofp8p24  (float x);
+FPMFUNC ufp8p8_t   ftoufp8p8  (float x);
+FPMFUNC ufp24p8_t  ftoufp24p8 (float x);
+FPMFUNC ufp16p16_t ftoufp16p16(float x);
+FPMFUNC ufp8p24_t  ftoufp8p24 (float x);
 
 /* double to fixed point */
 
-FPMFUNC  fp8p8_t   dtofp8p8   (double x) { return x * 256;      }
-FPMFUNC  fp24p8_t  dtofp24p8  (double x) { return x * 256;      }
-FPMFUNC  fp16p16_t dtofp16p16 (double x) { return x * 65536;    }
-FPMFUNC  fp8p24_t  dtofp8p24  (double x) { return x * 16777216; }
-FPMFUNC ufp8p8_t   dtoufp8p8  (double x) { return x * 256;      }
-FPMFUNC ufp24p8_t  dtoufp24p8 (double x) { return x * 256;      }
-FPMFUNC ufp16p16_t dtoufp16p16(double x) { return x * 65536;    }
-FPMFUNC ufp8p24_t  dtoufp8p24 (double x) { return x * 16777216; }
+FPMFUNC  fp8p8_t   dtofp8p8   (double x);
+FPMFUNC  fp24p8_t  dtofp24p8  (double x);
+FPMFUNC  fp16p16_t dtofp16p16 (double x);
+FPMFUNC  fp8p24_t  dtofp8p24  (double x);
+FPMFUNC ufp8p8_t   dtoufp8p8  (double x);
+FPMFUNC ufp24p8_t  dtoufp24p8 (double x);
+FPMFUNC ufp16p16_t dtoufp16p16(double x);
+FPMFUNC ufp8p24_t  dtoufp8p24 (double x);
 
 /* fixed point to int (truncated) */
 
-FPMFUNC int  fp8p8toi  ( fp8p8_t   x) { return x >> 8;  }
-FPMFUNC int  fp24p8toi ( fp24p8_t  x) { return x >> 8;  }
-FPMFUNC int  fp16p16toi( fp16p16_t x) { return x >> 16; }
-FPMFUNC int  fp8p24toi ( fp8p24_t  x) { return x >> 24; }
-FPMFUNC int ufp8p8toi  (ufp8p8_t   x) { return x >> 8;  }
-FPMFUNC int ufp24p8toi (ufp24p8_t  x) { return x >> 8;  }
-FPMFUNC int ufp16p16toi(ufp16p16_t x) { return x >> 16; }
-FPMFUNC int ufp8p24toi (ufp8p24_t  x) { return x >> 24; }
+FPMFUNC int  fp8p8toi  ( fp8p8_t   x);
+FPMFUNC int  fp24p8toi ( fp24p8_t  x);
+FPMFUNC int  fp16p16toi( fp16p16_t x);
+FPMFUNC int  fp8p24toi ( fp8p24_t  x);
+FPMFUNC int ufp8p8toi  (ufp8p8_t   x);
+FPMFUNC int ufp24p8toi (ufp24p8_t  x);
+FPMFUNC int ufp16p16toi(ufp16p16_t x);
+FPMFUNC int ufp8p24toi (ufp8p24_t  x);
 
 /* fixed point to float */
 
-FPMFUNC float  fp8p8tof  ( fp8p8_t   x) { return (float) x / 256.0;      }
-FPMFUNC float  fp24p8tof ( fp24p8_t  x) { return (float) x / 256.0;      }
-FPMFUNC float  fp16p16tof( fp16p16_t x) { return (float) x / 65536.0;    }
-FPMFUNC float  fp8p24tof ( fp8p24_t  x) { return (float) x / 16777216.0; }
-FPMFUNC float ufp8p8tof  (ufp8p8_t   x) { return (float) x / 256.0;      }
-FPMFUNC float ufp24p8tof (ufp24p8_t  x) { return (float) x / 256.0;      }
-FPMFUNC float ufp16p16tof(ufp16p16_t x) { return (float) x / 65536.0;    }
-FPMFUNC float ufp8p24tof (ufp8p24_t  x) { return (float) x / 16777216.0; }
+FPMFUNC float  fp8p8tof  ( fp8p8_t   x);
+FPMFUNC float  fp24p8tof ( fp24p8_t  x);
+FPMFUNC float  fp16p16tof( fp16p16_t x);
+FPMFUNC float  fp8p24tof ( fp8p24_t  x);
+FPMFUNC float ufp8p8tof  (ufp8p8_t   x);
+FPMFUNC float ufp24p8tof (ufp24p8_t  x);
+FPMFUNC float ufp16p16tof(ufp16p16_t x);
+FPMFUNC float ufp8p24tof (ufp8p24_t  x);
 
 /* fixed point to double */
 
-FPMFUNC double  fp8p8tod  ( fp8p8_t   x) { return (double) x / 256.0L;      }
-FPMFUNC double  fp24p8tod ( fp24p8_t  x) { return (double) x / 256.0L;      }
-FPMFUNC double  fp16p16tod( fp16p16_t x) { return (double) x / 65536.0L;    }
-FPMFUNC double  fp8p24tod ( fp8p24_t  x) { return (double) x / 16777216.0L; }
-FPMFUNC double ufp8p8tod  (ufp8p8_t   x) { return (double) x / 256.0L;      }
-FPMFUNC double ufp24p8tod (ufp24p8_t  x) { return (double) x / 256.0L;      }
-FPMFUNC double ufp16p16tod(ufp16p16_t x) { return (double) x / 65536.0L;    }
-FPMFUNC double ufp8p24tod (ufp8p24_t  x) { return (double) x / 16777216.0L; }
+FPMFUNC double  fp8p8tod  ( fp8p8_t   x);
+FPMFUNC double  fp24p8tod ( fp24p8_t  x);
+FPMFUNC double  fp16p16tod( fp16p16_t x);
+FPMFUNC double  fp8p24tod ( fp8p24_t  x);
+FPMFUNC double ufp8p8tod  (ufp8p8_t   x);
+FPMFUNC double ufp24p8tod (ufp24p8_t  x);
+FPMFUNC double ufp16p16tod(ufp16p16_t x);
+FPMFUNC double ufp8p24tod (ufp8p24_t  x);
 
 /* fixed point to fixed point */
 
-FPMFUNC fp8p8_t     fp8p8tofp8p8   ( fp8p8_t x) { return x;       }
-FPMFUNC fp24p8_t    fp8p8tofp24p8  ( fp8p8_t x) { return x;       }
-FPMFUNC fp16p16_t   fp8p8tofp16p16 ( fp8p8_t x) { return x << 8;  }
-FPMFUNC fp8p24_t    fp8p8tofp8p24  ( fp8p8_t x) { return x << 16; }
-FPMFUNC ufp8p8_t   ufp8p8toufp8p8  (ufp8p8_t x) { return x;       }
-FPMFUNC ufp24p8_t  ufp8p8toufp24p8 (ufp8p8_t x) { return x;       }
-FPMFUNC ufp16p16_t ufp8p8toufp16p16(ufp8p8_t x) { return x << 8;  }
-FPMFUNC ufp8p24_t  ufp8p8toufp8p24 (ufp8p8_t x) { return x << 16; }
+FPMFUNC fp8p8_t     fp8p8tofp8p8   ( fp8p8_t x);
+FPMFUNC fp24p8_t    fp8p8tofp24p8  ( fp8p8_t x);
+FPMFUNC fp16p16_t   fp8p8tofp16p16 ( fp8p8_t x);
+FPMFUNC fp8p24_t    fp8p8tofp8p24  ( fp8p8_t x);
+FPMFUNC ufp8p8_t   ufp8p8toufp8p8  (ufp8p8_t x);
+FPMFUNC ufp24p8_t  ufp8p8toufp24p8 (ufp8p8_t x);
+FPMFUNC ufp16p16_t ufp8p8toufp16p16(ufp8p8_t x);
+FPMFUNC ufp8p24_t  ufp8p8toufp8p24 (ufp8p8_t x);
 
-FPMFUNC fp8p8_t     fp24p8tofp8p8   ( fp24p8_t x) { return x;       }
-FPMFUNC fp24p8_t    fp24p8tofp24p8  ( fp24p8_t x) { return x;       }
-FPMFUNC fp16p16_t   fp24p8tofp16p16 ( fp24p8_t x) { return x << 8;  }
-FPMFUNC fp8p24_t    fp24p8tofp8p24  ( fp24p8_t x) { return x << 16; }
-FPMFUNC ufp8p8_t   ufp24p8toufp8p8  (ufp24p8_t x) { return x;       }
-FPMFUNC ufp24p8_t  ufp24p8toufp24p8 (ufp24p8_t x) { return x;       }
-FPMFUNC ufp16p16_t ufp24p8toufp16p16(ufp24p8_t x) { return x << 8;  }
-FPMFUNC ufp8p24_t  ufp24p8toufp8p24 (ufp24p8_t x) { return x << 16; }
+FPMFUNC fp8p8_t     fp24p8tofp8p8   ( fp24p8_t x);
+FPMFUNC fp24p8_t    fp24p8tofp24p8  ( fp24p8_t x);
+FPMFUNC fp16p16_t   fp24p8tofp16p16 ( fp24p8_t x);
+FPMFUNC fp8p24_t    fp24p8tofp8p24  ( fp24p8_t x);
+FPMFUNC ufp8p8_t   ufp24p8toufp8p8  (ufp24p8_t x);
+FPMFUNC ufp24p8_t  ufp24p8toufp24p8 (ufp24p8_t x);
+FPMFUNC ufp16p16_t ufp24p8toufp16p16(ufp24p8_t x);
+FPMFUNC ufp8p24_t  ufp24p8toufp8p24 (ufp24p8_t x);
 
-FPMFUNC fp8p8_t     fp16p16tofp8p8   ( fp16p16_t x) { return x >> 8; }
-FPMFUNC fp24p8_t    fp16p16tofp24p8  ( fp16p16_t x) { return x >> 8; }
-FPMFUNC fp16p16_t   fp16p16tofp16p16 ( fp16p16_t x) { return x;      }
-FPMFUNC fp8p24_t    fp16p16tofp8p24  ( fp16p16_t x) { return x << 8; }
-FPMFUNC ufp8p8_t   ufp16p16toufp8p8  (ufp16p16_t x) { return x >> 8; }
-FPMFUNC ufp24p8_t  ufp16p16toufp24p8 (ufp16p16_t x) { return x >> 8; }
-FPMFUNC ufp16p16_t ufp16p16toufp16p16(ufp16p16_t x) { return x;      }
-FPMFUNC ufp8p24_t  ufp16p16toufp8p24 (ufp16p16_t x) { return x << 8; }
+FPMFUNC fp8p8_t     fp16p16tofp8p8   ( fp16p16_t x);
+FPMFUNC fp24p8_t    fp16p16tofp24p8  ( fp16p16_t x);
+FPMFUNC fp16p16_t   fp16p16tofp16p16 ( fp16p16_t x);
+FPMFUNC fp8p24_t    fp16p16tofp8p24  ( fp16p16_t x);
+FPMFUNC ufp8p8_t   ufp16p16toufp8p8  (ufp16p16_t x);
+FPMFUNC ufp24p8_t  ufp16p16toufp24p8 (ufp16p16_t x);
+FPMFUNC ufp16p16_t ufp16p16toufp16p16(ufp16p16_t x);
+FPMFUNC ufp8p24_t  ufp16p16toufp8p24 (ufp16p16_t x);
 
-FPMFUNC fp8p8_t     fp8p24tofp8p8   ( fp8p24_t x) { return x >> 16; }
-FPMFUNC fp24p8_t    fp8p24tofp24p8  ( fp8p24_t x) { return x >> 16; }
-FPMFUNC fp16p16_t   fp8p24tofp16p16 ( fp8p24_t x) { return x >> 8;  }
-FPMFUNC fp8p24_t    fp8p24tofp8p24  ( fp8p24_t x) { return x;       }
-FPMFUNC ufp8p8_t   ufp8p24toufp8p8  (ufp8p24_t x) { return x >> 16; }
-FPMFUNC ufp24p8_t  ufp8p24toufp24p8 (ufp8p24_t x) { return x >> 16; }
-FPMFUNC ufp16p16_t ufp8p24toufp16p16(ufp8p24_t x) { return x >> 8;  }
-FPMFUNC ufp8p24_t  ufp8p24toufp8p24 (ufp8p24_t x) { return x;       }
+FPMFUNC fp8p8_t     fp8p24tofp8p8   ( fp8p24_t x);
+FPMFUNC fp24p8_t    fp8p24tofp24p8  ( fp8p24_t x);
+FPMFUNC fp16p16_t   fp8p24tofp16p16 ( fp8p24_t x);
+FPMFUNC fp8p24_t    fp8p24tofp8p24  ( fp8p24_t x);
+FPMFUNC ufp8p8_t   ufp8p24toufp8p8  (ufp8p24_t x);
+FPMFUNC ufp24p8_t  ufp8p24toufp24p8 (ufp8p24_t x);
+FPMFUNC ufp16p16_t ufp8p24toufp16p16(ufp8p24_t x);
+FPMFUNC ufp8p24_t  ufp8p24toufp8p24 (ufp8p24_t x);
 
 /* ------------------------------------------------------------------------- */
 
@@ -199,40 +199,46 @@ FPMFUNC ufp8p24_t  ufp8p24toufp8p24 (ufp8p24_t x) { return x;       }
 
 /* multiplication (x*y) */
 
-FPMFUNC fp8p8_t    mulfp8p8   ( fp8p8_t   x,  fp8p8_t   y) { return ( int32_t) x * y >> 8;  }
-FPMFUNC fp24p8_t   mulfp24p8  ( fp24p8_t  x,  fp24p8_t  y) { return ( int64_t) x * y >> 8;  }
-FPMFUNC fp16p16_t  mulfp16p16 ( fp16p16_t x,  fp16p16_t y) { return ( int64_t) x * y >> 16; }
-FPMFUNC fp8p24_t   mulfp8p24  ( fp8p24_t  x,  fp8p24_t  y) { return ( int64_t) x * y >> 24; }
-FPMFUNC ufp8p8_t   mulufp8p8  (ufp8p8_t   x, ufp8p8_t   y) { return (uint32_t) x * y >> 8;  }
-FPMFUNC ufp24p8_t  mulufp24p8 (ufp24p8_t  x, ufp24p8_t  y) { return (uint64_t) x * y >> 8;  }
-FPMFUNC ufp16p16_t mulufp16p16(ufp16p16_t x, ufp16p16_t y) { return (uint64_t) x * y >> 16; }
-FPMFUNC ufp8p24_t  mulufp8p24 (ufp8p24_t  x, ufp8p24_t  y) { return (uint64_t) x * y >> 24; }
+FPMFUNC fp8p8_t    mulfp8p8   ( fp8p8_t   x,  fp8p8_t   y);
+FPMFUNC fp24p8_t   mulfp24p8  ( fp24p8_t  x,  fp24p8_t  y);
+FPMFUNC fp16p16_t  mulfp16p16 ( fp16p16_t x,  fp16p16_t y);
+FPMFUNC fp8p24_t   mulfp8p24  ( fp8p24_t  x,  fp8p24_t  y);
+FPMFUNC ufp8p8_t   mulufp8p8  (ufp8p8_t   x, ufp8p8_t   y);
+FPMFUNC ufp24p8_t  mulufp24p8 (ufp24p8_t  x, ufp24p8_t  y);
+FPMFUNC ufp16p16_t mulufp16p16(ufp16p16_t x, ufp16p16_t y);
+FPMFUNC ufp8p24_t  mulufp8p24 (ufp8p24_t  x, ufp8p24_t  y);
 
 /* fast multiplication, less precision */
 
-FPMFUNC fp8p8_t    fastmulfp8p8   ( fp8p8_t   x,  fp8p8_t   y) { return (x >> 4 ) * (y >> 4 ); }
-FPMFUNC fp24p8_t   fastmulfp24p8  ( fp24p8_t  x,  fp24p8_t  y) { return (x >> 4 ) * (y >> 4 ); }
-FPMFUNC fp16p16_t  fastmulfp16p16 ( fp16p16_t x,  fp16p16_t y) { return (x >> 8 ) * (y >> 8 ); }
-FPMFUNC fp8p24_t   fastmulfp8p24  ( fp8p24_t  x,  fp8p24_t  y) { return (x >> 12) * (y >> 12); }
-FPMFUNC fp8p8_t    fastmulufp8p8  (ufp8p8_t   x, ufp8p8_t   y) { return (x >> 4 ) * (y >> 4 ); }
-FPMFUNC fp24p8_t   fastmulufp24p8 (ufp24p8_t  x, ufp24p8_t  y) { return (x >> 4 ) * (y >> 4 ); }
-FPMFUNC fp16p16_t  fastmulufp16p16(ufp16p16_t x, ufp16p16_t y) { return (x >> 8 ) * (y >> 8 ); }
-FPMFUNC fp8p24_t   fastmulufp8p24 (ufp8p24_t  x, ufp8p24_t  y) { return (x >> 12) * (y >> 12); }
+FPMFUNC fp8p8_t    fastmulfp8p8   ( fp8p8_t   x,  fp8p8_t   y);
+FPMFUNC fp24p8_t   fastmulfp24p8  ( fp24p8_t  x,  fp24p8_t  y);
+FPMFUNC fp16p16_t  fastmulfp16p16 ( fp16p16_t x,  fp16p16_t y);
+FPMFUNC fp8p24_t   fastmulfp8p24  ( fp8p24_t  x,  fp8p24_t  y);
+FPMFUNC fp8p8_t    fastmulufp8p8  (ufp8p8_t   x, ufp8p8_t   y);
+FPMFUNC fp24p8_t   fastmulufp24p8 (ufp24p8_t  x, ufp24p8_t  y);
+FPMFUNC fp16p16_t  fastmulufp16p16(ufp16p16_t x, ufp16p16_t y);
+FPMFUNC fp8p24_t   fastmulufp8p24 (ufp8p24_t  x, ufp8p24_t  y);
 
 /* division (x/y) */
 
-FPMFUNC fp8p8_t    divfp8p8   ( fp8p8_t   x,  fp8p8_t   y) { return (( int32_t) x << 8 ) / y; }
-FPMFUNC fp24p8_t   divfp24p8  ( fp24p8_t  x,  fp24p8_t  y) { return (( int64_t) x << 8 ) / y; }
-FPMFUNC fp16p16_t  divfp16p16 ( fp16p16_t x,  fp16p16_t y) { return (( int64_t) x << 16) / y; }
-FPMFUNC fp8p24_t   divfp8p24  ( fp8p24_t  x,  fp8p24_t  y) { return (( int64_t) x << 24) / y; }
-FPMFUNC ufp8p8_t   divufp8p8  (ufp8p8_t   x, ufp8p8_t   y) { return ((uint32_t) x << 8 ) / y; }
-FPMFUNC ufp24p8_t  divufp24p8 (ufp24p8_t  x, ufp24p8_t  y) { return ((uint64_t) x << 8 ) / y; }
-FPMFUNC ufp16p16_t divufp16p16(ufp16p16_t x, ufp16p16_t y) { return ((uint64_t) x << 16) / y; }
-FPMFUNC ufp8p24_t  divufp8p24 (ufp8p24_t  x, ufp8p24_t  y) { return ((uint64_t) x << 24) / y; }
+FPMFUNC fp8p8_t    divfp8p8   ( fp8p8_t   x,  fp8p8_t   y);
+FPMFUNC fp24p8_t   divfp24p8  ( fp24p8_t  x,  fp24p8_t  y);
+FPMFUNC fp16p16_t  divfp16p16 ( fp16p16_t x,  fp16p16_t y);
+FPMFUNC fp8p24_t   divfp8p24  ( fp8p24_t  x,  fp8p24_t  y);
+FPMFUNC ufp8p8_t   divufp8p8  (ufp8p8_t   x, ufp8p8_t   y);
+FPMFUNC ufp24p8_t  divufp24p8 (ufp24p8_t  x, ufp24p8_t  y);
+FPMFUNC ufp16p16_t divufp16p16(ufp16p16_t x, ufp16p16_t y);
+FPMFUNC ufp8p24_t  divufp8p24 (ufp8p24_t  x, ufp8p24_t  y);
 
 /* ------------------------------------------------------------------------- */
 
 /* ADVANCED MATH */
+
+/* ------------------------------------------------------------------------- */
+
+#define FPM_INTERNAL
+#include <fpm/fpmcode.h>
+#undef FPM_INTERNAL
 
 /* ------------------------------------------------------------------------- */
 
