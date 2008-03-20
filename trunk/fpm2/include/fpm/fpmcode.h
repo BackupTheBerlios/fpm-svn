@@ -100,41 +100,17 @@ FPMFUNC double ufp8p24tod (ufp8p24_t  x) { return (double) x / 16777216.0; }
 
 /* fixed point to fixed point */
 
-FPMFUNC fp8p8_t     fp8p8tofp8p8   ( fp8p8_t x) { return x;       }
-FPMFUNC fp24p8_t    fp8p8tofp24p8  ( fp8p8_t x) { return x;       }
-FPMFUNC fp16p16_t   fp8p8tofp16p16 ( fp8p8_t x) { return x << 8;  }
-FPMFUNC fp8p24_t    fp8p8tofp8p24  ( fp8p8_t x) { return x << 16; }
-FPMFUNC ufp8p8_t   ufp8p8toufp8p8  (ufp8p8_t x) { return x;       }
-FPMFUNC ufp24p8_t  ufp8p8toufp24p8 (ufp8p8_t x) { return x;       }
-FPMFUNC ufp16p16_t ufp8p8toufp16p16(ufp8p8_t x) { return x << 8;  }
-FPMFUNC ufp8p24_t  ufp8p8toufp8p24 (ufp8p8_t x) { return x << 16; }
+#define FPMA2B(a,b,c) FPMFUNC b##_t a##to##b(a##_t x) { return x c; } \
+          FPMFUNC u##b##_t u##a##to##u##b(u##a##_t x) { return x c; }
 
-FPMFUNC fp8p8_t     fp24p8tofp8p8   ( fp24p8_t x) { return x;       }
-FPMFUNC fp24p8_t    fp24p8tofp24p8  ( fp24p8_t x) { return x;       }
-FPMFUNC fp16p16_t   fp24p8tofp16p16 ( fp24p8_t x) { return x << 8;  }
-FPMFUNC fp8p24_t    fp24p8tofp8p24  ( fp24p8_t x) { return x << 16; }
-FPMFUNC ufp8p8_t   ufp24p8toufp8p8  (ufp24p8_t x) { return x;       }
-FPMFUNC ufp24p8_t  ufp24p8toufp24p8 (ufp24p8_t x) { return x;       }
-FPMFUNC ufp16p16_t ufp24p8toufp16p16(ufp24p8_t x) { return x << 8;  }
-FPMFUNC ufp8p24_t  ufp24p8toufp8p24 (ufp24p8_t x) { return x << 16; }
-
-FPMFUNC fp8p8_t     fp16p16tofp8p8   ( fp16p16_t x) { return x >> 8; }
-FPMFUNC fp24p8_t    fp16p16tofp24p8  ( fp16p16_t x) { return x >> 8; }
-FPMFUNC fp16p16_t   fp16p16tofp16p16 ( fp16p16_t x) { return x;      }
-FPMFUNC fp8p24_t    fp16p16tofp8p24  ( fp16p16_t x) { return x << 8; }
-FPMFUNC ufp8p8_t   ufp16p16toufp8p8  (ufp16p16_t x) { return x >> 8; }
-FPMFUNC ufp24p8_t  ufp16p16toufp24p8 (ufp16p16_t x) { return x >> 8; }
-FPMFUNC ufp16p16_t ufp16p16toufp16p16(ufp16p16_t x) { return x;      }
-FPMFUNC ufp8p24_t  ufp16p16toufp8p24 (ufp16p16_t x) { return x << 8; }
-
-FPMFUNC fp8p8_t     fp8p24tofp8p8   ( fp8p24_t x) { return x >> 16; }
-FPMFUNC fp24p8_t    fp8p24tofp24p8  ( fp8p24_t x) { return x >> 16; }
-FPMFUNC fp16p16_t   fp8p24tofp16p16 ( fp8p24_t x) { return x >> 8;  }
-FPMFUNC fp8p24_t    fp8p24tofp8p24  ( fp8p24_t x) { return x;       }
-FPMFUNC ufp8p8_t   ufp8p24toufp8p8  (ufp8p24_t x) { return x >> 16; }
-FPMFUNC ufp24p8_t  ufp8p24toufp24p8 (ufp8p24_t x) { return x >> 16; }
-FPMFUNC ufp16p16_t ufp8p24toufp16p16(ufp8p24_t x) { return x >> 8;  }
-FPMFUNC ufp8p24_t  ufp8p24toufp8p24 (ufp8p24_t x) { return x;       }
+FPMA2B(fp8p8  , fp8p8  ,     )      FPMA2B(fp8p8  , fp24p8 ,     )
+FPMA2B(fp8p8  , fp16p16, <<8 )      FPMA2B(fp8p8  , fp8p24 , <<16)
+FPMA2B(fp24p8 , fp8p8  ,     )      FPMA2B(fp24p8 , fp24p8 ,     )
+FPMA2B(fp24p8 , fp16p16, <<8 )      FPMA2B(fp24p8 , fp8p24 , <<16)
+FPMA2B(fp16p16, fp8p8  , >>8 )      FPMA2B(fp16p16, fp24p8 , >>8 )
+FPMA2B(fp16p16, fp16p16,     )      FPMA2B(fp16p16, fp8p24 , <<8 )
+FPMA2B(fp8p24 , fp8p8  , >>16)      FPMA2B(fp8p24 , fp24p8 , >>16)
+FPMA2B(fp8p24 , fp16p16, >>8 )      FPMA2B(fp8p24 , fp8p24 ,     )
 
 /* ------------------------------------------------------------------------- */
 
