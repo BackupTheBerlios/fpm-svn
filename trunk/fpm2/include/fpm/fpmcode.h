@@ -89,14 +89,14 @@ FPMFUNC float ufp8p24tof (ufp8p24_t  x) { return (float) x / 16777216.0; }
 
 /* fixed point to double */
 
-FPMFUNC double  fp8p8tod  ( fp8p8_t   x) { return (double) x / 256.0L;      }
-FPMFUNC double  fp24p8tod ( fp24p8_t  x) { return (double) x / 256.0L;      }
-FPMFUNC double  fp16p16tod( fp16p16_t x) { return (double) x / 65536.0L;    }
-FPMFUNC double  fp8p24tod ( fp8p24_t  x) { return (double) x / 16777216.0L; }
-FPMFUNC double ufp8p8tod  (ufp8p8_t   x) { return (double) x / 256.0L;      }
-FPMFUNC double ufp24p8tod (ufp24p8_t  x) { return (double) x / 256.0L;      }
-FPMFUNC double ufp16p16tod(ufp16p16_t x) { return (double) x / 65536.0L;    }
-FPMFUNC double ufp8p24tod (ufp8p24_t  x) { return (double) x / 16777216.0L; }
+FPMFUNC double  fp8p8tod  ( fp8p8_t   x) { return (double) x / 256.0;      }
+FPMFUNC double  fp24p8tod ( fp24p8_t  x) { return (double) x / 256.0;      }
+FPMFUNC double  fp16p16tod( fp16p16_t x) { return (double) x / 65536.0;    }
+FPMFUNC double  fp8p24tod ( fp8p24_t  x) { return (double) x / 16777216.0; }
+FPMFUNC double ufp8p8tod  (ufp8p8_t   x) { return (double) x / 256.0;      }
+FPMFUNC double ufp24p8tod (ufp24p8_t  x) { return (double) x / 256.0;      }
+FPMFUNC double ufp16p16tod(ufp16p16_t x) { return (double) x / 65536.0;    }
+FPMFUNC double ufp8p24tod (ufp8p24_t  x) { return (double) x / 16777216.0; }
 
 /* fixed point to fixed point */
 
