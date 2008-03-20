@@ -95,10 +95,10 @@ FPMFUNC  fp8p8_t   itofp8p8   (int x);
 FPMFUNC  fp24p8_t  itofp24p8  (int x);
 FPMFUNC  fp16p16_t itofp16p16 (int x);
 FPMFUNC  fp8p24_t  itofp8p24  (int x);
-FPMFUNC ufp8p8_t   itoufp8p8  (int x);
-FPMFUNC ufp24p8_t  itoufp24p8 (int x);
-FPMFUNC ufp16p16_t itoufp16p16(int x);
-FPMFUNC ufp8p24_t  itoufp8p24 (int x);
+FPMFUNC ufp8p8_t   itoufp8p8  (unsigned int x);
+FPMFUNC ufp24p8_t  itoufp24p8 (unsigned int x);
+FPMFUNC ufp16p16_t itoufp16p16(unsigned int x);
+FPMFUNC ufp8p24_t  itoufp8p24 (unsigned int x);
 
 /* float to fixed point */
 
@@ -128,10 +128,10 @@ FPMFUNC int  fp8p8toi  ( fp8p8_t   x);
 FPMFUNC int  fp24p8toi ( fp24p8_t  x);
 FPMFUNC int  fp16p16toi( fp16p16_t x);
 FPMFUNC int  fp8p24toi ( fp8p24_t  x);
-FPMFUNC int ufp8p8toi  (ufp8p8_t   x);
-FPMFUNC int ufp24p8toi (ufp24p8_t  x);
-FPMFUNC int ufp16p16toi(ufp16p16_t x);
-FPMFUNC int ufp8p24toi (ufp8p24_t  x);
+FPMFUNC unsigned int ufp8p8toi  (ufp8p8_t   x);
+FPMFUNC unsigned int ufp24p8toi (ufp24p8_t  x);
+FPMFUNC unsigned int ufp16p16toi(ufp16p16_t x);
+FPMFUNC unsigned int ufp8p24toi (ufp8p24_t  x);
 
 /* fixed point to float */
 
