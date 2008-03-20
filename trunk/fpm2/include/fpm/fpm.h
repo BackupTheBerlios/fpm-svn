@@ -230,6 +230,17 @@ FPMFUNC ufp24p8_t  divufp24p8 (ufp24p8_t  x, ufp24p8_t  y);
 FPMFUNC ufp16p16_t divufp16p16(ufp16p16_t x, ufp16p16_t y);
 FPMFUNC ufp8p24_t  divufp8p24 (ufp8p24_t  x, ufp8p24_t  y);
 
+/* fast division, less precision, lower max x, perhaps not that useful */
+
+FPMFUNC fp8p8_t    fastdivfp8p8   ( fp8p8_t   x,  fp8p8_t   y);
+FPMFUNC fp24p8_t   fastdivfp24p8  ( fp24p8_t  x,  fp24p8_t  y);
+FPMFUNC fp16p16_t  fastdivfp16p16 ( fp16p16_t x,  fp16p16_t y);
+FPMFUNC fp8p24_t   fastdivfp8p24  ( fp8p24_t  x,  fp8p24_t  y);
+FPMFUNC ufp8p8_t   fastdivufp8p8  (ufp8p8_t   x, ufp8p8_t   y);
+FPMFUNC ufp24p8_t  fastdivufp24p8 (ufp24p8_t  x, ufp24p8_t  y);
+FPMFUNC ufp16p16_t fastdivufp16p16(ufp16p16_t x, ufp16p16_t y);
+FPMFUNC ufp8p24_t  fastdivufp8p24 (ufp8p24_t  x, ufp8p24_t  y);
+
 /* ------------------------------------------------------------------------- */
 
 /* ADVANCED MATH */
