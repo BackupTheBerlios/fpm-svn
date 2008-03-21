@@ -157,6 +157,11 @@ FPMFUNC ufp8p24_t  fastdivufp8p24 (FPMXYu8p24 ) { return ((x<<4) / y) << 20; }
 
 /* square root */
 
+#ifndef FPM_SQUARE_ROOT_METHOD
+#   define FPM_SQUARE_ROOT_METHOD 1
+#endif
+
+#if FPM_SQUARE_ROOT_METHOD == 1
 /* babylonian method */
 
 #define FPMSQRT8p8(a,b) FPMFUNC a##_t sqrt##a(a##_t x) { \
@@ -209,6 +214,10 @@ FPMSQRT16p16(ufp16p16, x<=0)
 }
 FPMSQRT8p24(fp8p24 , !x  )
 FPMSQRT8p24(ufp8p24, x<=0)
+
+#else
+#   error "Invalid FPM_SQUARE_ROOT_METHOD"
+#endif
 
 /* ------------------------------------------------------------------------- */
 
