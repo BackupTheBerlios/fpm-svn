@@ -245,6 +245,17 @@ FPMFUNC ufp8p24_t  fastdivufp8p24 (ufp8p24_t  x, ufp8p24_t  y);
 
 /* ADVANCED MATH */
 
+/* square root */
+
+FPMFUNC fp8p8_t    sqrtfp8p8   ( fp8p8_t   x);
+FPMFUNC fp24p8_t   sqrtfp24p8  ( fp24p8_t  x);
+FPMFUNC fp16p16_t  sqrtfp16p16 ( fp16p16_t x);
+FPMFUNC fp8p24_t   sqrtfp8p24  ( fp8p24_t  x);
+FPMFUNC ufp8p8_t   sqrtufp8p8  (ufp8p8_t   x);
+FPMFUNC ufp24p8_t  sqrtufp24p8 (ufp24p8_t  x);
+FPMFUNC ufp16p16_t sqrtufp16p16(ufp16p16_t x);
+FPMFUNC ufp8p24_t  sqrtufp8p24 (ufp8p24_t  x);
+
 /* ------------------------------------------------------------------------- */
 
 #define FPM_INTERNAL

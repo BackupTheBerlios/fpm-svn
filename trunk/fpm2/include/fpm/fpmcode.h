@@ -155,6 +155,61 @@ FPMFUNC ufp8p24_t  fastdivufp8p24 (FPMXYu8p24 ) { return ((x<<4) / y) << 20; }
 
 /* ADVANCED MATH */
 
+/* square root */
+
+/* babylonian method */
+
+#define FPMSQRT8p8(a,b) FPMFUNC a##_t sqrt##a(a##_t x) { \
+    register a##_t r; \
+    if (b) return 0;  \
+    r = x >> 2;       \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    return r; \
+}
+FPMSQRT8p8(fp8p8 , !x  )
+FPMSQRT8p8(ufp8p8, x<=0)
+
+#define FPMSQRT24p8(a,b) FPMFUNC a##_t sqrt##a(a##_t x) { \
+    register a##_t r; \
+    if (b) return 0;  \
+    r = x >> 2;       \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    return r; \
+}
+FPMSQRT24p8(fp24p8 , !x  )
+FPMSQRT24p8(ufp24p8, x<=0)
+
+#define FPMSQRT16p16(a,b) FPMFUNC a##_t sqrt##a(a##_t x) { \
+    register a##_t r; \
+    if (b) return 0;  \
+    r = x >> 2;       \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    return r; \
+}
+FPMSQRT16p16(fp16p16 , !x  )
+FPMSQRT16p16(ufp16p16, x<=0)
+
+#define FPMSQRT8p24(a,b) FPMFUNC a##_t sqrt##a(a##_t x) { \
+    register a##_t r; \
+    if (b) return 0;  \
+    r = x >> 2;       \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    r += div##a(x,r); r >>= 1; r += div##a(x,r); r >>= 1; \
+    r += div##a(x,r); r >>= 1; \
+    return r; \
+}
+FPMSQRT8p24(fp8p24 , !x  )
+FPMSQRT8p24(ufp8p24, x<=0)
+
 /* ------------------------------------------------------------------------- */
 
 #endif
