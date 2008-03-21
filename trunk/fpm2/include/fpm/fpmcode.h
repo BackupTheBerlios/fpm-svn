@@ -140,7 +140,7 @@ FPMFUNC ufp24p8_t  divufp24p8 (FPMXYu24p8 ) { return ((uint64_t) x<<8 ) / y; }
 FPMFUNC ufp16p16_t divufp16p16(FPMXYu16p16) { return ((uint64_t) x<<16) / y; }
 FPMFUNC ufp8p24_t  divufp8p24 (FPMXYu8p24 ) { return ((uint64_t) x<<24) / y; }
 
-/* fast division, less precision, lower max x, perhaps not that useful */
+/* fast division, less precision, smaller range, perhaps not that useful */
 
 FPMFUNC fp8p8_t    fastdivfp8p8   (FPMXY8p8   ) { return ((x<<4) / y) << 4;  }
 FPMFUNC fp24p8_t   fastdivfp24p8  (FPMXY24p8  ) { return ((x<<8) / y);       }
