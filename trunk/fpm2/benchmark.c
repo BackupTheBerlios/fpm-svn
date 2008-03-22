@@ -28,7 +28,7 @@
  * Makefile, etc... */
 
 #define INNERLOOP   10000
-#define OUTERLOOP   10000
+#define OUTERLOOP   1000
 #define VAL1        2.9
 #define VAL2        213
 #define VAL3        3.1
@@ -117,13 +117,13 @@ static inline long long rdtsc()
 int main()
 {
     unsigned int i, j, num;
-    ufp8p8_t   a1, a2, a3, a4;
-    ufp24p8_t  b1, b2, b3, b4;
-    ufp16p16_t c1, c2, c3, c4;
-    ufp8p24_t  d1, d2, d3, d4;
-    float      f1, f2, f3, f4;
-    double     g1, g2, g3, g4;
-    uint64_t   start, end, sum;
+    volatile ufp8p8_t   a1, a2, a3, a4;
+    volatile ufp24p8_t  b1, b2, b3, b4;
+    volatile ufp16p16_t c1, c2, c3, c4;
+    volatile ufp8p24_t  d1, d2, d3, d4;
+    volatile float      f1, f2, f3, f4;
+    volatile double     g1, g2, g3, g4;
+    volatile uint64_t   start, end, sum;
     uint64_t   avga, avgb, avgc, avgd, avgf, avgg;
     int        prca, prcb, prcc, prcd, prcf, prcg;
     int        foo, bar;
