@@ -217,7 +217,7 @@ FPMSQRT8p24(ufp8p24, x<=0)
 
 #elif FPM_SQUARE_ROOT_METHOD == 2
 
-/* digit-by-digit method, upper range of x is halved */
+/* digit-by-digit method, upper range of x is halved, result is less precise */
 
 #define FPMSQRT(a,b,c) FPMFUNC a##_t sqrt##a(a##_t x) { \
     a##_t r = 0, s = 1<<b; \
