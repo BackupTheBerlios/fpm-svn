@@ -1,5 +1,6 @@
 
 clean:
+	rm -f benchmark
 
 distclean: clean
 	rm -f *~ */*~ */*/*~ */*/*/*~
