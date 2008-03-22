@@ -14,6 +14,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
 #include "fpm/fpm.h"
 
@@ -24,11 +25,8 @@
 
 /* ------------------------------------------------------------------------- */
 
-/* 10000 and 100000 or something, but lower values while testing scripts,
- * Makefile, etc... */
-
 #define INNERLOOP   10000
-#define OUTERLOOP   1000
+#define OUTERLOOP   1000        /* adjust for slower machines */
 #define VAL1        2.9
 #define VAL2        213
 #define VAL3        3.1
@@ -114,7 +112,7 @@ static inline long long rdtsc()
  * because somehow (can anybody explain?) one needs to "kick" the CPU out of
  * 16-bit short int mode */
 
-int main()
+int main(int argc, char **argv)
 {
     unsigned int i, j, num;
     volatile ufp8p8_t   a1, a2, a3, a4;
@@ -127,6 +125,17 @@ int main()
     uint64_t   avga, avgb, avgc, avgd, avgf, avgg;
     int        prca, prcb, prcc, prcd, prcf, prcg;
     int        foo, bar;
+    int        doall, doadd, dosub, domul, dodiv, dosqrt;
+
+    doall = doadd = dosub = domul = dodiv = dosqrt = 0;
+
+#define ELSIF(a) else if (!strcmp(*argv, #a)) do##a = 1
+    argv++;
+    while (--argc) {
+        if (0) ; ELSIF(add); ELSIF(sub); ELSIF(mul); ELSIF(div); ELSIF(sqrt);
+    }
+    if (doall)
+        doadd = dosub = domul = dodiv = dosqrt = 1;
 
     a2 = dtoufp8p8(VAL1);
     b2 = dtoufp24p8(VAL1);
@@ -149,6 +158,7 @@ int main()
     f4 = VAL3;
     g4 = VAL3;
 
+  if (doadd) {
     /* ADD */
 
     timeloop(avga, a1=a2+a3);
@@ -160,7 +170,9 @@ int main()
     timeloop(avgg, g1=g2+g3);
     calcallperc;
     printreport("ADD", 0);
+  }
 
+  if (dosub) {
     /* SUB */
 
     timeloop(avga, a1=a2-a3);
@@ -172,7 +184,9 @@ int main()
     timeloop(avgg, g1=g2-g3);
     calcallperc;
     printreport("SUB", 1);
+  }
 
+  if (domul) {
     /* MUL */
 
     timeloop(avga, a1=mulufp8p8(a2,a3)  );
@@ -183,7 +197,9 @@ int main()
     timeloop(avgg, g1=g2*g3);
     calcallperc;
     printreport("MUL", 2);
+  }
 
+  if (dodiv) {
     /* DIV */
 
     timeloop(avga, a1=divufp8p8(a2,a3)  );
@@ -194,7 +210,9 @@ int main()
     timeloop(avgg, g1=g2/g3);
     calcallperc;
     printreport("DIV", 3);
+  }
 
+  if (dosqrt) {
     /* SQRT */
 
     timeloop(avga, a1=sqrtufp8p8(a2)  );
@@ -205,6 +223,7 @@ int main()
     timeloop(avgg, g1=sqrt(g2));
     calcallperc;
     printreport("SQRT", 4);
+  }
 
 #if 0
     /* EXP */
