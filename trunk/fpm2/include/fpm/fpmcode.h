@@ -215,6 +215,28 @@ FPMSQRT16p16(ufp16p16, x<=0)
 FPMSQRT8p24(fp8p24 , !x  )
 FPMSQRT8p24(ufp8p24, x<=0)
 
+#elif FPM_SQUARE_ROOT_METHOD == 2
+
+/* digit-by-digit method, upper range of x is halved */
+
+#define FPMSQRT(a,b,c) FPMFUNC a##_t sqrt##a(a##_t x) { \
+    a##_t r = 0, s = 1<<b; \
+    while (s>x) s >>= 2;   \
+    while (s) {            \
+        if (x >= r+s) {    \
+            x -= r+s;      \
+            r += s<<1;     \
+        }                  \
+        r >>= 1; s >>= 2;  \
+    }                      \
+    return r<<c;           \
+}
+
+FPMSQRT( fp8p8  , 14, 4 )   FPMSQRT(ufp8p8  , 14, 4 )
+FPMSQRT( fp24p8 , 30, 4 )   FPMSQRT(ufp24p8 , 30, 4 )
+FPMSQRT( fp16p16, 30, 8 )   FPMSQRT(ufp16p16, 30, 8 )
+FPMSQRT( fp8p24 , 30, 12)   FPMSQRT(ufp8p24 , 30, 12)
+
 #else
 #   error "Invalid FPM_SQUARE_ROOT_METHOD"
 #endif
