@@ -237,6 +237,24 @@ FPMSQRT( fp24p8 , 30, 4 )   FPMSQRT(ufp24p8 , 30, 4 )
 FPMSQRT( fp16p16, 30, 8 )   FPMSQRT(ufp16p16, 30, 8 )
 FPMSQRT( fp8p24 , 30, 12)   FPMSQRT(ufp8p24 , 30, 12)
 
+#elif FPM_SQUARE_ROOT_METHOD == 3
+
+/* John Carmack's Quake III algorithm with Chris Lomont's Initial Guess.
+ * http://www.lomont.org/Math/Papers/2003/InvSqrt.pdf
+ * Carmack: 0x5f3759df, Lomont: 0x5f375a86
+ * Version for CPU's with an FPU
+ */
+
+#define FPMSQRT(a) FPMFUNC a##_t sqrt##a(a##_t x) { \
+    register union { float f; int i; } u = { .f = a##tof(x) }; \
+    float xhalf = 0.5f * x;      \
+    u.i = 0x5f375a86 - (u.i>>1); \
+    return fto##a(u.f * (1.5f - xhalf * u.f * u.f)); \
+}
+
+FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
+FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
+
 #else
 #   error "Invalid FPM_SQUARE_ROOT_METHOD"
 #endif
