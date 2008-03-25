@@ -73,6 +73,10 @@ typedef   signed long long   int64_t;
  * FPM_SQUARE_ROOT_METHOD   1   Babylonian Method
  *                          2   Digit-by-digit Method   (default)
  *                          3   Quake III + Lomont's improvement (needs FPU)
+ *
+ * FPM_NO_FPU_MUL_CONVERSIONS
+ *      Convert from float to fpXpY without using a multiply.
+ *
  */
 
 /* ------------------------------------------------------------------------- */
