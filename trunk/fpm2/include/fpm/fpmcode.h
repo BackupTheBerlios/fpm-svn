@@ -98,58 +98,43 @@ FPMA2B(fp8p24 , fp16p16, >>8 )      FPMA2B(fp8p24 , fp8p24 ,     )
 
 /* BASIC MATH */
 
-#define FPMXY8p8    fp8p8_t    x, fp8p8_t    y
-#define FPMXY24p8   fp24p8_t   x, fp24p8_t   y
-#define FPMXY16p16  fp16p16_t  x, fp16p16_t  y
-#define FPMXY8p24   fp8p24_t   x, fp8p24_t   y
-#define FPMXYu8p8   ufp8p8_t   x, ufp8p8_t   y
-#define FPMXYu24p8  ufp24p8_t  x, ufp24p8_t  y
-#define FPMXYu16p16 ufp16p16_t x, ufp16p16_t y
-#define FPMXYu8p24  ufp8p24_t  x, ufp8p24_t  y
-
 /* multiplication (x*y) */
 
-FPMFUNC fp8p8_t    mulfp8p8   (FPMXY8p8   ) { return ( int32_t) x * y >> 8;  }
-FPMFUNC fp24p8_t   mulfp24p8  (FPMXY24p8  ) { return ( int64_t) x * y >> 8;  }
-FPMFUNC fp16p16_t  mulfp16p16 (FPMXY16p16 ) { return ( int64_t) x * y >> 16; }
-FPMFUNC fp8p24_t   mulfp8p24  (FPMXY8p24  ) { return ( int64_t) x * y >> 24; }
-FPMFUNC ufp8p8_t   mulufp8p8  (FPMXYu8p8  ) { return (uint32_t) x * y >> 8;  }
-FPMFUNC ufp24p8_t  mulufp24p8 (FPMXYu24p8 ) { return (uint64_t) x * y >> 8;  }
-FPMFUNC ufp16p16_t mulufp16p16(FPMXYu16p16) { return (uint64_t) x * y >> 16; }
-FPMFUNC ufp8p24_t  mulufp8p24 (FPMXYu8p24 ) { return (uint64_t) x * y >> 24; }
+#define FPMMUL(a,b,c) FPMFUNC a##_t mul##a(a##_t x, a##_t y){return (b)x*y>>c;}
+
+FPMMUL( fp8p8  ,  int32_t, 8 )  FPMMUL( fp24p8 ,  int64_t, 8 )
+FPMMUL( fp16p16,  int64_t, 16)  FPMMUL( fp8p24 ,  int64_t, 24)
+FPMMUL(ufp8p8  , uint32_t, 8 )  FPMMUL(ufp24p8 , uint64_t, 8 )
+FPMMUL(ufp16p16, uint64_t, 16)  FPMMUL(ufp8p24 , uint64_t, 24)
 
 /* fast multiplication, less precision */
 
-FPMFUNC fp8p8_t    fastmulfp8p8   (FPMXY8p8   ) { return (x>>4 ) * (y>>4 ); }
-FPMFUNC fp24p8_t   fastmulfp24p8  (FPMXY24p8  ) { return (x>>4 ) * (y>>4 ); }
-FPMFUNC fp16p16_t  fastmulfp16p16 (FPMXY16p16 ) { return (x>>8 ) * (y>>8 ); }
-FPMFUNC fp8p24_t   fastmulfp8p24  (FPMXY8p24  ) { return (x>>12) * (y>>12); }
-FPMFUNC ufp8p8_t   fastmulufp8p8  (FPMXYu8p8  ) { return (x>>4 ) * (y>>4 ); }
-FPMFUNC ufp24p8_t  fastmulufp24p8 (FPMXYu24p8 ) { return (x>>4 ) * (y>>4 ); }
-FPMFUNC ufp16p16_t fastmulufp16p16(FPMXYu16p16) { return (x>>8 ) * (y>>8 ); }
-FPMFUNC ufp8p24_t  fastmulufp8p24 (FPMXYu8p24 ) { return (x>>12) * (y>>12); }
+#define FPMFMUL(a,b) FPMFUNC a##_t fastmul##a(a##_t x, a##_t y) { \
+    return (x>>b) * (y>>b); \
+}
+
+FPMFMUL(fp8p8, 4) FPMFMUL(fp24p8, 4) FPMFMUL(fp16p16, 8) FPMFMUL(fp8p24, 12)
+FPMFMUL(ufp8p8,4) FPMFMUL(ufp24p8,4) FPMFMUL(ufp16p16,8) FPMFMUL(ufp8p24,12)
 
 /* division (x/y) */
 
-FPMFUNC fp8p8_t    divfp8p8   (FPMXY8p8   ) { return (( int32_t) x<<8 ) / y; }
-FPMFUNC fp24p8_t   divfp24p8  (FPMXY24p8  ) { return (( int64_t) x<<8 ) / y; }
-FPMFUNC fp16p16_t  divfp16p16 (FPMXY16p16 ) { return (( int64_t) x<<16) / y; }
-FPMFUNC fp8p24_t   divfp8p24  (FPMXY8p24  ) { return (( int64_t) x<<24) / y; }
-FPMFUNC ufp8p8_t   divufp8p8  (FPMXYu8p8  ) { return ((uint32_t) x<<8 ) / y; }
-FPMFUNC ufp24p8_t  divufp24p8 (FPMXYu24p8 ) { return ((uint64_t) x<<8 ) / y; }
-FPMFUNC ufp16p16_t divufp16p16(FPMXYu16p16) { return ((uint64_t) x<<16) / y; }
-FPMFUNC ufp8p24_t  divufp8p24 (FPMXYu8p24 ) { return ((uint64_t) x<<24) / y; }
+#define FPMDIV(a,b,c) FPMFUNC a##_t div##a(a##_t x, a##_t y) { \
+    return ((b)x<<c) / y; }
+
+FPMDIV( fp8p8  ,  int32_t, 8 )  FPMDIV( fp24p8 ,  int64_t, 8 )
+FPMDIV( fp16p16,  int64_t, 16)  FPMDIV( fp8p24 ,  int64_t, 24)
+FPMDIV(ufp8p8  , uint32_t, 8 )  FPMDIV(ufp24p8 , uint64_t, 8 )
+FPMDIV(ufp16p16, uint64_t, 16)  FPMDIV(ufp8p24 , uint64_t, 24)
 
 /* fast division, less precision, smaller range, perhaps not that useful */
 
-FPMFUNC fp8p8_t    fastdivfp8p8   (FPMXY8p8   ) { return ((x<<4) / y) << 4;  }
-FPMFUNC fp24p8_t   fastdivfp24p8  (FPMXY24p8  ) { return ((x<<8) / y);       }
-FPMFUNC fp16p16_t  fastdivfp16p16 (FPMXY16p16 ) { return ((x<<8) / y) << 8;  }
-FPMFUNC fp8p24_t   fastdivfp8p24  (FPMXY8p24  ) { return ((x<<4) / y) << 20; }
-FPMFUNC ufp8p8_t   fastdivufp8p8  (FPMXYu8p8  ) { return ((x<<4) / y) << 4;  }
-FPMFUNC ufp24p8_t  fastdivufp24p8 (FPMXYu24p8 ) { return ((x<<8) / y);       }
-FPMFUNC ufp16p16_t fastdivufp16p16(FPMXYu16p16) { return ((x<<8) / y) << 8;  }
-FPMFUNC ufp8p24_t  fastdivufp8p24 (FPMXYu8p24 ) { return ((x<<4) / y) << 20; }
+#define FPMFDIV(a,b,c) FPMFUNC a##_t fastdiv##a(a##_t x, a##_t y) { \
+    return ((x<<b) / y) << c; }
+
+FPMFDIV( fp8p8  , 4, 4 )    FPMFDIV( fp24p8 , 8, 0 )
+FPMFDIV( fp16p16, 8, 8 )    FPMFDIV( fp8p24 , 4, 20)
+FPMFDIV(ufp8p8  , 4, 4 )    FPMFDIV(ufp24p8 , 8, 0 )
+FPMFDIV(ufp16p16, 8, 8 )    FPMFDIV(ufp8p24 , 4, 20)
 
 /* ------------------------------------------------------------------------- */
 
