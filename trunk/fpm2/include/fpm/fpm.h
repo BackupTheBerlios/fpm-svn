@@ -67,6 +67,14 @@ typedef   signed long long   int64_t;
 
 #define FPMFUNC static fpm_always_inline
 
+
+/* Other stuff you can define before include fpm/fpm.h
+ *
+ * FPM_SQUARE_ROOT_METHOD   1   Babylonian Method
+ *                          2   Digit-by-digit Method   (default)
+ *                          3   Quake III + Lomont's improvement (needs FPU)
+ */
+
 /* ------------------------------------------------------------------------- */
 
 /* TYPES */

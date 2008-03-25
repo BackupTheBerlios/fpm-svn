@@ -158,7 +158,7 @@ FPMFUNC ufp8p24_t  fastdivufp8p24 (FPMXYu8p24 ) { return ((x<<4) / y) << 20; }
 /* square root */
 
 #ifndef FPM_SQUARE_ROOT_METHOD
-#   define FPM_SQUARE_ROOT_METHOD 1
+#   define FPM_SQUARE_ROOT_METHOD 2
 #endif
 
 #if FPM_SQUARE_ROOT_METHOD == 1
@@ -246,7 +246,7 @@ FPMSQRT( fp8p24 , 30, 12)   FPMSQRT(ufp8p24 , 30, 12)
  */
 
 #define FPMSQRT(a) FPMFUNC a##_t sqrt##a(a##_t x) { \
-    register union { float f; int i; } u = { .f = a##tof(x) }; \
+    register union { float f; uint32_t i; } u = { .f = a##tof(x) }; \
     float xhalf = 0.5f * x;      \
     u.i = 0x5f375a86 - (u.i>>1); \
     return fto##a(u.f * (1.5f - xhalf * u.f * u.f)); \
