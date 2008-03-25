@@ -133,6 +133,7 @@ int main(int argc, char **argv)
     argv++;
     while (--argc) {
         if (0) ; ELSIF(add); ELSIF(sub); ELSIF(mul); ELSIF(div); ELSIF(sqrt);
+        ELSIF(all);
     }
     if (doall)
         doadd = dosub = domul = dodiv = dosqrt = 1;
