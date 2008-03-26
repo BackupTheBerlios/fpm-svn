@@ -39,6 +39,14 @@ typedef union {
     uint8_t  u8[4];
 } fpm_funion_t;
 
+typedef union {
+    double   d;
+    uint64_t u64;
+    uint32_t u32[2];
+    uint16_t u16[4];
+    uint8_t  u8[8];
+} fpm_dunion_t;
+
 /* ------------------------------------------------------------------------- */
 
 /* CONVERSION */
@@ -89,11 +97,39 @@ FPMF2UFP(ufp16p16, 65536.0f, <<9)   FPMF2UFP(ufp8p24 ,      256.0f, <<9)
 
 /* double to fixed point */
 
+#ifndef FPM_NO_FPU_MUL_CONVERSIONS
+
 #define FPMD2FP(a,c) FPMFUNC a##_t    dto##a (double x) { return x * c; } \
                      FPMFUNC u##a##_t dtou##a(double x) { return x * c; }
 
 FPMD2FP(fp8p8  ,   256.0f)      FPMD2FP(fp24p8 ,      256.0f)
 FPMD2FP(fp16p16, 65536.0f)      FPMD2FP(fp8p24 , 16777216.0f)
+
+#else
+
+#define FPMD2FP(a,b,c) a##_t dto##a(double d) { \
+    fpm_dunion_t x = { .d = d }; \
+    a##_t fp, s = x.u8[7] >> 7;                 /* extract sign */      \
+    x.u8[7] &= 0x7f;                            /* abs() */             \
+    x.d += b;                                   /* range 0.0-128.0 */   \
+    fp   = (x.u64 & 0x000fffffffffffffULL) c;   /* extract mantissa */  \
+    fp  ^= -s;                                  /* one's complement */  \
+    return fp + s;                              /* two's complement */  \
+}
+
+FPMD2FP(fp8p8  ,   128.0, >>37)   FPMD2FP(fp24p8 , 8388608.0, >>21)
+FPMD2FP(fp16p16, 32768.0, >>21)   FPMD2FP(fp8p24 ,     128.0, >>21)
+
+#define FPMD2UFP(a,b,c) a##_t dto##a(double d) { \
+    fpm_dunion_t x = { .d = d }; \
+    x.d += b; \
+    return (x.u64 & 0x000fffffffffffffULL) c; \
+}
+
+FPMD2UFP(ufp8p8  ,   256.0, >>36)   FPMD2UFP(ufp24p8 , 16777216.0, >>20)
+FPMD2UFP(ufp16p16, 65536.0, >>20)   FPMD2UFP(ufp8p24 ,      256.0, >>20)
+
+#endif
 
 /* fixed point to int (truncated) */
 
