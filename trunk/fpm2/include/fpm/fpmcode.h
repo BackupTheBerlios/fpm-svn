@@ -211,6 +211,15 @@ FPMFDIV( fp16p16, 8, 8 )    FPMFDIV( fp8p24 , 4, 20)
 FPMFDIV(ufp8p8  , 4, 4 )    FPMFDIV(ufp24p8 , 8, 0 )
 FPMFDIV(ufp16p16, 8, 8 )    FPMFDIV(ufp8p24 , 4, 20)
 
+/* floor (round down to nearest integer) */
+
+#define FPMFLOOR(a,b) FPMFUNC floor##a(a##_t x) { return x & b; };
+
+FPMFLOOR( fp8p8  , 0xff00    )  FPMFLOOR( fp24p8 , 0xffffff00)
+FPMFLOOR( fp16p16, 0xffff0000)  FPMFLOOR( fp8p24 , 0xff000000)
+FPMFLOOR(ufp8p8  , 0xff00    )  FPMFLOOR(ufp24p8 , 0xffffff00)
+FPMFLOOR(ufp16p16, 0xffff0000)  FPMFLOOR(ufp8p24 , 0xff000000)
+
 /* ------------------------------------------------------------------------- */
 
 /* ADVANCED MATH */

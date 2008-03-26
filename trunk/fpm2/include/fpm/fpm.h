@@ -253,6 +253,17 @@ FPMFUNC ufp24p8_t  fastdivufp24p8 (ufp24p8_t  x, ufp24p8_t  y);
 FPMFUNC ufp16p16_t fastdivufp16p16(ufp16p16_t x, ufp16p16_t y);
 FPMFUNC ufp8p24_t  fastdivufp8p24 (ufp8p24_t  x, ufp8p24_t  y);
 
+/* floor (round down to nearest integer) */
+
+FPMFUNC fp8p8_t    floorfp8p8   ( fp8p8_t   x);
+FPMFUNC fp24p8_t   floorfp24p8  ( fp24p8_t  x);
+FPMFUNC fp16p16_t  floorfp16p16 ( fp16p16_t x);
+FPMFUNC fp8p24_t   floorfp8p24  ( fp8p24_t  x);
+FPMFUNC ufp8p8_t   floorufp8p8  (ufp8p8_t   x);
+FPMFUNC ufp24p8_t  floorufp24p8 (ufp24p8_t  x);
+FPMFUNC ufp16p16_t floorufp16p16(ufp16p16_t x);
+FPMFUNC ufp8p24_t  floorufp8p24 (ufp8p24_t  x);
+
 /* ------------------------------------------------------------------------- */
 
 /* ADVANCED MATH */
