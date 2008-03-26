@@ -264,6 +264,17 @@ FPMFUNC ufp24p8_t  floorufp24p8 (ufp24p8_t  x);
 FPMFUNC ufp16p16_t floorufp16p16(ufp16p16_t x);
 FPMFUNC ufp8p24_t  floorufp8p24 (ufp8p24_t  x);
 
+/* ceil (round up to nearest integer) */
+
+FPMFUNC fp8p8_t    ceilfp8p8   ( fp8p8_t   x);
+FPMFUNC fp24p8_t   ceilfp24p8  ( fp24p8_t  x);
+FPMFUNC fp16p16_t  ceilfp16p16 ( fp16p16_t x);
+FPMFUNC fp8p24_t   ceilfp8p24  ( fp8p24_t  x);
+FPMFUNC ufp8p8_t   ceilufp8p8  (ufp8p8_t   x);
+FPMFUNC ufp24p8_t  ceilufp24p8 (ufp24p8_t  x);
+FPMFUNC ufp16p16_t ceilufp16p16(ufp16p16_t x);
+FPMFUNC ufp8p24_t  ceilufp8p24 (ufp8p24_t  x);
+
 /* ------------------------------------------------------------------------- */
 
 /* ADVANCED MATH */
