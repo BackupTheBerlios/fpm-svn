@@ -75,7 +75,7 @@ FPMF2FP(fp16p16, 65536.0f)      FPMF2FP(fp8p24 , 16777216.0f)
     fpm_funion_t x = { .f = f }; \
     a##_t fp, s = x.u8[3] >> 7;         /* extract sign */      \
     x.u8[3] &= 0x7f;                    /* abs() */             \
-    x.f += b;                           /* range 0.0-128.0 */   \
+    x.f += b;                           /* range 0.0 ... b */   \
     fp   = (x.u32 & 0x7fffff) c;        /* extract mantissa */  \
     fp  ^= -s;                          /* one's complement */  \
     return fp + s;                      /* two's complement */  \
@@ -111,7 +111,7 @@ FPMD2FP(fp16p16, 65536.0f)      FPMD2FP(fp8p24 , 16777216.0f)
     fpm_dunion_t x = { .d = d }; \
     a##_t fp, s = x.u8[7] >> 7;                 /* extract sign */      \
     x.u8[7] &= 0x7f;                            /* abs() */             \
-    x.d += b;                                   /* range 0.0-128.0 */   \
+    x.d += b;                                   /* range 0.0 ... b */   \
     fp   = (x.u64 & 0x000fffffffffffffULL) c;   /* extract mantissa */  \
     fp  ^= -s;                                  /* one's complement */  \
     return fp + s;                              /* two's complement */  \
