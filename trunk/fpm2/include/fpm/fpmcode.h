@@ -216,8 +216,16 @@ FPMFDIV(ufp16p16, 8, 8 )    FPMFDIV(ufp8p24 , 4, 20)
 #define FPMFLOOR(a,b) FPMFUNC a##_t floor##a(a##_t x) { return x & b; }; \
                FPMFUNC u##a##_t flooru##a(u##a##_t x) { return x & b; };
 
-FPMFLOOR( fp8p8  , 0xff00    )  FPMFLOOR( fp24p8 , 0xffffff00)
-FPMFLOOR( fp16p16, 0xffff0000)  FPMFLOOR( fp8p24 , 0xff000000)
+FPMFLOOR(fp8p8  , 0xff00    )   FPMFLOOR(fp24p8 , 0xffffff00)
+FPMFLOOR(fp16p16, 0xffff0000)   FPMFLOOR(fp8p24 , 0xff000000)
+
+/* ceil (round up to nearest integer) */
+
+#define FPMCEIL(a,b,c) FPMFUNC a##_t ceil##a(a##_t x) { return (x+b) & c; }; \
+              FPMFUNC u##a##_t ceil##u##a(u##a##_t x) { return (x+b) & c; };
+
+FPMCEIL(fp8p8  , 0x0100    ,0xff00    ) FPMCEIL(fp24p8, 0x00000100,0xffffff00)
+FPMCEIL(fp16p16, 0x00010000,0xffff0000) FPMCEIL(fp8p24, 0x01000000,0xff000000)
 
 /* ------------------------------------------------------------------------- */
 
