@@ -75,7 +75,7 @@ typedef   signed long long   int64_t;
  *                          3   Quake III + Lomont's improvement (needs FPU)
  *
  * FPM_NO_FPU_MUL_CONVERSIONS
- *      Convert from float to fpXpY without using a multiply.
+ *      Convert from float/double to fpXpY without using a multiply.
  *
  */
 
