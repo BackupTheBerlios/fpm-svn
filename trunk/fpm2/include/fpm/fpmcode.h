@@ -37,7 +37,7 @@ typedef union {
     uint32_t u32;
     uint16_t u16[2];
     uint8_t  u8[4];
-} funion_t;
+} fpm_funion_t;
 
 /* ------------------------------------------------------------------------- */
 
@@ -64,7 +64,7 @@ FPMF2FP(fp16p16, 65536   )  FPMF2FP(fp8p24 , 16777216)
 #else
 
 #define FPMF2FP(a,b,c) a##_t fastfto##a(float f) { \
-    funion_t x = { .f = f }; \
+    fpm_funion_t x = { .f = f }; \
     a##_t fp, s = x.u8[3] >> 7;         /* extract sign */      \
     x.u8[3] &= 0x7f;                    /* abs() */             \
     x.f += b;                           /* range 0.0-128.0 */   \
@@ -77,7 +77,7 @@ FPMF2FP(fp8p8  ,   128.0, >>8)  FPMF2FP(fp24p8 , 8388608.0, <<8)
 FPMF2FP(fp16p16, 32768.0, <<8)  FPMF2FP(fp8p24 ,     128.0, <<8)
 
 #define FPMF2UFP(a,b,c) a##_t fastfto##a(float f) { \
-    funion_t x = { .f = f }; \
+    fpm_funion_t x = { .f = f }; \
     x.f += b; \
     return (x.u32 & 0x7fffff) c; \
 }
