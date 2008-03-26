@@ -275,6 +275,17 @@ FPMFUNC ufp24p8_t  ceilufp24p8 (ufp24p8_t  x);
 FPMFUNC ufp16p16_t ceilufp16p16(ufp16p16_t x);
 FPMFUNC ufp8p24_t  ceilufp8p24 (ufp8p24_t  x);
 
+/* fract (return fraction of fixed point value) */
+
+FPMFUNC fp8p8_t    fractfp8p8   ( fp8p8_t   x);
+FPMFUNC fp24p8_t   fractfp24p8  ( fp24p8_t  x);
+FPMFUNC fp16p16_t  fractfp16p16 ( fp16p16_t x);
+FPMFUNC fp8p24_t   fractfp8p24  ( fp8p24_t  x);
+FPMFUNC ufp8p8_t   fractufp8p8  (ufp8p8_t   x);
+FPMFUNC ufp24p8_t  fractufp24p8 (ufp24p8_t  x);
+FPMFUNC ufp16p16_t fractufp16p16(ufp16p16_t x);
+FPMFUNC ufp8p24_t  fractufp8p24 (ufp8p24_t  x);
+
 /* ------------------------------------------------------------------------- */
 
 /* ADVANCED MATH */

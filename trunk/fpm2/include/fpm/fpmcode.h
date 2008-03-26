@@ -227,6 +227,18 @@ FPMFLOOR(fp16p16, 0xffff0000)   FPMFLOOR(fp8p24 , 0xff000000)
 FPMCEIL(fp8p8  , 0x0100    ,0xff00    ) FPMCEIL(fp24p8, 0x00000100,0xffffff00)
 FPMCEIL(fp16p16, 0x00010000,0xffff0000) FPMCEIL(fp8p24, 0x01000000,0xff000000)
 
+/* fract (return fraction of fixed point value) */
+
+#define FPMFRAC(a) FPMFUNC a##_t fract##a(a##_t x) { \
+    if (x>= 0) return fractu##a(x); else return fractu##a(~x)+1; }
+
+FPMFRAC(fp8p8) FPMFRAC(fp24p8) FPMFRAC(fp16p16) FPMFRAC(fp8p24)
+
+FPMFUNC ufp8p8_t   fractufp8p8  (ufp8p8_t   x) { return x & 0x00ff; }
+FPMFUNC ufp24p8_t  fractufp24p8 (ufp24p8_t  x) { return x & 0x000000ff; }
+FPMFUNC ufp16p16_t fractufp16p16(ufp16p16_t x) { return x & 0x0000ffff; }
+FPMFUNC ufp8p24_t  fractufp8p24 (ufp8p24_t  x) { return x & 0x00ffffff; }
+
 /* ------------------------------------------------------------------------- */
 
 /* ADVANCED MATH */
