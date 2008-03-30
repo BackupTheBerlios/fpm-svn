@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="fpm.xsl"?>
+<rss version="2.0">
+
+<channel>
+    <title>Fixed Point Math Library</title>
+    <link>http://fpm.berlios.de/blog/fpm.xml</link>
+    <description>&#160;</description>
+    <generator>Manual</generator>
+    <language>en</language>
+    <image>
+        <title>Fixed Point Math Library</title>
+        <link>http://fpm.berlios.de/blog/fpm.xml</link>
+        <url>http://fpm.berlios.de/blog/01101011s.png</url>
+    </image>
+
+<!-- Template for a new entry; 10 lines
+    <item>
+        <title>title here</title>
+        <link>#title_here</link>
+        <author>Ivo</author>
+        <pubDate>output of date '+%a, %d %b %Y %H:%M:%S %z' here</pubDate>
+        <description><![CDATA[
+            <p>The quick brown <b>fox</b> jumps over the lazy dog.</p>
+            ]]>
+        </description>
+    </item>
+-->
+
+    <item>
+        <title>New blog-like webpage</title>
+        <link>#new_blog_like_webpage</link>
+        <author>Ivo</author>
+        <pubDate>Sun, 30 Mar 2008 22:53:11 +0200</pubDate>
+        <description><![CDATA[
+            <p>
+            After some messing around with
+            <a href="http://www.python.org/">Python</a> and
+            <a href="http://feedparser.org/">Universal Feed Parser</a>
+            to convert an RSS feed to an HTML page,
+            I decided I did not want an offline convertor but have the
+            client convert the RSS feed on-the-fly. So I read up
+            on XSLT and implemented the basics of this page.
+            </p>
+            <p>
+            Soon thereafter, I stumbled upon this Mozilla
+            <a href"https://bugzilla.mozilla.org/show_bug.cgi?id=98168#c11">
+                'Feature'</a>, which I had to work around with the infamous
+            <a href="http://fadshop.net/xsl_mop-up.js">
+                xsl_mop-up.js
+            </a>
+            script by
+            <a href="http://interglacial.com/~sburke/">
+                Sean M. Burke</a>.
+            After that, everything seems to work
+            very well. All not-too-old browsers render this page correctly
+            and both Akregator and Opera accept it as an RSS feed too.
+            </p>
+            <p>
+             Now I have to maintain only one document and automagically
+             have both a webpage and an RSS feed :)
+             </p>
+            ]]>
+        </description>
+    </item>
+
+</channel>
+</rss>
+
