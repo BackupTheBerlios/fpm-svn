@@ -45,7 +45,7 @@
             <p>
             Soon thereafter, I stumbled upon this Mozilla
             <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=98168#c11">
-                'Feature'</a>, which I had to work around with the infamous
+                <i>Feature</i></a>, which I had to work around with the infamous
             <a href="http://fadshop.net/xsl_mop-up.js">
                 xsl_mop-up.js
             </a>
