@@ -36,6 +36,46 @@
 #   define FPM_SQUARE_ROOT_METHOD 2
 #endif
 
+#if FPM_SQUARE_ROOT_METHOD == 6  || FPM_SQUARE_ROOT_METHOD == 7  || \
+    FPM_SQUARE_ROOT_METHOD == 8  || FPM_SQUARE_ROOT_METHOD == 9  || \
+    FPM_SQUARE_ROOT_METHOD == 10 || FPM_SQUARE_ROOT_METHOD == 11
+#   ifndef FPM_HAVE_SSE
+#       warning "SSE SQRT Method selected without having SSE"
+#       warning "Falling back to x87 inline assembly"
+#       undef FPM_SQUARE_ROOT_METHOD
+#       define FPM_SQUARE_ROOT_METHOD 5
+#   endif
+#endif
+
+#if FPM_SQUARE_ROOT_METHOD == 9 || FPM_SQUARE_ROOT_METHOD == 10 || \
+    FPM_SQUARE_ROOT_METHOD == 11
+#   ifndef FPM_HAVE_INTRINSICS
+#       warning "SSE Intrinsics SQRT Method selected without having intrinsics"
+#       warning "Falling back to inline assembly"
+#       if FPM_SQUARE_ROOT_METHOD == 9
+#           undef FPM_SQUARE_ROOT_METHOD
+#           define FPM_SQUARE_ROOT_METHOD 6
+#       endif
+#       if FPM_SQUARE_ROOT_METHOD == 10
+#           undef FPM_SQUARE_ROOT_METHOD
+#           define FPM_SQUARE_ROOT_METHOD 7
+#       endif
+#       if FPM_SQUARE_ROOT_METHOD == 11
+#           undef FPM_SQUARE_ROOT_METHOD
+#           define FPM_SQUARE_ROOT_METHOD 8
+#       endif
+#   endif
+#endif
+
+#if FPM_SQUARE_ROOT_METHOD == 5
+#   ifndef FPM_HAVE_X87
+#       warning "x87 SQRT Method selected without having x87"
+#       warning "Falling back to method 4 (QIII w/ integer math)"
+#       undef FPM_SQUARE_ROOT_METHOD
+#       define FPM_SQUARE_ROOT_METHOD 4
+#   endif
+#endif
+
 #if FPM_SQUARE_ROOT_METHOD == 1
 /* babylonian method */
 

@@ -85,6 +85,14 @@ typedef   signed long long   int64_t;
  * FPM_NO_FPU_MUL_CONVERSIONS
  *      Convert from float/double to fpXpY without using a multiply.
  *
+ * FPM_HAVE_X87
+ *      Needs to be set for method 5
+ *
+ * FPM_HAVE_SSE
+ *      Needs to be set for method 6-11
+ *
+ * FPM_HAVE_INTRINSICS
+ *      Needs to be set for method 9-11
  */
 
 /* ------------------------------------------------------------------------- */
