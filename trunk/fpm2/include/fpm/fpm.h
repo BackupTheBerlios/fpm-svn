@@ -74,6 +74,10 @@ typedef   signed long long   int64_t;
  *                          2   Digit-by-digit Method   (default)
  *                          3   Quake III + Lomont's improvement (needs FPU)
  *                          4   Same as 3, but without float mul
+ *                          5   x87 fsqrt + to/from fixed point conversions
+ *                          6   SSE sqrtss + conversions
+ *                          7   SSE rsqrtss + rcpss + conversions
+ *                          8   SSE rsqrtss + minss + mulss + conversions
  *
  * FPM_NO_FPU_MUL_CONVERSIONS
  *      Convert from float/double to fpXpY without using a multiply.

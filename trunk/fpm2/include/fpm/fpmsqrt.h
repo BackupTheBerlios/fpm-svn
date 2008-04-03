@@ -147,6 +147,79 @@ FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
 FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
 FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
 
+#elif FPM_SQUARE_ROOT_METHOD == 5
+
+/* x87 FPU */
+
+FPMFUNC float fpm_x87sqrt(float f) {
+    asm(    "fld    %1  \n\t"
+            "fsqrt      \n\t"
+            "fstp   %0  \n\t"
+            : "=m" (f) : "m" (f)    );
+    return f;
+}
+
+#define FPMSQRT(a) FPMFUNC a##_t sqrt##a(a##_t x) { \
+                                    return fto##a(fpm_x87sqrt(a##tof(x))); }
+
+FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
+FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
+
+#elif FPM_SQUARE_ROOT_METHOD == 6
+
+/* SSE sqrtss */
+
+FPMFUNC float fpm_ssesqrt(float f) {
+    asm(    "sqrtss %1,     %%xmm0  \n\t"
+            "movss  %%xmm0, %0      \n\t"
+            : "=m" (f) : "m" (f)    );
+    return f;
+}
+
+#define FPMSQRT(a) FPMFUNC a##_t sqrt##a(a##_t x) { \
+                                    return fto##a(fpm_ssesqrt(a##tof(x))); }
+
+FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
+FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
+
+#elif FPM_SQUARE_ROOT_METHOD == 7
+
+/* SSE rsqrtss */
+
+FPMFUNC float fpm_ssesqrt(float f) {
+    asm(    "rsqrtss    %1,     %%xmm0  \n\t"
+            "rcpss      %%xmm0, %%xmm0  \n\t"
+            "movss      %%xmm0, %0      \n\t"
+            : "=m" (f) : "m" (f)    );
+    return f;
+}
+
+#define FPMSQRT(a) FPMFUNC a##_t sqrt##a(a##_t x) { \
+                                    return fto##a(fpm_ssesqrt(a##tof(x))); }
+
+FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
+FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
+
+#elif FPM_SQUARE_ROOT_METHOD == 8
+
+/* SSE rsqrtss (alternate version) */
+
+FPMFUNC float fpm_ssesqrt(float f) {
+    static int big = 0x7f7fffff;
+    asm(    "rsqrtss    %1,     %%xmm0  \n\t"
+            "minss      %2,     %%xmm0  \n\t"
+            "mulss      %1,     %%xmm0  \n\t"
+            "movss      %%xmm0, %0      \n\t"
+            : "=m" (f) : "m" (f), "m" (big) );
+    return f;
+}
+
+#define FPMSQRT(a) FPMFUNC a##_t sqrt##a(a##_t x) { \
+                                    return fto##a(fpm_ssesqrt(a##tof(x))); }
+
+FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
+FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
+
 #else
 #   error "Invalid FPM_SQUARE_ROOT_METHOD"
 #endif
