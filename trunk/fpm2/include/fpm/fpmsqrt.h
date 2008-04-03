@@ -245,12 +245,10 @@ FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
 /* SSE rsqrtss (alternate version) */
 
 FPMFUNC float fpm_ssesqrt(float f) {
-    static int big = 0x7f7fffff;
     asm(    "rsqrtss    %1,     %%xmm0  \n\t"
-            "minss      %2,     %%xmm0  \n\t"
             "mulss      %1,     %%xmm0  \n\t"
             "movss      %%xmm0, %0      \n\t"
-            : "=m" (f) : "m" (f), "m" (big) );
+            : "=m" (f) : "m" (f) );
     return f;
 }
 
@@ -310,9 +308,7 @@ FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
 FPMFUNC float fpm_ssesqrt(float f) {
     __m128 mm0, mm1;
     mm0 = _mm_set_ss(f);
-    mm1 = _mm_set_ss(3.40282347e+38F);
-    mm0 = _mm_rsqrt_ss(mm0);
-    mm1 = _mm_min_ss(mm0, mm1);
+    mm1 = _mm_rsqrt_ss(mm0);
     mm0 = _mm_mul_ss(mm0, mm1);
     _mm_store_ss(&f, mm0);
     return f;
