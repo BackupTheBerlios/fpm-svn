@@ -78,6 +78,9 @@ typedef   signed long long   int64_t;
  *                          6   SSE sqrtss + conversions
  *                          7   SSE rsqrtss + rcpss + conversions
  *                          8   SSE rsqrtss + minss + mulss + conversions
+ *                          9   Same as 6, but w/ intrinsics instead of asm
+ *                          10  Same as 7, but w/ intrinsics instead of asm
+ *                          11  Same as 8, but w/ intrinsics instead of asm
  *
  * FPM_NO_FPU_MUL_CONVERSIONS
  *      Convert from float/double to fpXpY without using a multiply.

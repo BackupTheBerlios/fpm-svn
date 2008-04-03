@@ -220,6 +220,70 @@ FPMFUNC float fpm_ssesqrt(float f) {
 FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
 FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
 
+#elif FPM_SQUARE_ROOT_METHOD == 9
+
+/* SSE sqrtss w/ intrinsics */
+
+#include <xmmintrin.h>
+
+FPMFUNC float fpm_ssesqrt(float f) {
+    __m128 mm;
+    mm = _mm_set_ss(f);
+    mm = _mm_sqrt_ss(mm);
+    _mm_store_ss(&f, mm);
+    return f;
+}
+
+#define FPMSQRT(a) FPMFUNC a##_t sqrt##a(a##_t x) { \
+                                    return fto##a(fpm_ssesqrt(a##tof(x))); }
+
+FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
+FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
+
+#elif FPM_SQUARE_ROOT_METHOD == 10
+
+/* SSE rsqrtss w/ intrinsics */
+
+#include <xmmintrin.h>
+
+FPMFUNC float fpm_ssesqrt(float f) {
+    __m128 mm;
+    mm = _mm_set_ss(f);
+    mm = _mm_rsqrt_ss(mm);
+    mm = _mm_rcp_ss(mm);
+    _mm_store_ss(&f, mm);
+    return f;
+}
+
+#define FPMSQRT(a) FPMFUNC a##_t sqrt##a(a##_t x) { \
+                                    return fto##a(fpm_ssesqrt(a##tof(x))); }
+
+FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
+FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
+
+#elif FPM_SQUARE_ROOT_METHOD == 11
+
+/* SSE rsqrtss (alternate version) w/ intrinsics */
+
+#include <xmmintrin.h>
+
+FPMFUNC float fpm_ssesqrt(float f) {
+    __m128 mm0, mm1;
+    mm0 = _mm_set_ss(f);
+    mm1 = _mm_set_ss(3.40282347e+38F);
+    mm0 = _mm_rsqrt_ss(mm0);
+    mm1 = _mm_min_ss(mm0, mm1);
+    mm0 = _mm_mul_ss(mm0, mm1);
+    _mm_store_ss(&f, mm0);
+    return f;
+}
+
+#define FPMSQRT(a) FPMFUNC a##_t sqrt##a(a##_t x) { \
+                                    return fto##a(fpm_ssesqrt(a##tof(x))); }
+
+FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
+FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
+
 #else
 #   error "Invalid FPM_SQUARE_ROOT_METHOD"
 #endif
