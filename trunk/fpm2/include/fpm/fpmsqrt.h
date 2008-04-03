@@ -122,9 +122,26 @@ FPMSQRT( fp8p24 , 30, 12)   FPMSQRT(ufp8p24 , 30, 12)
 
 #define FPMSQRT(a) FPMFUNC a##_t sqrt##a(a##_t x) { \
     register union { float f; uint32_t i; } u = { .f = a##tof(x) }; \
-    float xhalf = 0.5f * x;      \
+    float xhalf = 0.5f * u.f;      \
     u.i = 0x5f375a86 - (u.i>>1); \
-    return fto##a(u.f * (1.5f - xhalf * u.f * u.f)); \
+    u.f *= 1.5f - xhalf * u.f * u.f; \
+    return fto##a(1.0f/u.f);\
+}
+
+FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
+FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
+
+#elif FPM_SQUARE_ROOT_METHOD == 4
+
+/* Same as 3 but without possibly slow float mul (depends on CPU) */
+
+#define FPMSQRT(a) FPMFUNC a##_t sqrt##a(a##_t x) { \
+    register union { float f; uint32_t i; } u = { .f = a##tof(x) }; \
+    a##_t xhalf = x >> 1; \
+    u.i = 0x5f375a86 - (u.i>>1); \
+    x = fto##a(u.f); \
+    x = mul##a(x, fto##a(1.5f) - mul##a(mul##a(xhalf,x),x)); \
+    return div##a(ito##a(1),x); \
 }
 
 FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )

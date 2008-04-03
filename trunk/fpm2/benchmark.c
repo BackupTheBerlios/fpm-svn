@@ -26,7 +26,7 @@
 /* ------------------------------------------------------------------------- */
 
 #define INNERLOOP   10000
-#define OUTERLOOP   10000        /* adjust for slower machines */
+#define OUTERLOOP   1000        /* adjust for slower machines */
 #define VAL1        2.9
 #define VAL2        213
 #define VAL3        3.1
