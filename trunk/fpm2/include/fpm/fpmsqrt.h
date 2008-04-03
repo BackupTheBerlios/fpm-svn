@@ -125,7 +125,7 @@ FPMSQRT( fp8p24 , 30, 12)   FPMSQRT(ufp8p24 , 30, 12)
     float xhalf = 0.5f * u.f;      \
     u.i = 0x5f375a86 - (u.i>>1); \
     u.f *= 1.5f - xhalf * u.f * u.f; \
-    return fto##a(1.0f/u.f);\
+    return fto##a(a##tof(x) * u.f);\
 }
 
 FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
@@ -137,11 +137,11 @@ FPMSQRT( fp16p16)   FPMSQRT(ufp16p16)   FPMSQRT( fp8p24 )   FPMSQRT(ufp8p24 )
 
 #define FPMSQRT(a) FPMFUNC a##_t sqrt##a(a##_t x) { \
     register union { float f; uint32_t i; } u = { .f = a##tof(x) }; \
-    a##_t xhalf = x >> 1; \
+    register a##_t xhalf = x >> 1, y; \
     u.i = 0x5f375a86 - (u.i>>1); \
-    x = fto##a(u.f); \
-    x = mul##a(x, fto##a(1.5f) - mul##a(mul##a(xhalf,x),x)); \
-    return div##a(ito##a(1),x); \
+    y = fto##a(u.f); \
+    y = mul##a(y, fto##a(1.5f) - mul##a(mul##a(xhalf,y),y)); \
+    return mul##a(y,x); \
 }
 
 FPMSQRT( fp8p8  )   FPMSQRT(ufp8p8  )   FPMSQRT( fp24p8 )   FPMSQRT(ufp24p8 )
