@@ -1,2 +1,2 @@
 * better benchmark framework
-* floor, ceil, pow, ln, exp, sin, cos, tan, acos, asin, atan
+* exp, pow, ln, sin, cos, tan, acos, asin, atan
