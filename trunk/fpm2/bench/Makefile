@@ -1,4 +1,9 @@
 
+# -DFPM_HAVE_RDTSC
+# -DFPM_SQUARE_ROOT_METHOD=x	(and -DFPM_HAVE_X87, -DFPM_HAVE_SSE,
+#  								 -DFPM_HAVE_INTRINSICS)
+#
+
 all:	bench-float 	\
 		bench-double 	\
 		all-fixed
