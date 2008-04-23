@@ -8,6 +8,11 @@ toupper() {
                    '[ABCDEFGHIJKLMNOPQRSTUVWXYZ]'
 }
 
+build() {
+    echo "$@"
+    $CC $@
+}
+
 build_all() {
     pf=$1
     shift 1
@@ -16,7 +21,7 @@ build_all() {
              ufp8p8 ufp24p8 ufp16p16 ufp8p24
     do
         j=`toupper $i`
-        $CC -o bench-$i$pf bench.c -I`pwd`/../include -lm -DDO$j $@
+        build bench.c -o bench-$i$pf -I`pwd`/../include -lm -DDO$j $@
     done
 }
 
