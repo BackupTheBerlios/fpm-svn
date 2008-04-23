@@ -201,6 +201,25 @@ static int llcompare(const void *p1, const void *p2) {
     return 0;
 }
 
+static int fromi, fromf, fromd, toi, tof, tod, add, sub, mul, div, sqr;
+#define ALL fromi = fromf = fromd = toi = tof = tod = add = sub = mul = div = sqr
+#define ELSIF(a)    else if (!strcmp(*argv, #a))    a = v
+
+static void command_line(int argc, char **argv) {
+    ALL = 1;
+
+    ++argv;
+    while (--argc) {
+        char f = *(*argv)++, v = f == '+';
+        if (!strcmp(*argv, "all")) ALL = v;
+        ELSIF(fromi);   ELSIF(fromf);   ELSIF(fromd);
+        ELSIF(toi);     ELSIF(tof);     ELSIF(tod);
+        ELSIF(add);     ELSIF(sub);     ELSIF(mul);     ELSIF(div);
+        ELSIF(sqr);
+        ELSIF(print);
+        argv++;
+    }
+}
 
 int main(int argc, char **argv)
 {
@@ -210,6 +229,8 @@ int main(int argc, char **argv)
     volatile int xi;
     volatile float xf;
     volatile double xd;
+
+    command_line(argc, argv);
 
 #define LOOPSTART(name) \
     PRINT("%-12s : ", name); \
@@ -231,28 +252,22 @@ int main(int argc, char **argv)
     tsum /= OUTER-2; \
     PRINT("%10llu\n", tsum);
 
-    PRINT("Conversions\n-----------\n\n");
-
-    LOOPSTART("FROMI")  a  = FPFROMI(xi);   LOOPEND
-    LOOPSTART("FROMF")  a  = FPFROMF(xi);   LOOPEND
-    LOOPSTART("FROMD")  a  = FPFROMD(xi);   LOOPEND
-    LOOPSTART("TOI")    xi = FPTOI(a);      LOOPEND
-    LOOPSTART("TOF")    xf = FPTOF(a);      LOOPEND
-    LOOPSTART("TOD")    xd = FPTOD(a);      LOOPEND
+    if(fromi){  LOOPSTART("FROMI")  a  = FPFROMI(xi);   LOOPEND }
+    if(fromf){  LOOPSTART("FROMF")  a  = FPFROMF(xi);   LOOPEND }
+    if(fromd){  LOOPSTART("FROMD")  a  = FPFROMD(xi);   LOOPEND }
+    if(toi){    LOOPSTART("TOI")    xi = FPTOI(a);      LOOPEND }
+    if(tof){    LOOPSTART("TOF")    xf = FPTOF(a);      LOOPEND }
+    if(tod){    LOOPSTART("TOD")    xd = FPTOD(a);      LOOPEND }
 
     a = FPFROMF(12.3456789f);
     b = FPFROMF(98.7654321f);
 
-    PRINT("\nBasic Math\n----------\n\n");
+    if(add){    LOOPSTART("ADD")    c = a + b;          LOOPEND }
+    if(sub){    LOOPSTART("SUB")    c = a - b;          LOOPEND }
+    if(mul){    LOOPSTART("MUL")    c = FPMUL(a,b);     LOOPEND }
+    if(div){    LOOPSTART("DIV")    c = FPDIV(a,b);     LOOPEND }
 
-    LOOPSTART("ADD")    c = a + b;          LOOPEND
-    LOOPSTART("SUB")    c = a - b;          LOOPEND
-    LOOPSTART("MUL")    c = FPMUL(a,b);     LOOPEND
-    LOOPSTART("DIV")    c = FPDIV(a,b);     LOOPEND
-
-    PRINT("\nAdvanced Math\n-------------\n\n");
-
-    LOOPSTART("SQRT")   c = FPSQRT(b);      LOOPEND
+    if(sqr){    LOOPSTART("SQRT")   c = FPSQRT(b);      LOOPEND }
 
     return 0;
 }
