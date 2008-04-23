@@ -50,7 +50,7 @@ archflags() {
 
 archflags
 
-cctest -DTEST_ALWAYS_INLINE && addcflags -DHAVE_ALWAYS_INLINE && echo have_always_inline
+cctest -DTEST_ALWAYS_INLINE -Werror && addcflags -DHAVE_ALWAYS_INLINE && echo have_always_inline
 cctest -DTEST_X87 && FPM_HAVE_X87=1 && echo have_x87
 cctest -DTEST_SSE && FPM_HAVE_SSE=1 && echo have_sse && case "$arch" in i?86) arch=pentium3; ARCH= ; archflags ;; esac
 cctest -DTEST_INTRINSICS && FPM_HAVE_INTRINSICS=1 && echo have_intrinsics
